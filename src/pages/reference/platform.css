@@ -1,0 +1,37 @@
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;color:#262A33;background:#FFFFFF;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  ul{list-style:none;}
+  a{color:#22262E;text-decoration:none;}
+  a:hover{color:#3A4A63 !important}
+  input,select,textarea,button{font-family:inherit;}
+  button{cursor:pointer;border:none;background:none;}
+  :focus-visible{outline:2px solid #A8825F;outline-offset:2px;}
+  ::placeholder{color:#8B92A0;}
+
+.platform-hover-2:hover{background:#3A4A63 !important}
+.platform-hover-3:hover{background:#B99671 !important}
+.platform-hover-5:hover{border-color:#C9A98A !important;box-shadow:0 2px 4px rgba(23,26,32,0.04),0 14px 34px -18px rgba(23,26,32,0.28) !important;transform:translateY(-2px) !important}
+.platform-hover-6:hover{background:#3A4A63 !important}
+.platform-hover-8:hover{background:#B99671 !important}
+.platform-hover-9:hover{border-color:#22262E !important;background:#F4F4F6 !important}
+.platform-hover-12:hover{background:#4C262C !important}
+.platform-hover-13:hover{background:#3A4A63 !important}
+.platform-hover-18:hover{border-color:#C9A98A !important;box-shadow:0 2px 4px rgba(23,26,32,0.04),0 14px 34px -18px rgba(23,26,32,0.28) !important;transform:translateY(-2px) !important}
+.platform-hover-19:hover{background:#3A4A63 !important}
+.platform-hover-24:hover{border-color:#C9A98A !important;box-shadow:0 2px 4px rgba(23,26,32,0.04),0 14px 34px -18px rgba(23,26,32,0.28) !important;transform:translateY(-2px) !important}
+.platform-hover-25:hover{background:#B99671 !important}
+.platform-hover-26:hover{background:#22262E !important;color:#fff !important}
+.platform-hover-34:hover{border-color:#22262E !important;background:#F4F4F6 !important}
+.platform-hover-35:hover{background:#3A4A63 !important}
+.platform-hover-36:hover{background:#3A4A63 !important}
+.platform-hover-37:hover{border-color:#22262E !important;background:#F4F4F6 !important}
+.platform-hover-39:hover{background:#3A4A63 !important}
+.platform-hover-41:hover{border-color:#C9A98A !important;box-shadow:0 2px 4px rgba(23,26,32,0.04),0 14px 34px -18px rgba(23,26,32,0.28) !important;transform:translateY(-2px) !important}
+.platform-hover-44:hover{background:#22262E !important;color:#fff !important}
+.platform-hover-51:hover{background:#B99671 !important}
+.platform-hover-53:hover{background:#3A4A63 !important}
+.platform-hover-54:hover{border-color:#22262E !important;background:#F4F4F6 !important}
+.platform-hover-57:hover{background:#3A4A63 !important}
+.platform-hover-60:hover{background:#22262E !important;color:#fff !important}
+.platform-hover-64:hover{background:#3A4A63 !important}

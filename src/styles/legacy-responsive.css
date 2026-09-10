@@ -1,0 +1,39 @@
+/* Desktop measurements come directly from the supplied design templates. */
+html { scroll-behavior: smooth; }
+img { max-width: 100%; }
+button, input, select, textarea { max-width: 100%; }
+main, main div, main section, main aside, main form { min-width: 0; }
+.skip-link { position: fixed; top: -80px; left: 16px; z-index: 100; background: #fff; color: #3A1D22; padding: 12px 18px; border-radius: 8px; }
+.skip-link:focus { top: 12px; }
+.menu-toggle { display: none; }
+@media (max-width: 1000px) {
+  header > div:last-child { flex-wrap: wrap; gap: 16px !important; }
+  header nav { order: 3; flex-basis: 100% !important; }
+  header > div:last-child > div:last-child { margin-left: auto; }
+  main aside { position: static !important; }
+}
+@media (max-width: 600px) {
+  header { position: relative !important; }
+  header > div:first-child > div { height: auto !important; min-height: 36px; flex-wrap: wrap; padding: 8px 20px !important; gap: 8px !important; }
+  header > div:first-child > div > div { flex-wrap: wrap; gap: 8px 16px !important; }
+  header > div:last-child { padding: 14px 20px !important; gap: 12px !important; }
+  header nav { display: none !important; }
+  header nav[data-open="true"] { display: flex !important; }
+  .menu-toggle { display: block; padding: 8px; border: 1px solid #E5E2DC; border-radius: 8px; color: #3A1D22; margin-left: auto; }
+  header > div:last-child > div:last-child { margin-left: 0; }
+  main :is(div,section,form)[style*="max-width:"], footer > div { padding-left: 20px !important; padding-right: 20px !important; }
+  main [style*="min-width:"] { min-width: 0 !important; }
+  main [style*="display:grid"], main [style*="display: grid"] { grid-template-columns: minmax(0, 1fr) !important; }
+  main [style*="flex:0 1"], main [style*="flex: 0 1"], main aside { flex-basis: 100% !important; width: 100%; }
+  main [style*="display:flex"] { flex-wrap: wrap; }
+  main [style*="padding:72px 0"] { padding-top: 44px !important; padding-bottom: 24px !important; }
+  main h1 { font-size: 34px !important; overflow-wrap: anywhere; }
+  main h2 { font-size: 27px !important; }
+  main input, main select, main textarea { font-size: 16px !important; }
+  main [style*="white-space:nowrap"] { white-space: normal !important; }
+  footer > div { gap: 24px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

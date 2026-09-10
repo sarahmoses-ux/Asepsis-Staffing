@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asepsis Staffing — Design Handoff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0..100,0..1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#F5F4F2;color:#2A1418;font-family:'Instrument Sans',system-ui,sans-serif;padding:72px 32px 96px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7A5B4A;margin-bottom:18px}
+  h1{font-family:Fraunces,serif;font-variation-settings:'SOFT' 0,'WONK' 0;font-weight:600;font-size:clamp(34px,5vw,52px);line-height:1.04;letter-spacing:-.02em;color:#3A1D22}
+  .lede{margin-top:18px;font-size:17px;line-height:1.6;color:#4A3A34;max-width:56ch}
+  h2{font-family:Fraunces,serif;font-variation-settings:'SOFT' 0,'WONK' 0;font-weight:600;font-size:22px;color:#3A1D22;margin:56px 0 18px}
+  .list{display:grid;gap:10px}
+  a.card{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;background:#fff;border:1px solid #E4DFD9;border-radius:3px;padding:22px 24px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+  a.card:hover{border-color:#C9A98A;transform:translateY(-1px)}
+  .tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7A5B4A}
+  .name{font-family:Fraunces,serif;font-variation-settings:'SOFT' 0,'WONK' 0;font-weight:600;font-size:19px;margin:6px 0 8px;color:#3A1D22}
+  .desc{font-size:14px;line-height:1.6;color:#55443E}
+  .go{font-size:13px;color:#7A5B4A;white-space:nowrap;padding-top:22px}
+  .notes{display:grid;gap:8px;font-size:14px;line-height:1.65;color:#55443E}
+  .notes a{color:#3A1D22}
+  .swatches{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .sw{width:96px}
+  .chip{height:52px;border-radius:2px;border:1px solid rgba(0,0,0,.08)}
+  .sw span{display:block;font-size:11px;color:#7A5B4A;margin-top:6px;letter-spacing:.02em}
+  footer{margin-top:64px;padding-top:22px;border-top:1px solid #E4DFD9;font-size:13px;color:#7A5B4A}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Asepsis Staffing · Design handoff</p>
+  <h1>Every kind of work.<br>One trusted partner.</h1>
+  <p class="lede">Four working design files covering the marketing site, the product screens, a campaign landing page and the brand system. Open any file below directly in a browser — no build step, no server.</p>
+
+  <h2>Design files</h2>
+  <div class="list">
+    <a class="card" href="design/Asepsis%20Site%20v3.dc.html"><div><div class="tag">Homepage</div><div class="name">Asepsis Site v3</div><div class="desc">Worker path, four practice areas, solution tiers, remote/hybrid, international talent, drivers, compliance proof, testimonials, branch locator, footer. Search and filters are wired to the jobs board.</div></div><div class="go">Open &rarr;</div></a>
+    <a class="card" href="design/Asepsis%20Platform%20v2.dc.html"><div><div class="tag">Product screens</div><div class="name">Asepsis Platform v2</div><div class="desc">Six screens: jobs board, job detail, apply flow, worker dashboard, employer request form, employer dashboard. Claim and approve actions confirm in place.</div></div><div class="go">Open &rarr;</div></a>
+    <a class="card" href="design/Asepsis%20Landing.dc.html"><div><div class="tag">Campaign landing page</div><div class="name">Asepsis Landing</div><div class="desc">Single-job landing page with a Workers / Employers mode toggle.</div></div><div class="go">Open &rarr;</div></a>
+    <a class="card" href="design/Asepsis%20Brand%20Identity.dc.html"><div><div class="tag">Brand identity</div><div class="name">Asepsis Brand Identity</div><div class="desc">Stacked lockup (primary), horizontal lockup (secondary), mark variants, palette roles, type rules and variable-font setup.</div></div><div class="go">Open &rarr;</div></a>
+  </div>
+
+  <h2>Palette</h2>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#3A1D22"></div><span>#3A1D22<br>Oxblood</span></div>
+    <div class="sw"><div class="chip" style="background:#2A1418"></div><span>#2A1418<br>Deep oxblood</span></div>
+    <div class="sw"><div class="chip" style="background:#C9A98A"></div><span>#C9A98A<br>Warm sand</span></div>
+    <div class="sw"><div class="chip" style="background:#F5F4F2"></div><span>#F5F4F2<br>Paper</span></div>
+    <div class="sw"><div class="chip" style="background:#FFFFFF"></div><span>#FFFFFF<br>White</span></div>
+  </div>
+
+  <h2>Also in this folder</h2>
+  <div class="notes">
+    <div><a href="README.md">README.md</a> — contents, how to open, dependencies.</div>
+    <div><a href="assets/EXTERNAL-ASSETS.md">assets/EXTERNAL-ASSETS.md</a> — every font and photo URL the design loads.</div>
+    <div><a href="reference/asepsis-staffing-home.html">reference/</a> — the original standalone homepage the project started from.</div>
+    <div><a href="design/archive/">design/archive/</a> — superseded versions, kept for history.</div>
+  </div>
+
+  <footer>Type: Fraunces (display) · Instrument Sans (UI). Photography placeholders from Unsplash — replace before production.</footer>
+</div>
+</body>
+</html>

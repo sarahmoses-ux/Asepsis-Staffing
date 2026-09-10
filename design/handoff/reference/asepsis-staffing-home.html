@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asepsis Staffing — Every kind of work. One trusted partner.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-900:#081527; --navy-800:#0E2340; --navy-700:#173A5E; --navy-600:#204c78;
+    --gold-500:#E0A458; --gold-600:#C98A3A; --gold-100:#FBEEDC;
+    --ink:#16223A; --slate:#5B6B84; --slate-light:#8493A8;
+    --mist:#F3F5F8; --mist-dark:#E9ECF1; --white:#FFFFFF; --border:#E3E7ED;
+    --success:#2F8F6C; --success-bg:#E7F4EF; --danger:#C24B4B;
+    --radius-s:8px; --radius-m:14px; --radius-l:22px;
+    --font-display:'Fraunces', serif; --font-body:'Inter', sans-serif;
+    --shadow-card: 0 1px 2px rgba(14,35,64,0.04), 0 8px 24px -12px rgba(14,35,64,0.12);
+    --shadow-lift: 0 20px 60px -20px rgba(8,21,39,0.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ font-family:var(--font-body); color:var(--ink); background:var(--white); line-height:1.5; -webkit-font-smoothing:antialiased; }
+  img{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 40px;}
+  h1,h2,h3,h4{font-family:var(--font-display); font-weight:500; color:var(--navy-900); letter-spacing:-0.01em;}
+  :focus-visible{outline:2px solid var(--gold-600); outline-offset:3px;}
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:13px 24px; border-radius:10px; font-weight:600; font-size:15px; transition:transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease; white-space:nowrap; }
+  .btn-gold{ background:var(--gold-500); color:var(--navy-900); }
+  .btn-gold:hover{ background:var(--gold-600); }
+  .btn-navy{ background:var(--navy-800); color:var(--white); }
+  .btn-navy:hover{ background:var(--navy-700); }
+  .btn-ghost{ background:transparent; color:var(--navy-900); border:1.5px solid var(--border); }
+  .btn-ghost:hover{ border-color:var(--navy-800); }
+  .btn-ghost-light{ background:rgba(255,255,255,0.08); color:var(--white); border:1.5px solid rgba(255,255,255,0.3); }
+  .btn-ghost-light:hover{ background:rgba(255,255,255,0.16); }
+  .btn-sm{ padding:9px 16px; font-size:13.5px; border-radius:8px; }
+  .link-arrow{ display:inline-flex; align-items:center; gap:6px; font-weight:600; color:var(--navy-800); font-size:14.5px; }
+  .link-arrow svg{ transition:transform .15s ease; }
+  .link-arrow:hover svg{ transform:translateX(3px); }
+
+  header.site-nav{ position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .logo{ display:flex; align-items:center; gap:9px; font-family:var(--font-display); font-size:22px; font-weight:600; color:var(--navy-900); }
+  .logo svg{ flex-shrink:0; }
+  .nav-links{ display:flex; align-items:center; gap:28px; }
+  .nav-links a{ font-size:14px; font-weight:500; color:var(--ink); white-space:nowrap; }
+  .nav-links a:hover{ color:var(--navy-700); }
+  .nav-right{ display:flex; align-items:center; gap:14px; }
+  .nav-signin{ font-size:14.5px; font-weight:600; color:var(--navy-900); padding:10px 6px; white-space:nowrap; }
+
+  /* ---------- Hero ---------- */
+  .hero{ position:relative; background:var(--navy-900); overflow:hidden; }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; align-items:stretch; min-height:660px; }
+  .hero-left{ padding:70px 56px 70px 40px; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; max-width:620px; }
+  .hero-left::before{ content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(ellipse 620px 480px at 20% 20%, rgba(224,164,88,0.10), transparent 60%); }
+  .audience-toggle{ display:inline-flex; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.16); border-radius:100px; padding:4px; gap:4px; margin-bottom:28px; width:fit-content; }
+  .audience-toggle button{ padding:9px 20px; border-radius:100px; font-size:14px; font-weight:600; color:rgba(255,255,255,0.65); transition:all .2s ease; }
+  .audience-toggle button.active{ background:var(--gold-500); color:var(--navy-900); }
+  .hero-left h1{ color:var(--white); font-size:47px; line-height:1.08; margin-bottom:18px; max-width:560px; }
+  .hero-left p.subhead{ color:rgba(255,255,255,0.72); font-size:16.5px; line-height:1.6; max-width:480px; margin-bottom:26px; }
+  .vertical-picker{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+  .vertical-chip{ display:flex; align-items:center; gap:7px; padding:8px 14px; border-radius:100px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.75); font-size:13px; font-weight:600; }
+  .vertical-chip:hover{ background:rgba(255,255,255,0.1); }
+  .search-card{ background:var(--white); border-radius:var(--radius-m); padding:10px; display:flex; gap:8px; box-shadow:var(--shadow-lift); margin-bottom:18px; }
+  .search-field{ flex:1; display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:10px; }
+  .search-field:hover{ background:var(--mist); }
+  .search-field svg{ flex-shrink:0; color:var(--slate-light); }
+  .search-field input{ border:none; outline:none; font-family:inherit; font-size:14.5px; width:100%; color:var(--ink); background:transparent; }
+  .search-divider{ width:1px; background:var(--border); margin:8px 0; }
+  .hero-trust{ display:flex; flex-wrap:wrap; align-items:center; gap:20px; color:rgba(255,255,255,0.55); font-size:13px; }
+  .hero-trust b{ color:var(--white); font-weight:600; }
+  .hero-right{ position:relative; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:3px; }
+  .hero-photo-cell{ position:relative; overflow:hidden; }
+  .hero-photo-cell img{ width:100%; height:100%; object-fit:cover; }
+  .hero-photo-label{ position:absolute; left:14px; bottom:12px; color:#fff; font-size:12px; font-weight:600; background:rgba(8,21,39,0.55); backdrop-filter:blur(6px); padding:5px 10px; border-radius:100px; }
+
+  .marquee-band{ background:var(--mist); padding:32px 0; border-bottom:1px solid var(--border); }
+  .marquee-label{ text-align:center; font-size:13.5px; color:var(--slate); font-weight:500; margin-bottom:0; }
+
+  section{ padding:96px 0; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:44px; gap:24px; }
+  .section-head h2{ font-size:36px; line-height:1.15; max-width:560px; }
+  .section-head p{ color:var(--slate); font-size:15.5px; max-width:420px; margin-top:10px; }
+
+  /* ---------- Verticals ---------- */
+  .vert-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .vert-card{ border-radius:var(--radius-m); padding:26px 22px; display:flex; flex-direction:column; gap:14px; min-height:280px; }
+  .vert-card.c1{ background:var(--navy-800); color:var(--white); }
+  .vert-card.c2{ background:var(--mist); color:var(--navy-900); }
+  .vert-card.c3{ background:var(--gold-100); color:var(--navy-900); }
+  .vert-card.c4{ background:var(--white); border:1.5px solid var(--border); color:var(--navy-900); }
+  .vert-icon{ width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; }
+  .vert-card.c1 .vert-icon{ background:rgba(255,255,255,0.12); }
+  .vert-card.c2 .vert-icon{ background:var(--white); }
+  .vert-card.c3 .vert-icon{ background:var(--white); }
+  .vert-card.c4 .vert-icon{ background:var(--mist); }
+  .vert-card h3{ font-family:var(--font-body); font-size:18px; font-weight:600; }
+  .vert-card.c1 h3{ color:var(--white); }
+  .vert-card p.desc{ font-size:13.5px; line-height:1.55; }
+  .vert-card.c1 p.desc{ color:rgba(255,255,255,0.65); }
+  .vert-card.c2 p.desc, .vert-card.c3 p.desc, .vert-card.c4 p.desc{ color:var(--slate); }
+  .vert-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
+  .vert-tag{ font-size:11px; font-weight:600; padding:5px 9px; border-radius:100px; background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.85); }
+  .vert-card.c2 .vert-tag, .vert-card.c3 .vert-tag, .vert-card.c4 .vert-tag{ background:var(--white); color:var(--slate); border:1px solid var(--border); }
+  .vert-link{ font-size:12.5px; font-weight:700; }
+  .vert-card.c1 .vert-link{ color:var(--gold-500); }
+  .vert-card.c2 .vert-link, .vert-card.c3 .vert-link, .vert-card.c4 .vert-link{ color:var(--navy-800); }
+
+  /* ---------- Job cards ---------- */
+  .job-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .job-card{ border:1px solid var(--border); border-radius:var(--radius-m); padding:24px; position:relative; transition:box-shadow .2s ease, transform .2s ease; background:var(--white); }
+  .job-card:hover{ box-shadow:var(--shadow-card); transform:translateY(-2px); }
+  .job-card .type-bar{ position:absolute; left:0; top:24px; bottom:24px; width:3px; border-radius:3px; }
+  .job-card .job-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; }
+  .job-logo{ width:44px; height:44px; border-radius:10px; background:var(--mist); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .job-card h4{ font-family:var(--font-body); font-size:16px; font-weight:600; color:var(--navy-900); margin-bottom:4px; }
+  .job-card .job-co{ font-size:13.5px; color:var(--slate); margin-bottom:14px; }
+  .job-meta{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px; }
+  .tag{ font-size:11.5px; font-weight:600; padding:5px 10px; border-radius:100px; background:var(--mist); color:var(--slate); }
+  .tag.remote{ background:var(--success-bg); color:var(--success); }
+  .tag.onsite{ background:var(--gold-100); color:var(--gold-600); }
+  .job-foot{ display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; }
+  .job-salary{ font-size:14px; font-weight:600; color:var(--navy-900); }
+  .job-posted{ font-size:12px; color:var(--slate-light); }
+
+  /* ---------- How it works ---------- */
+  .steps-alt{ background:var(--mist); }
+  .step-line{ display:flex; position:relative; margin-top:20px; }
+  .step-line::before{ content:""; position:absolute; top:23px; left:calc(16.6%); right:calc(16.6%); height:1px; background:var(--border); }
+  .step-item{ flex:1; text-align:left; padding-right:30px; position:relative; }
+  .step-num{ width:46px; height:46px; border-radius:50%; background:var(--white); border:1.5px solid var(--navy-800); color:var(--navy-800); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:18px; font-weight:600; margin-bottom:22px; position:relative; z-index:2; }
+  .step-item h4{ font-family:var(--font-body); font-size:17px; font-weight:600; margin-bottom:8px; }
+  .step-item p{ font-size:14px; color:var(--slate); line-height:1.6; max-width:280px; }
+
+  /* ---------- Employer solutions ---------- */
+  .solutions-grid{ display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden; background:var(--white); }
+  .solution-item{ padding:26px 22px; border-left:1px solid var(--border); }
+  .solution-item:first-child{ border-left:none; }
+  .solution-item .n{ font-family:var(--font-display); font-size:13px; color:var(--gold-600); margin-bottom:12px; }
+  .solution-item h4{ font-family:var(--font-body); font-size:15.5px; font-weight:600; margin-bottom:8px; }
+  .solution-item p{ font-size:13px; color:var(--slate); line-height:1.55; }
+
+  /* ---------- Compliance band ---------- */
+  .compliance-band{ background:var(--navy-900); color:var(--white); }
+  .compliance-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+  .compliance-grid h2{ color:var(--white); font-size:32px; max-width:420px; }
+  .compliance-grid > p{ color:rgba(255,255,255,0.6); font-size:15px; max-width:420px; margin-top:14px; line-height:1.6; }
+  .compliance-list{ display:grid; gap:14px; }
+  .compliance-item{ display:flex; gap:12px; align-items:flex-start; padding:14px 16px; background:rgba(255,255,255,0.05); border-radius:10px; }
+  .compliance-item svg{ color:var(--gold-500); flex-shrink:0; margin-top:2px; }
+  .compliance-item div b{ display:block; font-size:14.5px; font-weight:600; margin-bottom:2px; }
+  .compliance-item div span{ font-size:13px; color:rgba(255,255,255,0.6); }
+
+  /* ---------- Benefits split ---------- */
+  .benefits-split{ display:grid; grid-template-columns:1fr 1fr; gap:0; border-radius:var(--radius-l); overflow:hidden; border:1px solid var(--border); }
+  .benefit-col{ padding:44px 40px; }
+  .benefit-col.seekers{ background:var(--white); }
+  .benefit-col.employers{ background:var(--navy-800); color:var(--white); }
+  .benefit-col h3{ font-size:24px; margin-bottom:6px; }
+  .benefit-col.employers h3{ color:var(--white); }
+  .benefit-col .tagline{ font-size:14px; margin-bottom:24px; }
+  .benefit-col.seekers .tagline{ color:var(--slate); }
+  .benefit-col.employers .tagline{ color:rgba(255,255,255,0.6); }
+  .benefit-list li{ display:flex; gap:12px; padding:11px 0; border-top:1px solid var(--border); font-size:14px; }
+  .benefit-col.employers .benefit-list li{ border-top:1px solid rgba(255,255,255,0.14); color:rgba(255,255,255,0.85); }
+  .benefit-list li:first-child{ border-top:none; }
+  .benefit-list svg{ flex-shrink:0; margin-top:2px; color:var(--gold-600); }
+  .benefit-col.employers .benefit-list svg{ color:var(--gold-500); }
+  .benefit-col .btn{ margin-top:24px; }
+
+  /* ---------- Testimonial ---------- */
+  .testi-wrap{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:60px; align-items:center; }
+  .testi-photo{ border-radius:var(--radius-l); overflow:hidden; aspect-ratio:4/5; }
+  .testi-photo img{ width:100%; height:100%; object-fit:cover; }
+  .quote-mark{ font-family:var(--font-display); font-size:58px; color:var(--gold-500); line-height:1; margin-bottom:6px; }
+  .testi-quote{ font-family:var(--font-display); font-size:25px; line-height:1.42; color:var(--navy-900); margin-bottom:24px; font-weight:400; }
+  .testi-person{ display:flex; align-items:center; gap:14px; margin-bottom:30px; }
+  .testi-avatar{ width:46px; height:46px; border-radius:50%; overflow:hidden; }
+  .testi-avatar img{ width:100%; height:100%; object-fit:cover; }
+  .testi-person b{ display:block; font-size:14.5px; }
+  .testi-person span{ font-size:13px; color:var(--slate); }
+  .testi-switcher{ display:flex; gap:10px; }
+  .testi-switcher button{ width:40px; height:40px; border-radius:50%; overflow:hidden; opacity:0.4; transition:opacity .2s ease; border:2px solid transparent; }
+  .testi-switcher button.active{ opacity:1; border-color:var(--gold-500); }
+  .testi-switcher img{ width:100%; height:100%; object-fit:cover; }
+
+  /* ---------- Locations ---------- */
+  .loc-band{ background:var(--mist); }
+  .loc-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:10px; }
+  .loc-item{ background:var(--white); border:1px solid var(--border); border-radius:10px; padding:14px 16px; display:flex; justify-content:space-between; align-items:center; font-size:14px; font-weight:600; }
+  .loc-item span.state{ font-size:12px; font-weight:600; color:var(--slate-light); }
+  .loc-more{ text-align:center; margin-top:22px; }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{ display:grid; grid-template-columns:1fr 1fr; border-radius:var(--radius-l); overflow:hidden; }
+  .final-cta .half{ padding:52px 48px; }
+  .final-cta .half.gold{ background:var(--gold-500); }
+  .final-cta .half.navy{ background:var(--navy-800); }
+  .final-cta h3{ font-size:26px; margin-bottom:10px; }
+  .final-cta .half.gold h3{ color:var(--navy-900); }
+  .final-cta .half.navy h3{ color:var(--white); }
+  .final-cta .half.gold p{ color:rgba(14,35,64,0.72); margin-bottom:22px; font-size:14px; }
+  .final-cta .half.navy p{ color:rgba(255,255,255,0.65); margin-bottom:22px; font-size:14px; }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--navy-900); color:rgba(255,255,255,0.6); padding:64px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns:1.5fr repeat(4,1fr); gap:28px; margin-bottom:56px; }
+  .footer-brand .logo{ color:var(--white); margin-bottom:14px; }
+  .footer-brand p{ font-size:13.5px; line-height:1.6; max-width:250px; margin-bottom:20px; }
+  .footer-col h5{ font-family:var(--font-body); color:var(--white); font-size:13.5px; font-weight:600; margin-bottom:15px; }
+  .footer-col ul li{ margin-bottom:10px; font-size:13.5px; }
+  .footer-col a:hover{ color:var(--white); }
+  .footer-bottom{ display:flex; justify-content:space-between; align-items:center; padding-top:24px; border-top:1px solid rgba(255,255,255,0.12); font-size:12.5px; flex-wrap:wrap; gap:8px; }
+
+  @media (max-width: 1080px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-right{ display:none; }
+    .job-grid, .vert-grid, .solutions-grid, .loc-grid{ grid-template-columns:repeat(2,1fr); }
+    .benefits-split, .final-cta, .testi-wrap, .compliance-grid{ grid-template-columns:1fr; }
+    .nav-links{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo">
+      <svg width="26" height="26" viewBox="0 0 100 100" fill="none"><path d="M6 94V36A8 8 0 0 1 14 28H64Z" fill="#0E2340"/><path d="M94 6V64A8 8 0 0 1 86 72H36Z" fill="#E0A458"/></svg>
+      Asepsis
+    </a>
+    <nav class="nav-links">
+      <a href="#healthcare">Healthcare</a>
+      <a href="#skilled-trades">Skilled Trades</a>
+      <a href="#technical-trades">Technical Trades</a>
+      <a href="#professional">Professional</a>
+      <a href="#employers">For Employers</a>
+      <a href="#locations">Locations</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#" class="nav-signin">Sign in</a>
+      <a href="#" class="btn btn-navy btn-sm">Apply now</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:0;">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="audience-toggle">
+        <button class="active" id="tab-seeker" onclick="setAudience('seeker')">Find work</button>
+        <button id="tab-employer" onclick="setAudience('employer')">Hire talent</button>
+      </div>
+
+      <div id="content-seeker">
+        <h1>Every kind of work. One trusted staffing partner.</h1>
+        <p class="subhead">From hospital floors to warehouse docks to job sites to corner offices — we place people in real shifts, fast, and pay weekly.</p>
+        <div class="vertical-picker">
+          <button class="vertical-chip" onclick="document.getElementById('healthcare').scrollIntoView({behavior:'smooth'})">🩺 Healthcare</button>
+          <button class="vertical-chip" onclick="document.getElementById('skilled-trades').scrollIntoView({behavior:'smooth'})">🦺 Skilled Trades</button>
+          <button class="vertical-chip" onclick="document.getElementById('technical-trades').scrollIntoView({behavior:'smooth'})">🔧 Technical Trades</button>
+          <button class="vertical-chip" onclick="document.getElementById('professional').scrollIntoView({behavior:'smooth'})">💼 Professional</button>
+        </div>
+      </div>
+      <div id="content-employer" style="display:none;">
+        <h1>Staffing that covers your whole workforce.</h1>
+        <p class="subhead">One partner for nurses, tradespeople, technicians, and office staff — with credential checks, workers' comp, and payroll handled.</p>
+        <div class="vertical-picker">
+          <button class="vertical-chip" onclick="document.getElementById('employers').scrollIntoView({behavior:'smooth'})">Temp staffing</button>
+          <button class="vertical-chip" onclick="document.getElementById('employers').scrollIntoView({behavior:'smooth'})">Temp-to-hire</button>
+          <button class="vertical-chip" onclick="document.getElementById('employers').scrollIntoView({behavior:'smooth'})">Direct placement</button>
+          <button class="vertical-chip" onclick="document.getElementById('employers').scrollIntoView({behavior:'smooth'})">Per diem &amp; travel</button>
+        </div>
+      </div>
+
+      <div class="search-card" id="search-card">
+        <div class="search-field" style="flex:1.3;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="search-input" placeholder="Job title, trade, or license">
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <input type="text" placeholder="ZIP code or city">
+        </div>
+        <button class="btn btn-navy" id="search-btn" style="flex-shrink:0;">Search jobs</button>
+      </div>
+
+      <div class="hero-trust">
+        <span><b>48</b> branches nationwide</span>
+        <span><b>125,000+</b> workers placed</span>
+        <span><b>Weekly</b> pay, every Friday</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-photo-cell">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80" alt="Nurse in a hospital hallway">
+        <span class="hero-photo-label">Healthcare</span>
+      </div>
+      <div class="hero-photo-cell">
+        <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=700&q=80" alt="Warehouse worker operating a forklift">
+        <span class="hero-photo-label">Skilled Trades</span>
+      </div>
+      <div class="hero-photo-cell">
+        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700&q=80" alt="Technician servicing equipment">
+        <span class="hero-photo-label">Technical Trades</span>
+      </div>
+      <div class="hero-photo-cell">
+        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=700&q=80" alt="Office professionals in a meeting">
+        <span class="hero-photo-label">Professional</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-band">
+  <div class="wrap">
+    <p class="marquee-label">Trusted by hospitals, distribution centers, contractors, and employers across the country</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>We staff every kind of work</h2>
+      <p>Four workforces, one dedicated recruiting team for each — not a one-size-fits-all job board.</p>
+    </div>
+    <div class="vert-grid">
+
+      <div class="vert-card c1" id="healthcare">
+        <div class="vert-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 21s-7-4.6-9.5-9.1C.7 8.4 2.3 4.5 6 4c2-.3 3.7.8 4.5 2.2C11.3 4.8 13 3.7 15 4c3.7.5 5.3 4.4 3.5 7.9C16 16.4 12 21 12 21z"/><path d="M9 12h2l1-2 1 3 1-1h1.5"/></svg></div>
+        <h3>Healthcare</h3>
+        <p class="desc">RNs, CNAs, LPNs, and allied health for per diem, travel, and permanent placements.</p>
+        <div class="vert-tags">
+          <span class="vert-tag">RN</span><span class="vert-tag">CNA</span><span class="vert-tag">LPN</span><span class="vert-tag">Med Tech</span>
+        </div>
+        <span class="vert-link">View healthcare jobs →</span>
+      </div>
+
+      <div class="vert-card c2" id="skilled-trades">
+        <div class="vert-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16223A" stroke-width="1.8"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6"/></svg></div>
+        <h3>Skilled Trades</h3>
+        <p class="desc">Warehouse, manufacturing, construction, and logistics roles — no experience required for most.</p>
+        <div class="vert-tags">
+          <span class="vert-tag">Warehouse</span><span class="vert-tag">Forklift</span><span class="vert-tag">Assembly</span><span class="vert-tag">Construction</span>
+        </div>
+        <span class="vert-link">View skilled trades jobs →</span>
+      </div>
+
+      <div class="vert-card c3" id="technical-trades">
+        <div class="vert-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16223A" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 01-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 015.4-5.4l-2.7 2.7-2-2 2.7-2.7z"/></svg></div>
+        <h3>Technical Trades</h3>
+        <p class="desc">Licensed and certified technicians — electricians, HVAC, and diesel mechanics who bring their own credentials.</p>
+        <div class="vert-tags">
+          <span class="vert-tag">Electrician</span><span class="vert-tag">HVAC</span><span class="vert-tag">Diesel Tech</span>
+        </div>
+        <span class="vert-link">View technical trades jobs →</span>
+      </div>
+
+      <div class="vert-card c4" id="professional">
+        <div class="vert-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16223A" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></div>
+        <h3>Professional</h3>
+        <p class="desc">Accounting, admin, HR, and office roles — temp-to-hire and direct placement for growing teams.</p>
+        <div class="vert-tags">
+          <span class="vert-tag">Accounting</span><span class="vert-tag">Admin</span><span class="vert-tag">HR</span>
+        </div>
+        <span class="vert-link">View professional jobs →</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--mist); padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Open shifts and roles right now</h2>
+      <a href="#" class="link-arrow">Browse all jobs <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="job-grid">
+
+      <div class="job-card">
+        <div class="type-bar" style="background:var(--danger);"></div>
+        <div class="job-top">
+          <div class="job-logo"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#16223A" stroke-width="1.8"><path d="M12 21s-7-4.6-9.5-9.1C.7 8.4 2.3 4.5 6 4c2-.3 3.7.8 4.5 2.2C11.3 4.8 13 3.7 15 4c3.7.5 5.3 4.4 3.5 7.9C16 16.4 12 21 12 21z"/></svg></div>
+        </div>
+        <h4>Registered Nurse, ICU — Travel</h4>
+        <p class="job-co">Baptist Health · Dallas, TX</p>
+        <div class="job-meta"><span class="tag onsite">13-week contract</span><span class="tag">Nights</span></div>
+        <div class="job-foot"><span class="job-salary">$2,600–$3,200 / wk</span><span class="job-posted">Posted 2d ago</span></div>
+      </div>
+
+      <div class="job-card">
+        <div class="type-bar" style="background:var(--navy-700);"></div>
+        <div class="job-top"><div class="job-logo"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#16223A" stroke-width="1.8"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6"/></svg></div></div>
+        <h4>Warehouse Associate / Forklift</h4>
+        <p class="job-co">Regional Distribution Center · Columbus, OH</p>
+        <div class="job-meta"><span class="tag onsite">Temp-to-hire</span><span class="tag">1st shift</span></div>
+        <div class="job-foot"><span class="job-salary">$19–$22 / hr</span><span class="job-posted">Posted 4h ago</span></div>
+      </div>
+
+      <div class="job-card">
+        <div class="type-bar" style="background:var(--gold-500);"></div>
+        <div class="job-top"><div class="job-logo"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#16223A" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 01-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 015.4-5.4l-2.7 2.7-2-2 2.7-2.7z"/></svg></div></div>
+        <h4>HVAC Technician</h4>
+        <p class="job-co">Commercial Mechanical Contractor · Charlotte, NC</p>
+        <div class="job-meta"><span class="tag onsite">Direct placement</span><span class="tag">EPA 608 req.</span></div>
+        <div class="job-foot"><span class="job-salary">$26–$34 / hr</span><span class="job-posted">Posted 1d ago</span></div>
+      </div>
+
+      <div class="job-card">
+        <div class="type-bar" style="background:var(--success);"></div>
+        <div class="job-top"><div class="job-logo"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#16223A" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></div></div>
+        <h4>Staff Accountant</h4>
+        <p class="job-co">Mid-size Manufacturer · Phoenix, AZ</p>
+        <div class="job-meta"><span class="tag">Direct hire</span><span class="tag">Hybrid</span></div>
+        <div class="job-foot"><span class="job-salary">$58K–$68K / yr</span><span class="job-posted">Posted 3d ago</span></div>
+      </div>
+
+      <div class="job-card">
+        <div class="type-bar" style="background:var(--danger);"></div>
+        <div class="job-top"><div class="job-logo"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#16223A" stroke-width="1.8"><path d="M12 21s-7-4.6-9.5-9.1C.7 8.4 2.3 4.5 6 4c2-.3 3.7.8 4.5 2.2C11.3 4.8 13 3.7 15 4c3.7.5 5.3 4.4 3.5 7.9C16 16.4 12 21 12 21z"/></svg></div></div>
+        <h4>CNA — Per Diem</h4>
+        <p class="job-co">Skilled Nursing Facility · Atlanta, GA</p>
+        <div class="job-meta"><span class="tag onsite">Per diem</span><span class="tag">All shifts</span></div>
+        <div class="job-foot"><span class="job-salary">$19–$24 / hr</span><span class="job-posted">Posted 6h ago</span></div>
+      </div>
+
+      <div class="job-card">
+        <div class="type-bar" style="background:var(--gold-500);"></div>
+        <div class="job-top"><div class="job-logo"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#16223A" stroke-width="1.8"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></div></div>
+        <h4>Electrician, Journeyman</h4>
+        <p class="job-co">Industrial Facilities Group · Sacramento, CA</p>
+        <div class="job-meta"><span class="tag onsite">Temp-to-hire</span><span class="tag">License req.</span></div>
+        <div class="job-foot"><span class="job-salary">$30–$38 / hr</span><span class="job-posted">Posted 5d ago</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="steps-alt">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:20px;">
+      <h2>How it works</h2>
+      <p>Apply once — online or at your local branch — and start as soon as you're cleared.</p>
+    </div>
+    <div class="step-line">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <h4>Apply in minutes</h4>
+        <p>One application online or in person at a local branch. No resume required for most roles.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <h4>Get matched &amp; verified</h4>
+        <p>We confirm your license, certifications, or background check, then match you to open shifts.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <h4>Start working, get paid weekly</h4>
+        <p>Show up, clock in, and get paid every Friday by direct deposit or pay card.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="employers">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:36px;">
+      <h2>Staffing solutions for every stage of hiring</h2>
+      <p>From a single shift to a full workforce build-out.</p>
+    </div>
+    <div class="solutions-grid">
+      <div class="solution-item">
+        <div class="n">01</div>
+        <h4>Temporary Staffing</h4>
+        <p>Short-notice coverage for seasonal demand, absences, or project surges.</p>
+      </div>
+      <div class="solution-item">
+        <div class="n">02</div>
+        <h4>Temp-to-Hire</h4>
+        <p>Trial a worker on our payroll, then convert to your team when it's a fit.</p>
+      </div>
+      <div class="solution-item">
+        <div class="n">03</div>
+        <h4>Direct Placement</h4>
+        <p>Full-cycle search for permanent hires, from sourcing to offer.</p>
+      </div>
+      <div class="solution-item">
+        <div class="n">04</div>
+        <h4>Per Diem &amp; Travel Healthcare</h4>
+        <p>Credentialed clinical staff for single shifts or 13-week travel contracts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="compliance-band">
+  <div class="wrap compliance-grid">
+    <div>
+      <h2>Every worker screened. Every hire protected.</h2>
+      <p>Staffing isn't just matching — it's the paperwork, the coverage, and the compliance that keep your business protected.</p>
+    </div>
+    <div class="compliance-list">
+      <div class="compliance-item">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        <div><b>E-Verify &amp; I-9 compliance</b><span>Verified on every single hire, every time.</span></div>
+      </div>
+      <div class="compliance-item">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        <div><b>Background checks &amp; drug screening</b><span>Configurable to your industry's requirements.</span></div>
+      </div>
+      <div class="compliance-item">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        <div><b>License &amp; credential verification</b><span>RN licensure, CDL, EPA 608, OSHA-10/30, and more.</span></div>
+      </div>
+      <div class="compliance-item">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        <div><b>Workers' comp &amp; liability coverage</b><span>Fully insured while workers are on assignment.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="benefits-split">
+      <div class="benefit-col seekers">
+        <h3>For workers</h3>
+        <p class="tagline">One application. Every kind of shift.</p>
+        <ul class="benefit-list">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Weekly pay by direct deposit or pay card</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Apply online or walk into a local branch</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Credential and license tracking handled for you</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Always free to apply</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Apply now</a>
+      </div>
+      <div class="benefit-col employers">
+        <h3>For employers</h3>
+        <p class="tagline">One partner for your entire workforce.</p>
+        <ul class="benefit-list">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Dedicated recruiters by industry, not generalists</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Payroll, workers' comp, and compliance handled</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> 24/7 dispatch line for urgent, same-day coverage</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Local branch teams who know your market</li>
+        </ul>
+        <a href="#" class="btn btn-gold">Request workers</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap testi-wrap">
+    <div class="testi-photo">
+      <img id="testi-img-main" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" alt="Healthcare worker">
+    </div>
+    <div>
+      <div class="quote-mark">“</div>
+      <p class="testi-quote" id="testi-quote">I picked up a 13-week ICU contract within four days of applying. Credentialing was done before I even finished orientation paperwork.</p>
+      <div class="testi-person">
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?auto=format&fit=crop&w=100&q=80" alt=""></div>
+        <div><b id="testi-name">Maria Santos</b><span id="testi-role">RN, ICU — placed at Baptist Health Dallas</span></div>
+      </div>
+      <div class="testi-switcher">
+        <button class="active" onclick="setTesti(0, this)"><img src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?auto=format&fit=crop&w=100&q=80" alt=""></button>
+        <button onclick="setTesti(1, this)"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=100&q=80" alt=""></button>
+        <button onclick="setTesti(2, this)"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80" alt=""></button>
+        <button onclick="setTesti(3, this)"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt=""></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="locations" class="loc-band">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:20px;">
+      <h2>48 branches, coast to coast</h2>
+      <p>Local recruiters who know your local market.</p>
+    </div>
+    <div class="loc-grid">
+      <div class="loc-item">Dallas <span class="state">TX</span></div>
+      <div class="loc-item">Columbus <span class="state">OH</span></div>
+      <div class="loc-item">Charlotte <span class="state">NC</span></div>
+      <div class="loc-item">Phoenix <span class="state">AZ</span></div>
+      <div class="loc-item">Atlanta <span class="state">GA</span></div>
+      <div class="loc-item">Sacramento <span class="state">CA</span></div>
+      <div class="loc-item">Indianapolis <span class="state">IN</span></div>
+      <div class="loc-item">Tampa <span class="state">FL</span></div>
+    </div>
+    <div class="loc-more"><a href="#" class="link-arrow">Find your local branch <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <div class="half gold">
+        <h3>Ready for your next shift?</h3>
+        <p>Apply online in minutes or walk into a branch near you.</p>
+        <a href="#" class="btn btn-navy">Apply now</a>
+      </div>
+      <div class="half navy">
+        <h3>Need workers this week?</h3>
+        <p>Call our dispatch line — we staff same-day for urgent needs.</p>
+        <a href="#" class="btn btn-gold">Request workers</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <svg width="24" height="24" viewBox="0 0 100 100" fill="none"><path d="M6 94V36A8 8 0 0 1 14 28H64Z" fill="#FFFFFF"/><path d="M94 6V64A8 8 0 0 1 86 72H36Z" fill="#E0A458"/></svg>
+          Asepsis
+        </a>
+        <p>A US staffing company placing healthcare, skilled trades, technical trades, and professional workers nationwide.</p>
+      </div>
+      <div class="footer-col">
+        <h5>For workers</h5>
+        <ul>
+          <li><a href="#">Healthcare jobs</a></li>
+          <li><a href="#">Skilled trades jobs</a></li>
+          <li><a href="#">Technical trades jobs</a></li>
+          <li><a href="#">Professional jobs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>For employers</h5>
+        <ul>
+          <li><a href="#">Request workers</a></li>
+          <li><a href="#">Staffing solutions</a></li>
+          <li><a href="#">Compliance &amp; safety</a></li>
+          <li><a href="#">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Locations</a></li>
+          <li><a href="#">Contact &amp; support</a></li>
+          <li><a href="#">Careers at Asepsis</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Terms of service</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Asepsis Staffing, Inc. All rights reserved.</span>
+      <span>48 branches nationwide · Licensed staffing services in all 50 states.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function setAudience(type){
+    const isSeeker = type === 'seeker';
+    document.getElementById('tab-seeker').classList.toggle('active', isSeeker);
+    document.getElementById('tab-employer').classList.toggle('active', !isSeeker);
+    document.getElementById('content-seeker').style.display = isSeeker ? 'block' : 'none';
+    document.getElementById('content-employer').style.display = isSeeker ? 'none' : 'block';
+    document.getElementById('search-input').placeholder = isSeeker ? 'Job title, trade, or license' : 'Role or headcount needed';
+    document.getElementById('search-btn').textContent = isSeeker ? 'Search jobs' : 'Request workers';
+  }
+
+  const testimonials = [
+    { img:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80', quote:"I picked up a 13-week ICU contract within four days of applying. Credentialing was done before I even finished orientation paperwork.", name:'Maria Santos', role:'RN, ICU — placed at Baptist Health Dallas' },
+    { img:'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80', quote:"Applied Monday, badge in hand by Thursday. First paycheck came that Friday, exactly like they said it would.", name:'DeShawn Carter', role:'Forklift Operator — placed at a regional distribution center' },
+    { img:'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80', quote:"They matched me to a job that actually used my EPA 608 certification instead of starting me over as a helper.", name:'Miguel Reyes', role:'HVAC Technician — placed with a commercial contractor' },
+    { img:'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80', quote:"The recruiter understood the difference between AP and full-cycle accounting. That's rare in a staffing call.", name:'Angela Whitfield', role:'Staff Accountant — placed at a mid-size manufacturer' }
+  ];
+  function setTesti(i, btn){
+    const t = testimonials[i];
+    document.getElementById('testi-img-main').src = t.img;
+    document.getElementById('testi-quote').innerHTML = t.quote;
+    document.getElementById('testi-name').textContent = t.name;
+    document.getElementById('testi-role').innerHTML = t.role;
+    document.querySelectorAll('.testi-switcher button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

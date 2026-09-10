@@ -1,0 +1,7 @@
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Instrument Sans',sans-serif;color:#262A33;background:#F5F4F2;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  a{color:#3A1D22;text-decoration:none;}
+  a:hover{color:#22262E !important}
+  button{cursor:pointer;border:none;background:none;}
+  :focus-visible{outline:2px solid #8A6740;outline-offset:3px;}

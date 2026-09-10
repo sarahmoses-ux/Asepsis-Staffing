@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Instrument Sans',sans-serif;color:#262A33;font-feature-settings:'ss01';background:#FFFFFF;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  ul{list-style:none;}
+  a{color:#22262E;text-decoration:none;}
+  a:hover{color:#3A4A63;}
+  input,select,textarea,button{font-family:inherit;}
+  button{cursor:pointer;border:none;background:none;}
+  :focus-visible{outline:2px solid #A8825F;outline-offset:2px;}
+  ::placeholder{color:#5B6270;}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#FFFFFF">
+
+<header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-bottom:1px solid #E5E2DC">
+  <div style="background:#22262E">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px;height:36px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+      <div style="display:flex;align-items:center;gap:20px">
+        <span style="font-size:12px;color:rgba(244,244,246,0.7);white-space:nowrap">48 branches · walk in Mon–Fri 8–5</span>
+        <span style="font-size:12px;color:rgba(244,244,246,0.7);white-space:nowrap">24/7 dispatch {{ dispatch }}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:18px">
+        <button onClick="{{ goWorker }}" style="font-size:12px;font-weight:600;color:#C9A98A;white-space:nowrap">Worker sign in</button>
+        <button onClick="{{ goEmployer }}" style="font-size:12px;font-weight:600;color:#C9A98A;white-space:nowrap">Employer login</button>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1240px;margin:0 auto;padding:12px 32px;min-height:70px;display:flex;align-items:center;gap:24px">
+    <button onClick="{{ goHome }}" style="display:flex;align-items:center;gap:11px;flex-shrink:0">
+      <svg width="30" height="30" viewBox="0 0 100 100" fill="none"><path d="M6 94V36A8 8 0 0 1 14 28H64Z" fill="#3A1D22"/><path d="M94 6V64A8 8 0 0 1 86 72H36Z" fill="#C9A98A"/></svg>
+      <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1">
+        <span style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-size:21px;font-weight:600;color:#171A20;letter-spacing:-0.025em">Asepsis</span>
+        <span style="font-size:9.5px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:#8A6740;margin-top:4px">Staffing</span>
+      </span>
+    </button>
+    <nav style="display:flex;align-items:center;gap:4px;flex:1;flex-wrap:wrap">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
+        <button onClick="{{ n.go }}" style="{{ n.style }}">{{ n.label }}</button>
+      </sc-for>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <button onClick="{{ goWorker }}" style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#5D6472;white-space:nowrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2"><path d="M19 21l-7-4-7 4V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+        Saved · {{ savedCount }}
+      </button>
+      <button onClick="{{ goApply }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:10px 18px;border-radius:8px;font-size:13.5px;font-weight:600;white-space:nowrap;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Apply now</button>
+    </div>
+  </div>
+</header>
+
+<main style="flex:1">
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div style="background:#3A1D22;overflow:hidden">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px;display:flex;gap:48px;align-items:center;flex-wrap:wrap">
+      <div style="flex:1 1 480px;min-width:300px;padding:72px 0">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#C9A98A;margin-bottom:20px">US staffing · four practices · 48 branches</p>
+        <h1 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:46px;line-height:1.06;letter-spacing:-0.02em;color:#F5F4F2;max-width:620px">Every kind of work. One trusted staffing partner.</h1>
+        <p style="font-size:17.5px;line-height:1.6;color:rgba(244,244,246,0.74);max-width:520px;margin-top:20px">From hospital floors to warehouse docks to job sites to corner offices — we place people in real shifts, fast, and pay weekly.</p>
+        <div style="display:flex;gap:8px;background:#fff;border-radius:12px;padding:8px;margin-top:28px;max-width:560px;flex-wrap:wrap">
+          <label style="flex:1 1 200px;display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:8px;background:#F5F4F2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6270" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input value="{{ search }}" onChange="{{ onSearch }}" placeholder="Job title, trade, or licence" style="border:none;outline:none;background:transparent;font-size:14.5px;color:#262A33;width:100%">
+          </label>
+          <label style="flex:1 1 130px;display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:8px;background:#F5F4F2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6270" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <input value="{{ zip }}" onChange="{{ onZip }}" placeholder="ZIP or city" style="border:none;outline:none;background:transparent;font-size:14.5px;color:#262A33;width:100%">
+          </label>
+          <button onClick="{{ runSearch }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:12px 22px;border-radius:8px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease">Search jobs</button>
+        </div>
+        <div style="display:flex;gap:22px;flex-wrap:wrap;margin-top:18px;align-items:center">
+          <button onClick="{{ goRequest }}" style="font-size:14px;font-weight:600;color:#C9A98A;white-space:nowrap">Hiring? Request workers →</button>
+          <button onClick="{{ goApply }}" style="font-size:14px;font-weight:600;color:rgba(244,244,246,0.72);white-space:nowrap">Apply without a specific job →</button>
+        </div>
+        <div style="display:flex;gap:34px;flex-wrap:wrap;margin-top:40px;padding-top:26px;border-top:1px solid rgba(244,244,246,0.16)">
+          <div><p style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#F5F4F2">48</p><p style="font-size:13px;color:rgba(244,244,246,0.6);margin-top:3px">branches nationwide</p></div>
+          <div><p style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#F5F4F2">125,000+</p><p style="font-size:13px;color:rgba(244,244,246,0.6);margin-top:3px">workers placed</p></div>
+          <div><p style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#F5F4F2">Friday</p><p style="font-size:13px;color:rgba(244,244,246,0.6);margin-top:3px">pay, every week</p></div>
+        </div>
+      </div>
+      <div style="flex:1 1 380px;min-width:300px;display:grid;grid-template-columns:1fr 1fr;gap:4px;align-self:stretch;min-height:520px">
+        <div style="position:relative;overflow:hidden;background:#2A1418">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80" alt="Nurse in a hospital hallway" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+          <span style="position:absolute;left:12px;bottom:11px;font-size:11px;font-weight:600;color:#fff;background:rgba(23,26,32,0.6);padding:4px 10px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Healthcare</span>
+        </div>
+        <div style="position:relative;overflow:hidden;background:#2A1418">
+          <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=700&q=80" alt="Warehouse worker operating a forklift" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+          <span style="position:absolute;left:12px;bottom:11px;font-size:11px;font-weight:600;color:#fff;background:rgba(23,26,32,0.6);padding:4px 10px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Skilled Trades</span>
+        </div>
+        <div style="position:relative;overflow:hidden;background:#2A1418">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700&q=80" alt="Technician servicing equipment" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+          <span style="position:absolute;left:12px;bottom:11px;font-size:11px;font-weight:600;color:#fff;background:rgba(23,26,32,0.6);padding:4px 10px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Technical Trades</span>
+        </div>
+        <div style="position:relative;overflow:hidden;background:#2A1418">
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=700&q=80" alt="Office professionals in a meeting" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+          <span style="position:absolute;left:12px;bottom:11px;font-size:11px;font-weight:600;color:#fff;background:rgba(23,26,32,0.6);padding:4px 10px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Professional</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#F5F4F2;border-bottom:1px solid #E5E2DC;padding:26px 0">
+    <p style="max-width:1240px;margin:0 auto;padding:0 32px;text-align:center;font-size:13.5px;color:#5D6472">Trusted by hospitals, distribution centres, contractors, and employers across the country</p>
+  </div>
+
+  <section style="max-width:1240px;margin:0 auto;padding:72px 32px 8px">
+    
+    <div style="display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:flex-end">
+      <span style="display:block;width:38px;height:3px;background:#C9A98A;transform:skewX(-22deg);margin-bottom:20px"></span><h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:30px;line-height:1.15;color:#171A20;max-width:520px;letter-spacing:-0.015em">We staff every kind of work — with a dedicated team for each</h2>
+      <p style="font-size:15.5px;color:#5D6472;line-height:1.6;max-width:400px">Four recruiting practices, one branch network, one application. Not a generic job board with four filters.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:36px">
+      <sc-for list="{{ practiceCards }}" as="p" hint-placeholder-count="4">
+        <button onClick="{{ p.go }}" style-hover="border-color:#C9A98A;box-shadow:0 2px 4px rgba(23,26,32,0.04),0 14px 34px -18px rgba(23,26,32,0.28);transform:translateY(-2px)" style="text-align:left;border:1px solid #E5E2DC;border-radius:22px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease">
+          <span style="display:block;position:relative;aspect-ratio:16/10;background:#EBE8E2;overflow:hidden">
+            <sc-if value="{{ p.isHealthcare }}" hint-placeholder-val="{{ false }}">
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80" alt="Nurse in a hospital hallway" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+            </sc-if>
+            <sc-if value="{{ p.isSkilled }}" hint-placeholder-val="{{ false }}">
+              <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=700&q=80" alt="Warehouse worker operating a forklift" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+            </sc-if>
+            <sc-if value="{{ p.isTechnical }}" hint-placeholder-val="{{ false }}">
+              <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700&q=80" alt="Technician servicing equipment" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+            </sc-if>
+            <sc-if value="{{ p.isProfessional }}" hint-placeholder-val="{{ false }}">
+              <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=700&q=80" alt="Office professionals in a meeting" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+            </sc-if>
+          </span>
+          <span style="display:flex;flex-direction:column;gap:10px;padding:22px;flex:1">
+            <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <span style="{{ p.pillStyle }}">{{ p.name }}</span>
+              <span style="font-size:12px;color:#5B6270;font-weight:600">{{ p.count }}</span>
+            </span>
+            <span style="display:block;font-size:13.5px;color:#5D6472;line-height:1.6">{{ p.desc }}</span>
+            <span style="display:block;font-size:12px;color:#5B6270;margin-top:auto;padding-top:10px">{{ p.tags }}</span>
+            <span style="display:block;font-size:13px;font-weight:700;color:#3A1D22">View openings →</span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:64px 32px 8px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px">
+      <div>
+        
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:32px;line-height:1.14;color:#171A20;letter-spacing:-0.015em">Apply once. Start as soon as you're cleared.</h2>
+        <p style="font-size:15px;color:#5D6472;line-height:1.65;margin-top:12px">One application online or at a local branch. No resume required for most roles.</p>
+        <button onClick="{{ goApply }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;margin-top:22px">Apply now</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1px;background:#E5E2DC;border:1px solid #E5E2DC;border-radius:18px;overflow:hidden">
+        <div style="background:#fff;padding:22px 24px;display:flex;gap:16px">
+          <span style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:#8A6740;flex-shrink:0">01</span>
+          <span><b style="display:block;font-size:15.5px;font-weight:600;color:#171A20;margin-bottom:4px">Apply in minutes</b><span style="font-size:13.5px;color:#5D6472;line-height:1.6">Online or in person. Tell us your licences, your shifts, and how you want to be paid.</span></span>
+        </div>
+        <div style="background:#fff;padding:22px 24px;display:flex;gap:16px">
+          <span style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:#8A6740;flex-shrink:0">02</span>
+          <span><b style="display:block;font-size:15.5px;font-weight:600;color:#171A20;margin-bottom:4px">Get verified and matched</b><span style="font-size:13.5px;color:#5D6472;line-height:1.6">We confirm your licence, certifications, and background check, then match you to open shifts.</span></span>
+        </div>
+        <div style="background:#fff;padding:22px 24px;display:flex;gap:16px">
+          <span style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:#8A6740;flex-shrink:0">03</span>
+          <span><b style="display:block;font-size:15.5px;font-weight:600;color:#171A20;margin-bottom:4px">Work, and get paid weekly</b><span style="font-size:13.5px;color:#5D6472;line-height:1.6">Clock in, and get paid every Friday by direct deposit or pay card.</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:64px 32px 8px">
+    
+    <span style="display:block;width:38px;height:3px;background:#C9A98A;transform:skewX(-22deg);margin-bottom:20px"></span><h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:32px;line-height:1.14;color:#171A20;max-width:560px;letter-spacing:-0.015em">Staffing solutions for every stage of hiring</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:32px">
+      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="4">
+        <div style="background:#fff;padding:26px 24px;border:1px solid #E5E2DC;border-radius:14px">
+          <b style="display:block;font-size:16px;font-weight:600;color:#171A20;margin-bottom:8px">{{ t.name }}</b>
+          <span style="font-size:13.5px;color:#5D6472;line-height:1.6">{{ t.note }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
+      <button onClick="{{ goRequest }}" style-hover="background:#B99671" style="background:#C9A98A;color:#3A1D22;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Request workers</button>
+      <button onClick="{{ goEmployer }}" style-hover="border-color:#22262E;background:#F5F4F2" style="border:1.5px solid #E5E2DC;color:#22262E;padding:12px 20px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">See the employer portal</button>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:64px 32px 8px">
+    <div style="background:#22262E;border-radius:22px;padding:44px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:36px;align-items:center">
+      <div>
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px">Compliance</p>
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:30px;line-height:1.15;color:#F5F4F2;max-width:420px">Every worker screened. Every hire protected.</h2>
+        <p style="font-size:15px;color:rgba(244,244,246,0.66);line-height:1.65;max-width:420px;margin-top:14px">Staffing isn't just matching. It's the paperwork, the coverage, and the compliance that keep your business protected.</p>
+      </div>
+      <div style="display:grid;gap:10px">
+        <sc-for list="{{ handledItems }}" as="h" hint-placeholder-count="4">
+          <div style="display:flex;gap:12px;padding:15px 17px;background:rgba(244,244,246,0.06);border-radius:12px">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C9A98A" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>
+            <div>
+              <b style="display:block;font-size:14.5px;font-weight:600;color:#F5F4F2;margin-bottom:2px">{{ h.title }}</b>
+              <span style="font-size:13px;color:rgba(244,244,246,0.62)">{{ h.note }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:64px 32px 8px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:44px;align-items:center">
+      <div style="position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;background:#EBE8E2;max-width:420px">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" alt="ICU nurse on shift" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+      </div>
+      <div>
+        <p style="font-family:'Fraunces',serif;font-size:54px;color:#C9A98A;line-height:0.6">“</p>
+        <p style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:400;font-size:26px;line-height:1.42;color:#171A20;margin-top:14px">I picked up a 13-week ICU contract within four days of applying. Credentialing was done before I even finished orientation paperwork.</p>
+        <div style="display:flex;align-items:center;gap:13px;margin-top:24px">
+          <div style="width:44px;height:44px;border-radius:50%;background:#3A1D22;color:#C9A98A;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:15px;font-weight:600">MS</div>
+          <div>
+            <b style="display:block;font-size:14.5px;color:#171A20">Maria Santos</b>
+            <span style="font-size:13px;color:#5D6472">RN, ICU — placed at Baptist Health Dallas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:64px 32px 8px">
+    <span style="display:block;width:38px;height:3px;background:#C9A98A;transform:skewX(-22deg);margin-bottom:20px"></span>
+    <div style="display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:flex-end">
+      <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:30px;line-height:1.15;color:#171A20;letter-spacing:-0.015em;max-width:520px">Drivers, fleet owners, and courier companies</h2>
+      <p style="font-size:15px;color:#5D6472;line-height:1.65;max-width:400px">Two sides of the same shortage. Owners have trucks sitting idle; drivers want steady seats and weekly pay. We sit in the middle and keep the DOT file clean.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:32px">
+      <div style="border:1px solid #E5E2DC;border-radius:22px;padding:32px 30px;background:#fff">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8A6740;margin-bottom:14px">Truck owners &amp; courier companies</p>
+        <h3 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:23px;line-height:1.2;color:#171A20;margin-bottom:10px">You own the trucks. We fill the seats.</h3>
+        <p style="font-size:14.5px;color:#5D6472;line-height:1.65;margin-bottom:20px">Whether you run seven tractors or a last-mile depot of forty vans, we staff drivers onto your routes and keep them on our payroll until you want to convert them.</p>
+        <ul style="display:flex;flex-direction:column;gap:12px">
+          <li style="display:flex;gap:11px;font-size:14px;color:#262A33;line-height:1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>MVR pulls, DOT physicals, and clearinghouse queries run before dispatch</li>
+          <li style="display:flex;gap:11px;font-size:14px;color:#262A33;line-height:1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>Driver qualification files kept audit-ready for your authority</li>
+          <li style="display:flex;gap:11px;font-size:14px;color:#262A33;line-height:1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>Workers' comp and occupational accident coverage while on assignment</li>
+          <li style="display:flex;gap:11px;font-size:14px;color:#262A33;line-height:1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>Same-day backfill through dispatch when a driver calls off</li>
+        </ul>
+        <button onClick="{{ goRequest }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;margin-top:24px;transition:background .16s ease">Post driver seats</button>
+      </div>
+      <div style="border-radius:22px;padding:32px 30px;background:#3A1D22">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px">Drivers</p>
+        <h3 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:23px;line-height:1.2;color:#F5F4F2;margin-bottom:10px">CDL or not, there's a seat and a paycheck.</h3>
+        <p style="font-size:14.5px;color:rgba(244,244,246,0.7);line-height:1.65;margin-bottom:20px">Regional CDL-A runs with owner-operated fleets, 26-foot box truck courier routes with no CDL needed, and sprinter van runs you claim shift by shift.</p>
+        <ul style="display:flex;flex-direction:column;gap:12px">
+          <li style="display:flex;gap:11px;font-size:14px;color:rgba(244,244,246,0.88);line-height:1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A98A" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>Weekly pay every Friday, mileage and tolls covered</li>
+          <li style="display:flex;gap:11px;font-size:14px;color:rgba(244,244,246,0.88);line-height:1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A98A" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>Equipment provided — you never bring your own truck or van</li>
+          <li style="display:flex;gap:11px;font-size:14px;color:rgba(244,244,246,0.88);line-height:1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A98A" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>DOT physical and drug screen scheduled and paid by us</li>
+          <li style="display:flex;gap:11px;font-size:14px;color:rgba(244,244,246,0.88);line-height:1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A98A" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>Temp-to-hire seats convert onto the fleet owner's payroll</li>
+        </ul>
+        <button onClick="{{ goDrivers }}" style-hover="background:#B99671" style="background:#C9A98A;color:#3A1D22;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;margin-top:24px;transition:background .16s ease">See {{ driverSeats }} open driver seats</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#22262E;margin-top:64px;padding:64px 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px">
+      <div style="display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-end">
+        <div>
+          <p style="font-size:11.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px">International talent</p>
+          <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:30px;line-height:1.15;color:#F5F4F2;letter-spacing:-0.015em;max-width:520px">We recruit beyond the US labour market — legally, and end to end</h2>
+          <p style="font-size:15px;color:rgba(244,244,246,0.68);line-height:1.65;max-width:520px;margin-top:14px">Some roles cannot be filled locally at any wage. For those, we run sponsored pathways with employer counsel: EB-3 immigrant petitions for internationally educated nurses, H-2B seasonal programmes for production and agriculture, and TN and H-1B support for technical and professional hires.</p>
+        </div>
+        <div style="border:1px solid rgba(244,244,246,0.2);border-radius:16px;padding:22px;min-width:220px">
+          <p style="font-family:'Fraunces',serif;font-size:32px;font-weight:600;color:#C9A98A;line-height:1">{{ sponsoredOpenings }}</p>
+          <p style="font-size:13.5px;color:rgba(244,244,246,0.7);margin-top:8px;line-height:1.5">openings currently open to sponsored candidates</p>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:34px">
+        <div style="background:#22262E;padding:24px 22px;border:1px solid rgba(244,244,246,0.18);border-radius:14px">
+          <b style="display:block;font-size:15.5px;font-weight:600;color:#F5F4F2;margin-bottom:7px">Credential evaluation</b>
+          <span style="font-size:13.5px;color:rgba(244,244,246,0.64);line-height:1.6">CGFNS and licence endorsement filed and paid for, plus NCLEX preparation for nurses.</span>
+        </div>
+        <div style="background:#22262E;padding:24px 22px;border:1px solid rgba(244,244,246,0.18);border-radius:14px">
+          <b style="display:block;font-size:15.5px;font-weight:600;color:#F5F4F2;margin-bottom:7px">Petitions &amp; counsel</b>
+          <span style="font-size:13.5px;color:rgba(244,244,246,0.64);line-height:1.6">EB-3, H-2B, TN and H-1B filings run by employer-paid immigration counsel, not by you.</span>
+        </div>
+        <div style="background:#22262E;padding:24px 22px;border:1px solid rgba(244,244,246,0.18);border-radius:14px">
+          <b style="display:block;font-size:15.5px;font-weight:600;color:#F5F4F2;margin-bottom:7px">Arrival &amp; housing</b>
+          <span style="font-size:13.5px;color:rgba(244,244,246,0.64);line-height:1.6">Travel reimbursed, first-month housing arranged, and site transport for seasonal programmes.</span>
+        </div>
+        <div style="background:#22262E;padding:24px 22px;border:1px solid rgba(244,244,246,0.18);border-radius:14px">
+          <b style="display:block;font-size:15.5px;font-weight:600;color:#F5F4F2;margin-bottom:7px">Wage &amp; audit compliance</b>
+          <span style="font-size:13.5px;color:rgba(244,244,246,0.64);line-height:1.6">Prevailing wage determinations honoured, public access files kept audit-ready.</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:28px">
+        <button onClick="{{ goSponsored }}" style-hover="background:#B99671" style="background:#C9A98A;color:#3A1D22;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease">See sponsored openings</button>
+        <button onClick="{{ goRequest }}" style="border:1.5px solid rgba(244,244,246,0.32);background:rgba(244,244,246,0.08);color:#F5F4F2;padding:12px 20px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap">Hire international talent</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:64px 32px 8px">
+    <div style="border:1px solid #E5E2DC;border-radius:22px;overflow:hidden;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div style="padding:40px 36px">
+        <span style="display:block;width:38px;height:3px;background:#C9A98A;transform:skewX(-22deg);margin-bottom:20px"></span><h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:30px;line-height:1.15;color:#171A20;letter-spacing:-0.015em;max-width:420px">Remote and hybrid roles</h2>
+        <p style="font-size:15px;color:#5D6472;line-height:1.65;max-width:460px;margin-top:12px">Not every assignment happens on a floor or a site. Our Professional practice places billing, coordination, and back-office roles that run fully remote or two days onsite — on the same weekly pay and the same verified onboarding.</p>
+        <ul style="display:flex;flex-direction:column;gap:1px;background:#E5E2DC;border:1px solid #E5E2DC;border-radius:14px;overflow:hidden;margin-top:24px;max-width:460px">
+          <li style="background:#fff;padding:15px 17px;display:flex;gap:11px;font-size:14px;color:#262A33;line-height:1.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>
+            Laptop, monitors, and an internet stipend provided before day one
+          </li>
+          <li style="background:#fff;padding:15px 17px;display:flex;gap:11px;font-size:14px;color:#262A33;line-height:1.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>
+            I-9 and E-Verify completed with a remote agent or at any branch
+          </li>
+          <li style="background:#fff;padding:15px 17px;display:flex;gap:11px;font-size:14px;color:#262A33;line-height:1.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>
+            Hybrid schedules agreed in writing before you accept
+          </li>
+        </ul>
+        <button onClick="{{ goRemote }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;margin-top:24px;transition:background .16s ease">Browse {{ remoteCount }} remote &amp; hybrid roles</button>
+      </div>
+      <div style="position:relative;min-height:280px;background:#EBE8E2">
+        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80" alt="Coordinator working at a desk" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+        <span style="position:absolute;left:16px;bottom:14px;font-size:12px;font-weight:600;color:#fff;background:rgba(23,26,32,0.6);padding:6px 12px;border-radius:100px;white-space:nowrap">Professional practice</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#F5F4F2;margin-top:64px;padding:64px 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px">
+      <div style="display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end;margin-bottom:26px">
+        <div>
+          
+          <span style="display:block;width:38px;height:3px;background:#C9A98A;transform:skewX(-22deg);margin-bottom:20px"></span><h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:32px;line-height:1.14;color:#171A20;letter-spacing:-0.015em">48 branches, coast to coast</h2>
+        </div>
+        <p style="font-size:15px;color:#5D6472;max-width:320px">Local recruiters who know your local market. Walk in Mon–Fri, 8am–5pm.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
+        <sc-for list="{{ locations }}" as="l" hint-placeholder-count="8">
+          <div style="background:#fff;border:1px solid #E5E2DC;border-radius:12px;padding:15px 17px;display:flex;justify-content:space-between;align-items:center;gap:10px">
+            <span style="font-size:14.5px;font-weight:600;color:#171A20;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">{{ l.city }}</span>
+            <span style="font-size:12px;font-weight:700;color:#5B6270">{{ l.st }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:64px 32px 24px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      <div style="background:#C9A98A;border-radius:22px;padding:40px 36px">
+        <h3 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:26px;color:#3A1D22;margin-bottom:10px">Ready for your next shift?</h3>
+        <p style="font-size:14.5px;color:rgba(58,29,34,0.78);line-height:1.6;margin-bottom:22px">Apply online in minutes, or walk into a branch near you.</p>
+        <button onClick="{{ goApply }}" style-hover="background:#4C262C" style="background:#3A1D22;color:#F5F4F2;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Apply now</button>
+      </div>
+      <div style="background:#3A1D22;border-radius:22px;padding:40px 36px">
+        <h3 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:26px;color:#F5F4F2;margin-bottom:10px">Need workers this week?</h3>
+        <p style="font-size:14.5px;color:rgba(244,244,246,0.68);line-height:1.6;margin-bottom:22px">Call the dispatch line — we staff same-day for urgent needs.</p>
+        <p style="font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:#C9A98A">{{ dispatch }}</p>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isJobs }}" hint-placeholder-val="{{ true }}">
+  <div style="background:#22262E;padding:38px 0 32px">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px">
+      <p style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#C9A98A;margin-bottom:10px">Open shifts &amp; roles</p>
+      <h1 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:38px;line-height:1.1;color:#fff;letter-spacing:-0.01em;max-width:620px">Find work in every one of our four practices</h1>
+      <p style="color:rgba(255,255,255,0.68);font-size:15.5px;margin-top:12px;max-width:560px">One application covers all of them. Weekly pay, every Friday. Apply online or walk into any of our 48 branches.</p>
+      <div style="display:flex;gap:8px;background:#fff;border-radius:14px;padding:9px;margin-top:24px;box-shadow:0 20px 60px -20px rgba(23,26,32,0.30);flex-wrap:wrap;max-width:820px">
+        <label style="flex:1 1 240px;display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:9px;background:#F5F4F2">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5B6270" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input value="{{ search }}" onChange="{{ onSearch }}" placeholder="Job title, trade, or license" style="border:none;outline:none;background:transparent;font-size:14.5px;color:#262A33;width:100%">
+        </label>
+        <label style="flex:1 1 160px;display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:9px;background:#F5F4F2">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5B6270" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <input value="{{ zip }}" onChange="{{ onZip }}" placeholder="ZIP code or city" style="border:none;outline:none;background:transparent;font-size:14.5px;color:#262A33;width:100%">
+        </label>
+        <button style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:12px 22px;border-radius:9px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Search jobs</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1240px;margin:0 auto;padding:32px;display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap">
+
+    <aside style="flex:0 1 240px;min-width:220px;display:flex;flex-direction:column;gap:16px;position:sticky;top:98px">
+      <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff">
+        <h3 style="font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5B6270;margin-bottom:12px">Practice</h3>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <sc-for list="{{ verticalOptions }}" as="v" hint-placeholder-count="5">
+            <button onClick="{{ v.go }}" style="{{ v.style }}">
+              <span style="display:flex;align-items:center;gap:9px"><span style="{{ v.dot }}"></span>{{ v.name }}</span>
+              <span style="font-size:12.5px;color:#5B6270;font-weight:600">{{ v.count }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff">
+        <h3 style="font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5B6270;margin-bottom:12px">Solution type</h3>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ typeOptions }}" as="t" hint-placeholder-count="5">
+            <label style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#262A33;cursor:pointer">
+              <input type="checkbox" checked="{{ t.on }}" onChange="{{ t.go }}" style="width:15px;height:15px;accent-color:#22262E">
+              {{ t.name }}
+            </label>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff">
+        <h3 style="font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5B6270;margin-bottom:12px">Shift</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <sc-for list="{{ shiftOptions }}" as="s" hint-placeholder-count="4">
+            <button onClick="{{ s.go }}" style="{{ s.style }}">{{ s.name }}</button>
+          </sc-for>
+        </div>
+        <h3 style="font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5B6270;margin:18px 0 12px;padding-top:16px;border-top:1px solid #E5E2DC">Work setting</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <sc-for list="{{ settingOptions }}" as="ws" hint-placeholder-count="3">
+            <button onClick="{{ ws.go }}" style="{{ ws.style }}">{{ ws.name }}</button>
+          </sc-for>
+        </div>
+        <label style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#262A33;margin-top:16px;padding-top:14px;border-top:1px solid #E5E2DC;cursor:pointer">
+          <input type="checkbox" checked="{{ noExpOnly }}" onChange="{{ toggleNoExp }}" style="width:15px;height:15px;accent-color:#22262E">
+          No experience required
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#262A33;margin-top:11px;cursor:pointer">
+          <input type="checkbox" checked="{{ sponsoredOnly }}" onChange="{{ toggleSponsored }}" style="width:15px;height:15px;accent-color:#22262E">
+          Visa sponsorship available
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#262A33;margin-top:11px;cursor:pointer">
+          <input type="checkbox" checked="{{ driversOnly }}" onChange="{{ toggleDrivers }}" style="width:15px;height:15px;accent-color:#22262E">
+          Driving &amp; delivery roles
+        </label>
+      </div>
+
+      <div style="border-radius:14px;padding:18px;background:#F6EFE7">
+        <p style="font-size:14px;font-weight:600;color:#171A20;margin-bottom:5px">Prefer to walk in?</p>
+        <p style="font-size:13px;color:#5D6472;line-height:1.55;margin-bottom:12px">Bring your ID and any licenses to a branch. Most walk-ins are interviewed same day.</p>
+        <button onClick="{{ goJobs }}" style="font-size:13px;font-weight:700;color:#22262E;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Find your branch →</button>
+      </div>
+    </aside>
+
+    <section style="flex:1 1 440px;min-width:300px">
+      <sc-if value="{{ hasFilters }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;background:#F5F4F2;border:1px solid #E5E2DC;border-radius:12px;margin-bottom:14px">
+          <span style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#5B6270;white-space:nowrap">Filtered by</span>
+          <sc-for list="{{ activeFilters }}" as="af" hint-placeholder-count="2">
+            <span style="font-size:12.5px;font-weight:600;color:#22262E;background:#fff;border:1px solid #E5E2DC;padding:5px 11px;border-radius:100px;white-space:nowrap">{{ af }}</span>
+          </sc-for>
+          <button onClick="{{ clearFilters }}" style="font-size:12.5px;font-weight:700;color:#8A6740;margin-left:auto;white-space:nowrap">Clear all</button>
+        </div>
+      </sc-if>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px">
+        <p style="font-size:14px;color:#5D6472"><b style="color:#171A20;font-weight:600">{{ resultCount }} openings</b> {{ filterSummary }}</p>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:13px;color:#5B6270">Sort</span>
+          <select value="{{ sort }}" onChange="{{ onSort }}" style="border:1px solid #E5E2DC;border-radius:8px;padding:8px 10px;font-size:13.5px;color:#262A33;background:#fff">
+            <option>Newest</option>
+            <option>Highest pay</option>
+            <option>Nearest branch</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{ visibleJobs }}" as="j" hint-placeholder-count="6">
+          <article style-hover="border-color:#C9A98A;box-shadow:0 2px 4px rgba(23,26,32,0.04),0 14px 34px -18px rgba(23,26,32,0.28);transform:translateY(-2px)" style="border:1px solid #E5E2DC;border-radius:14px;background:#fff;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;position:relative;overflow:hidden;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease">
+            <span style="{{ j.bar }}"></span>
+            <div style="{{ j.logo }}">
+              <span style="font-family:'Fraunces',serif;font-size:15px;font-weight:600">{{ j.initials }}</span>
+            </div>
+            <div style="flex:1 1 240px;min-width:200px">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="{{ j.pillStyle }}">{{ j.vertical }}</span>
+                <sc-if value="{{ j.urgent }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size:11px;font-weight:700;color:#8C3A44;background:#F6EBEC;padding:4px 8px;border-radius:100px;white-space:nowrap">Fills fast</span>
+                </sc-if>
+                <sc-if value="{{ j.sponsored }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size:11px;font-weight:700;color:#3A1D22;background:#F6EFE7;border:1px solid #E4D6C6;padding:4px 8px;border-radius:100px;white-space:nowrap">Visa sponsorship</span>
+                </sc-if>
+              </div>
+              <button onClick="{{ j.open }}" style="text-align:left;font-size:16.5px;font-weight:600;color:#171A20;display:block;margin-bottom:3px">{{ j.title }}</button>
+              <p style="font-size:13.5px;color:#5D6472">{{ j.company }} · {{ j.location }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px">
+                <span style="font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:100px;background:#F6EFE7;color:#8A6740">{{ j.type }}</span>
+                <span style="font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:100px;background:#F5F4F2;color:#5D6472">{{ j.shift }}</span>
+                <span style="font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:100px;background:#F5F4F2;color:#5D6472">{{ j.credLine }}</span>
+              </div>
+            </div>
+            <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:10px;min-width:150px">
+              <div style="text-align:right">
+                <p style="font-size:15.5px;font-weight:600;color:#171A20">{{ j.pay }}</p>
+                <p style="font-size:12px;color:#5B6270;margin-top:2px">Weekly pay · {{ j.posted }}</p>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button onClick="{{ j.save }}" style="{{ j.saveStyle }}">{{ j.saveLabel }}</button>
+                <button onClick="{{ j.open }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:9px 15px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">View shift</button>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px dashed #E5E2DC;border-radius:14px;padding:44px;text-align:center;background:#F5F4F2">
+          <p style="font-size:16px;font-weight:600;color:#171A20;margin-bottom:6px">No openings match those filters</p>
+          <p style="font-size:14px;color:#5D6472;margin-bottom:16px">Clear a filter, or apply once and let a recruiter match you as shifts open.</p>
+          <button onClick="{{ clearFilters }}" style="border:1.5px solid #E5E2DC;padding:10px 18px;border-radius:9px;font-size:14px;font-weight:600;white-space:nowrap;color:#22262E">Clear filters</button>
+        </div>
+      </sc-if>
+    </section>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#F5F4F2;border-bottom:1px solid #E5E2DC">
+    <div style="max-width:1240px;margin:0 auto;padding:18px 32px">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:#5B6270">
+        <button onClick="{{ goHome }}" style="font-size:13px;font-weight:500;color:#5D6472;white-space:nowrap">Home</button>
+        <span>/</span>
+        <button onClick="{{ goJobs }}" style="font-size:13px;font-weight:500;color:#5D6472;white-space:nowrap">Find work</button>
+        <span>/</span>
+        <span style="white-space:nowrap">{{ crumbPractice }}</span>
+        <span>/</span>
+        <span style="color:#171A20;font-weight:600">{{ crumbTitle }}</span>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1240px;margin:0 auto;padding:32px;display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap">
+    <article style="flex:1 1 440px;min-width:300px">
+      <div style="position:relative;border-radius:18px;overflow:hidden;aspect-ratio:21/8;margin-bottom:22px;background:#EBE8E2">
+        <sc-if value="{{ job.isHealthcare }}" hint-placeholder-val="{{ false }}">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80" alt="Nurse walking a hospital corridor" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+        </sc-if>
+        <sc-if value="{{ job.isSkilled }}" hint-placeholder-val="{{ false }}">
+          <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80" alt="Warehouse worker operating a forklift" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+        </sc-if>
+        <sc-if value="{{ job.isTechnical }}" hint-placeholder-val="{{ false }}">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80" alt="Technician servicing equipment" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+        </sc-if>
+        <sc-if value="{{ job.isProfessional }}" hint-placeholder-val="{{ false }}">
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80" alt="Office professionals in a meeting" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+        </sc-if>
+        <span style="position:absolute;left:16px;bottom:14px;font-size:12px;font-weight:600;color:#fff;background:rgba(23,26,32,0.6);backdrop-filter:blur(6px);padding:6px 12px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">{{ job.branch }} branch · {{ job.vertical }}</span>
+      </div>
+      <span style="{{ job.pillStyle }}">{{ job.vertical }}</span>
+      <h1 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:34px;line-height:1.12;color:#171A20;letter-spacing:-0.01em;margin:12px 0 8px">{{ job.title }}</h1>
+      <p style="font-size:15.5px;color:#5D6472">{{ job.company }} · {{ job.location }} · Staffed by our {{ job.branch }} branch</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:#fff;border:1px solid #E5E2DC;border-radius:14px;overflow:hidden;margin:26px 0">
+        <div style="background:#fff;padding:16px 18px;box-shadow:0 0 0 1px #E5E2DC">
+          <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:5px">Pay</p>
+          <p style="font-size:15px;font-weight:600;color:#171A20">{{ job.pay }}</p>
+        </div>
+        <div style="background:#fff;padding:16px 18px;box-shadow:0 0 0 1px #E5E2DC">
+          <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:5px">Solution</p>
+          <p style="font-size:15px;font-weight:600;color:#171A20">{{ job.type }}</p>
+        </div>
+        <div style="background:#fff;padding:16px 18px;box-shadow:0 0 0 1px #E5E2DC">
+          <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:5px">Schedule</p>
+          <p style="font-size:15px;font-weight:600;color:#171A20">{{ job.shift }}</p>
+        </div>
+        <div style="background:#fff;padding:16px 18px;box-shadow:0 0 0 1px #E5E2DC">
+          <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:5px">Start date</p>
+          <p style="font-size:15px;font-weight:600;color:#171A20">{{ job.start }}</p>
+        </div>
+      </div>
+
+      <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:22px;color:#171A20;margin-bottom:10px">About the assignment</h2>
+      <p style="font-size:15px;color:#5D6472;line-height:1.65;max-width:640px">{{ job.desc }}</p>
+
+      <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:22px;color:#171A20;margin:28px 0 12px">What you'll do</h2>
+      <ul style="display:flex;flex-direction:column;gap:10px;max-width:640px">
+        <sc-for list="{{ job.duties }}" as="d" hint-placeholder-count="4">
+          <li style="display:flex;gap:11px;font-size:14.5px;color:#262A33;line-height:1.55">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2.4" style="flex-shrink:0;margin-top:3px"><path d="M20 6L9 17l-5-5"/></svg>
+            {{ d }}
+          </li>
+        </sc-for>
+      </ul>
+
+      <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:22px;color:#171A20;margin:28px 0 12px">Requirements</h2>
+      <ul style="display:flex;flex-direction:column;gap:10px;max-width:640px">
+        <sc-for list="{{ job.reqs }}" as="r" hint-placeholder-count="3">
+          <li style="display:flex;gap:11px;font-size:14.5px;color:#262A33;line-height:1.55">
+            <span style="width:5px;height:5px;border-radius:50%;background:#5B6270;flex-shrink:0;margin-top:9px"></span>
+            {{ r }}
+          </li>
+        </sc-for>
+      </ul>
+
+      <div style="background:#22262E;border-radius:22px;padding:30px;margin-top:32px">
+        <h3 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:21px;color:#fff;margin-bottom:6px">What Asepsis handles for you</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,0.62);margin-bottom:20px;max-width:460px">You're on our payroll from day one. The paperwork is ours.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px">
+          <sc-for list="{{ handledItems }}" as="h" hint-placeholder-count="4">
+            <div style="display:flex;gap:10px;padding:13px 15px;background:rgba(255,255,255,0.06);border-radius:10px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C9A98A" stroke-width="2.3" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>
+              <div>
+                <b style="display:block;font-size:14px;font-weight:600;color:#fff;margin-bottom:2px">{{ h.title }}</b>
+                <span style="font-size:12.5px;color:rgba(255,255,255,0.6)">{{ h.note }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:22px;color:#171A20;margin:36px 0 14px">Similar openings</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+        <sc-for list="{{ similarJobs }}" as="s" hint-placeholder-count="3">
+          <button onClick="{{ s.open }}" style-hover="border-color:#C9A98A;box-shadow:0 2px 4px rgba(23,26,32,0.04),0 14px 34px -18px rgba(23,26,32,0.28);transform:translateY(-2px)" style="text-align:left;border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease">
+            <p style="font-size:15px;font-weight:600;color:#171A20;margin-bottom:4px">{{ s.title }}</p>
+            <p style="font-size:13px;color:#5D6472;margin-bottom:10px">{{ s.location }}</p>
+            <p style="font-size:14px;font-weight:600;color:#22262E">{{ s.pay }}</p>
+          </button>
+        </sc-for>
+      </div>
+    </article>
+
+    <aside style="flex:0 1 280px;min-width:260px;position:sticky;top:98px;display:flex;flex-direction:column;gap:16px">
+      <div style="border:1px solid #E5E2DC;border-radius:18px;padding:22px;background:#fff;box-shadow:0 1px 2px rgba(23,26,32,0.05),0 8px 24px -12px rgba(23,26,32,0.14)">
+        <p style="font-size:22px;font-family:'Fraunces',serif;font-weight:600;color:#171A20">{{ job.pay }}</p>
+        <p style="font-size:13px;color:#5D6472;margin-top:4px;margin-bottom:18px">{{ job.openings }} openings · paid every Friday</p>
+        <button onClick="{{ goApply }}" style-hover="background:#B99671" style="width:100%;background:#C9A98A;color:#171A20;padding:14px;border-radius:10px;font-size:15px;font-weight:600;white-space:nowrap;margin-bottom:9px">Apply for this shift</button>
+        <button onClick="{{ saveCurrent }}" style="width:100%;border:1.5px solid #E5E2DC;color:#22262E;padding:13px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">{{ currentSaveLabel }}</button>
+        <p style="font-size:12.5px;color:#5B6270;margin-top:14px;line-height:1.5">Already applied with Asepsis? Sign in and a recruiter submits you in one click.</p>
+      </div>
+
+      <div style="border:1px solid #E5E2DC;border-radius:18px;padding:22px;background:#F5F4F2">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:14px">Your recruiter</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div style="width:46px;height:46px;border-radius:50%;background:#22262E;color:#C9A98A;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:600">{{ job.recruiterInitials }}</div>
+          <div>
+            <b style="display:block;font-size:14.5px;color:#171A20">{{ job.recruiter }}</b>
+            <span style="font-size:12.5px;color:#5D6472">{{ job.vertical }} · {{ job.branch }} branch</span>
+          </div>
+        </div>
+        <p style="font-size:13px;color:#5D6472;line-height:1.55;margin-bottom:14px">{{ job.branch }} branch · walk-ins Mon–Fri, 8am–5pm</p>
+        <button style-hover="background:#22262E;color:#fff" style="width:100%;border:1.5px solid #22262E;color:#22262E;padding:11px;border-radius:9px;font-size:13.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Call the branch</button>
+      </div>
+
+      <sc-if value="{{ showRail }}" hint-placeholder-val="{{ true }}">
+        <div style="border:1px solid #E5E2DC;border-radius:18px;padding:22px;background:#fff">
+          <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:12px">Before you start</p>
+          <ul style="display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ job.onboarding }}" as="o" hint-placeholder-count="3">
+              <li style="display:flex;gap:10px;font-size:13.5px;color:#262A33;line-height:1.5">
+                <span style="width:18px;height:18px;border-radius:50%;border:1.5px solid #E5E2DC;flex-shrink:0"></span>
+                {{ o }}
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+      </sc-if>
+    </aside>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isApply }}" hint-placeholder-val="{{ false }}">
+  <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+  <div style="background:#F5F4F2;border-bottom:1px solid #E5E2DC">
+    <div style="max-width:1240px;margin:0 auto;padding:26px 32px">
+      <button onClick="{{ goJobs }}" style="font-size:13.5px;font-weight:600;color:#5D6472;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">← Back to openings</button>
+      <h1 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:30px;color:#171A20;margin-top:12px">Apply once. We match you to every practice.</h1>
+      <p style="font-size:14.5px;color:#5D6472;margin-top:6px">Applying for <b style="color:#171A20;font-weight:600">{{ applyJobTitle }}</b> — {{ applyJobMeta }}</p>
+    </div>
+  </div>
+
+  <div style="max-width:1240px;margin:0 auto;padding:32px;display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap">
+    <aside style="flex:0 1 280px;min-width:250px;background:#F5F4F2;border-radius:18px;padding:12px;position:sticky;top:98px">
+      <sc-for list="{{ applySteps }}" as="st" hint-placeholder-count="4">
+        <button onClick="{{ st.go }}" style="{{ st.style }}">
+          <span style="{{ st.numStyle }}">{{ st.n }}</span>
+          <span>
+            <b style="{{ st.titleStyle }}">{{ st.title }}</b>
+            <span style="display:block;font-size:12.5px;color:#5B6270;margin-top:2px">{{ st.note }}</span>
+          </span>
+        </button>
+      </sc-for>
+      <div style="padding:14px;margin-top:6px;border-top:1px solid #E5E2DC">
+        <p style="font-size:12.5px;color:#5D6472;line-height:1.55">No resume needed for most roles. Prefer in person? Bring your ID to any of our 48 branches and we finish this with you.</p>
+      </div>
+    </aside>
+
+    <section style="flex:1 1 440px;min-width:300px;border:1px solid #E5E2DC;border-radius:18px;background:#fff;padding:28px;box-shadow:0 1px 2px rgba(23,26,32,0.05),0 8px 24px -12px rgba(23,26,32,0.14)">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8A6740;margin-bottom:16px">{{ stepLabel }}</p>
+
+      <sc-if value="{{ step1 }}" hint-placeholder-val="{{ true }}">
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:24px;color:#171A20;margin-bottom:20px">About you</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">First name</span>
+            <input data-field="first" value="{{ f.first }}" onChange="{{ onForm }}" placeholder="DeShawn" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Last name</span>
+            <input data-field="last" value="{{ f.last }}" onChange="{{ onForm }}" placeholder="Carter" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Mobile phone</span>
+            <input data-field="phone" value="{{ f.phone }}" onChange="{{ onForm }}" placeholder="(614) 555-0118" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Email</span>
+            <input data-field="email" value="{{ f.email }}" onChange="{{ onForm }}" placeholder="you@email.com" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">ZIP code</span>
+            <input data-field="zip" value="{{ f.zip }}" onChange="{{ onForm }}" placeholder="43215" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">How did you hear about us?</span>
+            <select data-field="heard" value="{{ f.heard }}" onChange="{{ onForm }}" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33;background:#fff">
+              <option>Referred by a friend</option><option>Walked into a branch</option><option>Job board or search</option><option>Worked with Asepsis before</option>
+            </select></label>
+        </div>
+        <p style="font-size:12.5px;color:#5B6270;margin-top:18px;line-height:1.55">We text you about shifts and pay. Standard message rates apply; reply STOP any time.</p>
+      </sc-if>
+
+      <sc-if value="{{ step2 }}" hint-placeholder-val="{{ false }}">
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:24px;color:#171A20;margin-bottom:6px">Work eligibility</h2>
+        <p style="font-size:14px;color:#5D6472;margin-bottom:22px;max-width:520px">Every Asepsis hire runs through E-Verify and I-9. You can finish this online or at a branch with your original documents.</p>
+        <p style="font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:8px">Are you authorized to work in the United States?</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px">
+          <sc-for list="{{ eligibleOptions }}" as="e" hint-placeholder-count="2">
+            <button onClick="{{ e.go }}" style="{{ e.style }}">{{ e.name }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid #E5E2DC;padding-top:20px">
+          <label style="display:flex;gap:11px;align-items:flex-start;font-size:14px;color:#262A33;line-height:1.5;cursor:pointer">
+            <input type="checkbox" data-field="over18" checked="{{ f.over18 }}" onChange="{{ onForm }}" style="width:16px;height:16px;margin-top:2px;accent-color:#22262E">
+            I am 18 years of age or older.
+          </label>
+          <label style="display:flex;gap:11px;align-items:flex-start;font-size:14px;color:#262A33;line-height:1.5;cursor:pointer">
+            <input type="checkbox" data-field="consent" checked="{{ f.consent }}" onChange="{{ onForm }}" style="width:16px;height:16px;margin-top:2px;accent-color:#22262E">
+            I consent to a background check and, where a client requires it, a drug screen. Asepsis pays for both.
+          </label>
+        </div>
+        <div style="background:#F5F4F2;border-radius:12px;padding:18px;margin-top:22px">
+          <p style="font-size:13.5px;font-weight:600;color:#171A20;margin-bottom:8px">Bring to your first branch visit</p>
+          <p style="font-size:13px;color:#5D6472;line-height:1.6">Photo ID and a Social Security card or birth certificate — or a passport on its own. If you are missing a document, your recruiter will tell you what else works.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ step3 }}" hint-placeholder-val="{{ false }}">
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:24px;color:#171A20;margin-bottom:6px">Credentials &amp; availability</h2>
+        <p style="font-size:14px;color:#5D6472;margin-bottom:22px;max-width:520px">Tell us what you hold and when you can work. We verify licenses on your behalf — no chasing state boards.</p>
+        <p style="font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:8px">Licenses &amp; certifications you hold</p>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px">
+          <sc-for list="{{ credOptions }}" as="c" hint-placeholder-count="8">
+            <button onClick="{{ c.go }}" style="{{ c.style }}">{{ c.name }}</button>
+          </sc-for>
+        </div>
+        <p style="font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:8px">Practices you want work in</p>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px">
+          <sc-for list="{{ practiceOptions }}" as="p" hint-placeholder-count="4">
+            <button onClick="{{ p.go }}" style="{{ p.style }}">{{ p.name }}</button>
+          </sc-for>
+        </div>
+        <p style="font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:8px">Shifts you can take</p>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px">
+          <sc-for list="{{ availOptions }}" as="a" hint-placeholder-count="6">
+            <button onClick="{{ a.go }}" style="{{ a.style }}">{{ a.name }}</button>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;border-top:1px solid #E5E2DC;padding-top:20px">
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">How soon can you start?</span>
+            <select data-field="start" value="{{ f.start }}" onChange="{{ onForm }}" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33;background:#fff">
+              <option>Immediately</option><option>Within a week</option><option>Two to four weeks</option><option>Just looking for now</option>
+            </select></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Transportation</span>
+            <select data-field="transport" value="{{ f.transport }}" onChange="{{ onForm }}" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33;background:#fff">
+              <option>Own vehicle</option><option>Public transit</option><option>Rideshare or carpool</option>
+            </select></label>
+        </div>
+        <p style="font-size:12.5px;font-weight:600;color:#5D6472;margin:22px 0 8px">How do you want to be paid every Friday?</p>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <sc-for list="{{ payOptions }}" as="p" hint-placeholder-count="2">
+            <button onClick="{{ p.go }}" style="{{ p.style }}">{{ p.name }}</button>
+          </sc-for>
+        </div>
+        <div style="border:1.5px dashed #E5E2DC;border-radius:12px;padding:20px;text-align:center;margin-top:22px;background:#F5F4F2">
+          <p style="font-size:13.5px;font-weight:600;color:#171A20;margin-bottom:4px">Resume or license copies (optional)</p>
+          <p style="font-size:12.5px;color:#5B6270;font-family:ui-monospace,monospace">drop a PDF or photo here · not required for most roles</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ step4 }}" hint-placeholder-val="{{ false }}">
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:24px;color:#171A20;margin-bottom:20px">Review &amp; submit</h2>
+        <div style="display:flex;flex-direction:column;gap:1px;background:#E5E2DC;border:1px solid #E5E2DC;border-radius:14px;overflow:hidden">
+          <div style="background:#fff;padding:15px 17px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <span style="font-size:12.5px;font-weight:600;color:#5B6270">Name</span><span style="font-size:14px;color:#171A20;font-weight:500">{{ reviewName }}</span></div>
+          <div style="background:#fff;padding:15px 17px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <span style="font-size:12.5px;font-weight:600;color:#5B6270">Contact</span><span style="font-size:14px;color:#171A20;font-weight:500">{{ reviewContact }}</span></div>
+          <div style="background:#fff;padding:15px 17px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <span style="font-size:12.5px;font-weight:600;color:#5B6270">Applying for</span><span style="font-size:14px;color:#171A20;font-weight:500">{{ applyJobTitle }}</span></div>
+          <div style="background:#fff;padding:15px 17px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <span style="font-size:12.5px;font-weight:600;color:#5B6270">Practices</span><span style="font-size:14px;color:#171A20;font-weight:500">{{ reviewPractices }}</span></div>
+          <div style="background:#fff;padding:15px 17px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <span style="font-size:12.5px;font-weight:600;color:#5B6270">Availability</span><span style="font-size:14px;color:#171A20;font-weight:500">{{ reviewAvail }}</span></div>
+          <div style="background:#fff;padding:15px 17px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <span style="font-size:12.5px;font-weight:600;color:#5B6270">Credentials</span><span style="font-size:14px;color:#171A20;font-weight:500">{{ reviewCreds }}</span></div>
+          <div style="background:#fff;padding:15px 17px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <span style="font-size:12.5px;font-weight:600;color:#5B6270">Pay</span><span style="font-size:14px;color:#171A20;font-weight:500">{{ reviewPay }}</span></div>
+        </div>
+        <p style="font-size:12.5px;color:#5B6270;margin-top:18px;line-height:1.6">By submitting you confirm the information is accurate and authorize Asepsis Staffing to verify your credentials and eligibility to work. Asepsis is an equal opportunity employer and an E-Verify participant.</p>
+      </sc-if>
+
+      <div style="display:flex;gap:10px;align-items:center;margin-top:26px;padding-top:22px;border-top:1px solid #E5E2DC;flex-wrap:wrap">
+        <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ back }}" style-hover="border-color:#22262E;background:#F5F4F2" style="border:1.5px solid #E5E2DC;color:#22262E;padding:13px 20px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Back</button>
+        </sc-if>
+        <sc-if value="{{ step4 }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ submitApply }}" style="background:#C9A98A;color:#171A20;padding:14px 26px;border-radius:10px;font-size:15px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Submit application</button>
+        </sc-if>
+        <sc-if value="{{ notLastStep }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ next }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:14px 26px;border-radius:10px;font-size:15px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Continue</button>
+        </sc-if>
+        <span style="font-size:12.5px;color:#5B6270">Takes about four minutes</span>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:720px;margin:0 auto;padding:64px 32px 40px;text-align:center">
+      <div style="width:62px;height:62px;border-radius:50%;background:#EAF1ED;display:flex;align-items:center;justify-content:center;margin:0 auto 22px">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3D6B57" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h1 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:34px;color:#171A20;line-height:1.15">Application in. A recruiter has it now.</h1>
+      <p style="font-size:16px;color:#5D6472;margin-top:12px;line-height:1.6">{{ applyJobTitle }} — {{ applyJobMeta }}. Most applicants hear back the same business day.</p>
+      <div style="text-align:left;border:1px solid #E5E2DC;border-radius:18px;background:#fff;padding:24px;margin-top:32px">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#5B6270;margin-bottom:16px">What happens next</p>
+        <ol style="display:flex;flex-direction:column;gap:16px">
+          <li style="display:flex;gap:13px"><span style="width:26px;height:26px;border-radius:50%;background:#22262E;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</span><span style="font-size:14.5px;color:#262A33;line-height:1.55">A recruiter from your local branch calls to confirm your availability and answer questions about the shift.</span></li>
+          <li style="display:flex;gap:13px"><span style="width:26px;height:26px;border-radius:50%;background:#22262E;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</span><span style="font-size:14.5px;color:#262A33;line-height:1.55">We complete I-9 and E-Verify, run your background check, and verify any licenses you listed.</span></li>
+          <li style="display:flex;gap:13px"><span style="width:26px;height:26px;border-radius:50%;background:#22262E;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</span><span style="font-size:14.5px;color:#262A33;line-height:1.55">You are cleared to work, shifts appear on your dashboard, and pay lands every Friday.</span></li>
+        </ol>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:26px;flex-wrap:wrap">
+        <button onClick="{{ goWorker }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:14px 24px;border-radius:10px;font-size:15px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Go to my dashboard</button>
+        <button onClick="{{ goJobs }}" style-hover="border-color:#22262E;background:#F5F4F2" style="border:1.5px solid #E5E2DC;color:#22262E;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Browse more openings</button>
+      </div>
+    </div>
+  </sc-if>
+</sc-if>
+
+<sc-if value="{{ isWorker }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#22262E;padding:34px 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end">
+      <div>
+        <p style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#C9A98A;margin-bottom:9px">Worker dashboard</p>
+        <h1 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:32px;color:#fff;line-height:1.1">Welcome back, {{ workerName }}</h1>
+        <p style="color:rgba(255,255,255,0.65);font-size:14.5px;margin-top:8px">Columbus branch · Skilled Trades · recruiter Deon Pratt</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;background:#EAF1ED;padding:11px 16px;border-radius:100px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3D6B57" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>
+        <span style="font-size:13.5px;font-weight:700;color:#3D6B57;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Cleared to work</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1240px;margin:0 auto;padding:28px 32px 8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+    <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:8px">Hours this week</p>
+      <p style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#171A20;font-variant-numeric:tabular-nums">24.0</p>
+      <p style="font-size:12.5px;color:#5D6472;margin-top:4px">3 of 5 shifts worked</p>
+    </div>
+    <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#F6EFE7">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#8A6740;margin-bottom:8px">Friday deposit</p>
+      <p style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#171A20;font-variant-numeric:tabular-nums">$487.20</p>
+      <p style="font-size:12.5px;color:#5D6472;margin-top:4px">Estimate · direct deposit</p>
+    </div>
+    <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:8px">Assignment</p>
+      <p style="font-size:15px;font-weight:600;color:#171A20;line-height:1.35">Warehouse Associate</p>
+      <p style="font-size:12.5px;color:#5D6472;margin-top:4px">Week 6 of 12 · temp-to-hire</p>
+    </div>
+    <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:8px">Credentials</p>
+      <p style="font-size:15px;font-weight:600;color:#8C3A44;line-height:1.35">1 action needed</p>
+      <p style="font-size:12.5px;color:#5D6472;margin-top:4px">OSHA-10 not started</p>
+    </div>
+  </div>
+
+  <div style="max-width:1240px;margin:0 auto;padding:20px 32px;display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">
+    <div style="flex:1 1 440px;min-width:300px;display:flex;flex-direction:column;gap:24px">
+      <section>
+        <div style="position:relative;border-radius:18px;overflow:hidden;aspect-ratio:21/7;margin-bottom:24px;background:#EBE8E2">
+          <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80" alt="Warehouse floor at the assignment site" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+          <span style="position:absolute;left:16px;bottom:14px;font-size:12px;font-weight:600;color:#fff;background:rgba(23,26,32,0.6);backdrop-filter:blur(6px);padding:6px 12px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Your site · Regional Distribution Center, Columbus OH</span>
+        </div>
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:22px;color:#171A20;margin-bottom:14px">Your schedule</h2>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ myShifts }}" as="sh" hint-placeholder-count="4">
+            <div style="border:1px solid #E5E2DC;border-radius:14px;background:#fff;padding:16px 18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+              <div style="flex:0 0 62px;text-align:center;background:#F5F4F2;border-radius:10px;padding:9px 6px">
+                <p style="font-size:11.5px;font-weight:700;color:#5B6270;letter-spacing:0.06em">{{ sh.day }}</p>
+                <p style="font-size:13.5px;font-weight:600;color:#171A20;margin-top:2px">{{ sh.date }}</p>
+              </div>
+              <div style="flex:1 1 200px;min-width:180px">
+                <p style="font-size:15px;font-weight:600;color:#171A20">{{ sh.role }}</p>
+                <p style="font-size:13px;color:#5D6472;margin-top:2px">{{ sh.site }} · {{ sh.time }}</p>
+              </div>
+              <span style="{{ sh.pill }}">{{ sh.status }}</span>
+              <sc-if value="{{ sh.isOpen }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ sh.claim }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;transition:background .16s ease">Claim shift</button>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:22px;color:#171A20;margin-bottom:6px">Matched to you</h2>
+        <p style="font-size:14px;color:#5D6472;margin-bottom:14px">Openings your recruiter flagged based on your certifications and shift availability.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px">
+          <sc-for list="{{ matchedJobs }}" as="m" hint-placeholder-count="2">
+            <button onClick="{{ m.open }}" style-hover="border-color:#C9A98A;box-shadow:0 2px 4px rgba(23,26,32,0.04),0 14px 34px -18px rgba(23,26,32,0.28);transform:translateY(-2px)" style="text-align:left;border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease">
+              <span style="{{ m.pillStyle }}">{{ m.vertical }}</span>
+              <p style="font-size:15.5px;font-weight:600;color:#171A20;margin:10px 0 3px">{{ m.title }}</p>
+              <p style="font-size:13px;color:#5D6472">{{ m.location }} · {{ m.shift }}</p>
+              <p style="font-size:14.5px;font-weight:600;color:#22262E;margin-top:12px">{{ m.pay }}</p>
+            </button>
+          </sc-for>
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:22px;color:#171A20;margin-bottom:14px">Pay history</h2>
+        <div style="border:1px solid #E5E2DC;border-radius:14px;overflow:hidden;background:#fff">
+          <sc-for list="{{ myPay }}" as="p" hint-placeholder-count="3">
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:15px 18px;border-bottom:1px solid #E5E2DC;flex-wrap:wrap">
+              <span style="font-size:14px;font-weight:600;color:#171A20;flex:1 1 140px">{{ p.week }}</span>
+              <span style="font-size:13.5px;color:#5D6472">{{ p.hours }}</span>
+              <span style="font-size:14px;font-weight:600;color:#171A20">{{ p.gross }}</span>
+              <span style="font-size:12.5px;color:#3D6B57;font-weight:600">{{ p.status }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+
+    <aside style="flex:0 1 280px;min-width:260px;display:flex;flex-direction:column;gap:16px">
+      <div style="border:1px solid #E5E2DC;border-radius:18px;padding:22px;background:#fff">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:14px">Credentials &amp; compliance</p>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ myCreds }}" as="c" hint-placeholder-count="4">
+            <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+              <div style="flex:1">
+                <p style="font-size:14px;font-weight:600;color:#171A20">{{ c.name }}</p>
+                <p style="font-size:12.5px;color:#5B6270;margin-top:2px">{{ c.detail }}</p>
+              </div>
+              <span style="{{ c.pill }}">{{ c.status }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <button style-hover="background:#22262E;color:#fff" style="width:100%;border:1.5px solid #22262E;color:#22262E;padding:11px;border-radius:9px;font-size:13.5px;font-weight:600;white-space:nowrap;margin-top:18px">Start OSHA-10 (paid)</button>
+      </div>
+
+      <sc-if value="{{ hasSaved }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid #E5E2DC;border-radius:18px;padding:22px;background:#F5F4F2">
+          <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:14px">Saved openings</p>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ savedJobs }}" as="sv" hint-placeholder-count="2">
+              <button onClick="{{ sv.open }}" style="text-align:left;width:100%">
+                <p style="font-size:14px;font-weight:600;color:#171A20">{{ sv.title }}</p>
+                <p style="font-size:12.5px;color:#5D6472;margin-top:2px">{{ sv.location }} · {{ sv.pay }}</p>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="border-radius:18px;padding:22px;background:#22262E">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#C9A98A;margin-bottom:12px">Your branch</p>
+        <p style="font-size:15px;font-weight:600;color:#fff">Columbus, OH</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);margin-top:4px;line-height:1.55">Walk-ins Mon–Fri, 8am–5pm. Call the 24/7 line for same-day shift changes.</p>
+        <p style="font-size:15px;font-weight:600;color:#fff;margin-top:14px">{{ dispatch }}</p>
+      </div>
+    </aside>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isRequest }}" hint-placeholder-val="{{ false }}">
+  <sc-if value="{{ reqNotSubmitted }}" hint-placeholder-val="{{ true }}">
+  <div style="background:#22262E;padding:38px 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-end">
+      <div>
+        <p style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#C9A98A;margin-bottom:10px">For employers</p>
+        <h1 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:34px;color:#fff;line-height:1.12;max-width:560px">Tell us what you need. We staff it.</h1>
+        <p style="color:rgba(255,255,255,0.68);font-size:15.5px;margin-top:12px;max-width:520px">A recruiter from the nearest branch responds within two hours on business days. Same-day coverage runs through the dispatch line.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);border-radius:14px;padding:20px;min-width:240px">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#C9A98A;margin-bottom:8px">Need workers today?</p>
+        <p style="font-size:20px;font-weight:600;color:#fff">{{ dispatch }}</p>
+        <p style="font-size:12.5px;color:rgba(255,255,255,0.6);margin-top:6px">24/7 dispatch · answered by a person</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1240px;margin:0 auto;padding:32px;display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap">
+    <form style="flex:1 1 440px;min-width:300px;display:flex;flex-direction:column;gap:26px">
+      <section style="border:1px solid #E5E2DC;border-radius:18px;background:#fff;padding:26px">
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:21px;color:#171A20;margin-bottom:18px">1. What you need</h2>
+        <p style="font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:8px">Practice</p>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px">
+          <sc-for list="{{ reqPracticeOptions }}" as="p" hint-placeholder-count="4">
+            <button type="button" onClick="{{ p.go }}" style="{{ p.style }}">{{ p.name }}</button>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Role or job title</span>
+            <input data-field="role" value="{{ r.role }}" onChange="{{ onReqField }}" placeholder="Forklift operator, 2nd shift" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">How many workers</span>
+            <input data-field="headcount" value="{{ r.headcount }}" onChange="{{ onReqField }}" placeholder="6" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+        </div>
+        <p style="font-size:12.5px;font-weight:600;color:#5D6472;margin:22px 0 10px">Staffing solution</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px">
+          <sc-for list="{{ tierOptions }}" as="t" hint-placeholder-count="4">
+            <button type="button" onClick="{{ t.go }}" style="{{ t.style }}">
+              <b style="{{ t.titleStyle }}">{{ t.name }}</b>
+              <span style="font-size:12.5px;color:#5D6472;line-height:1.5">{{ t.note }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="border:1px solid #E5E2DC;border-radius:18px;background:#fff;padding:26px">
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:21px;color:#171A20;margin-bottom:18px">2. When and where</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Start date</span>
+            <input data-field="start" value="{{ r.start }}" onChange="{{ onReqField }}" placeholder="Mon, Sep 14" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Work site address</span>
+            <input data-field="site" value="{{ r.site }}" onChange="{{ onReqField }}" placeholder="4400 Etna Pkwy, Dock 12" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">City &amp; state</span>
+            <input data-field="cityState" value="{{ r.cityState }}" onChange="{{ onReqField }}" placeholder="Columbus, OH" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+        </div>
+        <p style="font-size:12.5px;font-weight:600;color:#5D6472;margin:22px 0 8px">Shift</p>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px">
+          <sc-for list="{{ reqShiftOptions }}" as="sh" hint-placeholder-count="5">
+            <button type="button" onClick="{{ sh.go }}" style="{{ sh.style }}">{{ sh.name }}</button>
+          </sc-for>
+        </div>
+        <p style="font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:8px">Expected duration</p>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <sc-for list="{{ reqDurationOptions }}" as="d" hint-placeholder-count="5">
+            <button type="button" onClick="{{ d.go }}" style="{{ d.style }}">{{ d.name }}</button>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="border:1px solid #E5E2DC;border-radius:18px;background:#fff;padding:26px">
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:21px;color:#171A20;margin-bottom:6px">3. Screening &amp; requirements</h2>
+        <p style="font-size:14px;color:#5D6472;margin-bottom:18px;max-width:520px">Everything you check is completed and documented by us before a worker reaches your site. E-Verify and I-9 run on every hire regardless.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px">
+          <sc-for list="{{ empReqOptions }}" as="rq" hint-placeholder-count="8">
+            <label style="display:flex;gap:10px;align-items:center;font-size:13.5px;color:#262A33;cursor:pointer">
+              <input type="checkbox" checked="{{ rq.on }}" onChange="{{ rq.go }}" style="width:15px;height:15px;accent-color:#22262E">
+              {{ rq.name }}
+            </label>
+          </sc-for>
+        </div>
+        <label style="display:block;margin-top:22px"><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Anything else we should know</span>
+          <textarea data-field="notes" value="{{ r.notes }}" onChange="{{ onReqField }}" rows="3" placeholder="Cold storage environment, boots required, badge access through Dock 12." style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33;resize:vertical"></textarea></label>
+      </section>
+
+      <section style="border:1px solid #E5E2DC;border-radius:18px;background:#fff;padding:26px">
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:21px;color:#171A20;margin-bottom:18px">4. Who we contact</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Your name</span>
+            <input data-field="contact" value="{{ r.contact }}" onChange="{{ onReqField }}" placeholder="Jordan Blake" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Company</span>
+            <input data-field="company" value="{{ r.company }}" onChange="{{ onReqField }}" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Work email</span>
+            <input data-field="email" value="{{ r.email }}" onChange="{{ onReqField }}" placeholder="jordan@company.com" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+          <label><span style="display:block;font-size:12.5px;font-weight:600;color:#5D6472;margin-bottom:6px">Phone</span>
+            <input data-field="phone" value="{{ r.phone }}" onChange="{{ onReqField }}" placeholder="(614) 555-0170" style="width:100%;border:1.5px solid #E5E2DC;border-radius:10px;padding:12px 13px;font-size:14.5px;color:#262A33"></label>
+        </div>
+        <label style="display:flex;gap:11px;align-items:flex-start;font-size:14px;color:#262A33;line-height:1.5;margin-top:20px;padding-top:18px;border-top:1px solid #E5E2DC;cursor:pointer">
+          <input type="checkbox" data-field="urgent" checked="{{ r.urgent }}" onChange="{{ onReqField }}" style="width:16px;height:16px;margin-top:2px;accent-color:#22262E">
+          This is urgent — route it to the 24/7 dispatch team for same-day coverage.
+        </label>
+      </section>
+    </form>
+
+    <aside style="flex:0 1 280px;min-width:260px;position:sticky;top:98px;display:flex;flex-direction:column;gap:16px">
+      <div style="border:1px solid #E5E2DC;border-radius:18px;padding:22px;background:#fff;box-shadow:0 1px 2px rgba(23,26,32,0.05),0 8px 24px -12px rgba(23,26,32,0.14)">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:10px">Your request</p>
+        <p style="font-size:15px;font-weight:600;color:#171A20;line-height:1.45;margin-bottom:16px">{{ reqSummaryLine }}</p>
+        <button onClick="{{ submitRequest }}" style-hover="background:#B99671" style="width:100%;background:#C9A98A;color:#171A20;padding:14px;border-radius:10px;font-size:15px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Send request to a recruiter</button>
+        <p style="font-size:12.5px;color:#5B6270;margin-top:12px;line-height:1.5">No commitment. You approve every candidate before they show up.</p>
+      </div>
+      <div style="border-radius:18px;padding:22px;background:#F5F4F2">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:14px">Included on every hire</p>
+        <ul style="display:flex;flex-direction:column;gap:11px">
+          <sc-for list="{{ handledItems }}" as="h" hint-placeholder-count="4">
+            <li style="display:flex;gap:10px;font-size:13.5px;color:#262A33;line-height:1.5">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2.4" style="flex-shrink:0;margin-top:2px"><path d="M20 6L9 17l-5-5"/></svg>
+              {{ h.title }}
+            </li>
+          </sc-for>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ reqSubmitted }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:720px;margin:0 auto;padding:64px 32px 40px;text-align:center">
+      <div style="width:62px;height:62px;border-radius:50%;background:#F6EFE7;display:flex;align-items:center;justify-content:center;margin:0 auto 22px">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A8825F" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h1 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:34px;color:#171A20;line-height:1.15">Request sent. Sourcing has started.</h1>
+      <p style="font-size:16px;color:#5D6472;margin-top:12px;line-height:1.6">{{ reqSummaryLine }}. A recruiter from the nearest branch calls within two hours; first candidates typically reach your portal the same day.</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+        <button onClick="{{ goEmployer }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:14px 24px;border-radius:10px;font-size:15px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Open employer portal</button>
+        <button onClick="{{ goRequest }}" style-hover="border-color:#22262E;background:#F5F4F2" style="border:1.5px solid #E5E2DC;color:#22262E;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Submit another request</button>
+      </div>
+    </div>
+  </sc-if>
+</sc-if>
+
+<sc-if value="{{ isEmployer }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#22262E;padding:34px 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end">
+      <div>
+        <p style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#C9A98A;margin-bottom:9px">Employer portal</p>
+        <h1 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:32px;color:#fff;line-height:1.1">Cardinal Logistics</h1>
+        <p style="color:rgba(255,255,255,0.65);font-size:14.5px;margin-top:8px">4 sites · Columbus, Dallas, Phoenix, Charlotte · account manager Deon Pratt</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button onClick="{{ goRequest }}" style="background:#C9A98A;color:#171A20;padding:13px 20px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Request workers</button>
+        <button style="border:1.5px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.08);color:#fff;padding:13px 20px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Call dispatch {{ dispatch }}</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1240px;margin:0 auto;padding:28px 32px 8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+    <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:8px">Open requests</p>
+      <p style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#171A20;font-variant-numeric:tabular-nums">3</p>
+      <p style="font-size:12.5px;color:#5D6472;margin-top:4px">Across three practices</p>
+    </div>
+    <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#F6EFE7">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#8A6740;margin-bottom:8px">Awaiting your review</p>
+      <p style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#171A20;font-variant-numeric:tabular-nums">3</p>
+      <p style="font-size:12.5px;color:#5D6472;margin-top:4px">Candidates submitted, fully screened</p>
+    </div>
+    <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:8px">On assignment</p>
+      <p style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#171A20;font-variant-numeric:tabular-nums">34</p>
+      <p style="font-size:12.5px;color:#5D6472;margin-top:4px">160.5 hours logged this week</p>
+    </div>
+    <div style="border:1px solid #E5E2DC;border-radius:14px;padding:18px;background:#fff">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:8px">Week to date</p>
+      <p style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#171A20;font-variant-numeric:tabular-nums">$41,280</p>
+      <p style="font-size:12.5px;color:#5D6472;margin-top:4px">Invoices Friday · net 30</p>
+    </div>
+  </div>
+
+  <div style="max-width:1240px;margin:0 auto;padding:20px 32px;display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">
+    <div style="flex:1 1 440px;min-width:300px;display:flex;flex-direction:column;gap:24px">
+      <section>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:14px">
+          <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:22px;color:#171A20">Staffing requests</h2>
+          <button onClick="{{ goRequest }}" style="font-size:13.5px;font-weight:600;color:#22262E;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">New request →</button>
+        </div>
+        <div style="border:1px solid #E5E2DC;border-radius:14px;overflow:hidden;background:#fff">
+          <sc-if value="{{ newRequestRow }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:16px 18px;border-bottom:1px solid #E5E2DC;background:#F6EFE7;display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+              <div style="flex:1 1 220px;min-width:200px">
+                <p style="font-size:15px;font-weight:600;color:#171A20">{{ reqSummaryLine }}</p>
+                <p style="font-size:12.5px;color:#5D6472;margin-top:3px">Submitted just now · sourcing started</p>
+              </div>
+              <span style="font-size:11.5px;font-weight:700;color:#8A6740;background:#fff;padding:5px 10px;border-radius:100px">New</span>
+            </div>
+          </sc-if>
+          <sc-for list="{{ requests }}" as="rq" hint-placeholder-count="5">
+            <div style="padding:16px 18px;border-bottom:1px solid #E5E2DC;display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+              <div style="flex:1 1 240px;min-width:200px">
+                <p style="font-size:15px;font-weight:600;color:#171A20">{{ rq.role }}</p>
+                <p style="font-size:12.5px;color:#5D6472;margin-top:3px">{{ rq.id }} · {{ rq.practice }} · {{ rq.tier }} · {{ rq.site }} · opened {{ rq.opened }}</p>
+              </div>
+              <div style="flex:0 1 150px;min-width:120px">
+                <p style="font-size:12.5px;color:#5D6472;margin-bottom:6px">{{ rq.fill }} filled</p>
+                <div style="height:5px;background:#EBE8E2;border-radius:100px;overflow:hidden"><div style="{{ rq.barStyle }}"></div></div>
+              </div>
+              <span style="{{ rq.pill }}">{{ rq.status }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:22px;color:#171A20;margin-bottom:6px">Candidates awaiting your review · {{ candidateQueueLabel }}</h2>
+        <p style="font-size:14px;color:#5D6472;margin-bottom:14px">Screened, verified, and insured. Approve and we confirm a start date the same day.</p>
+        <sc-if value="{{ hasApproved }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:13px;font-weight:600;color:#3D6B57;background:#EAF1ED;padding:11px 14px;border-radius:10px;margin-bottom:12px">{{ approvedNote }}</p>
+        </sc-if>
+        <sc-if value="{{ queueCleared }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px dashed #E5E2DC;border-radius:14px;padding:32px;text-align:center;background:#F5F4F2">
+            <p style="font-size:15px;font-weight:600;color:#171A20;margin-bottom:5px">Queue clear</p>
+            <p style="font-size:13.5px;color:#5D6472">New candidates appear here as recruiters submit them. Urgent needs go through dispatch.</p>
+          </div>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ candidates }}" as="c" hint-placeholder-count="3">
+            <div style="border:1px solid #E5E2DC;border-radius:14px;background:#fff;padding:16px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+              <div style="width:44px;height:44px;border-radius:50%;background:#F5F4F2;color:#22262E;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:15px;font-weight:600;flex-shrink:0">{{ c.initials }}</div>
+              <div style="flex:1 1 220px;min-width:190px">
+                <p style="font-size:15px;font-weight:600;color:#171A20">{{ c.name }}</p>
+                <p style="font-size:12.5px;color:#5D6472;margin-top:3px">{{ c.role }} · {{ c.creds }}</p>
+              </div>
+              <div style="text-align:right;min-width:80px">
+                <p style="font-size:14.5px;font-weight:600;color:#171A20">{{ c.rate }}</p>
+                <p style="font-size:12px;color:#5B6270;margin-top:2px">{{ c.req }}</p>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button onClick="{{ c.pass }}" style-hover="border-color:#22262E" style="border:1.5px solid #E5E2DC;color:#5D6472;padding:9px 14px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;transition:border-color .16s ease">Pass</button>
+                <button onClick="{{ c.approve }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:9px 15px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;transition:background .16s ease">Approve</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:20px">
+          <div style="position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:#EBE8E2">
+            <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=600&q=80" alt="Columbus distribution centre" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+            <span style="position:absolute;left:9px;bottom:8px;font-size:11px;font-weight:600;color:#fff;background:rgba(23,26,32,0.62);padding:4px 9px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Columbus</span>
+          </div>
+          <div style="position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:#EBE8E2">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="Dallas hospital assignment" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+            <span style="position:absolute;left:9px;bottom:8px;font-size:11px;font-weight:600;color:#fff;background:rgba(23,26,32,0.62);padding:4px 9px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Dallas</span>
+          </div>
+          <div style="position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:#EBE8E2">
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80" alt="Phoenix fleet shop" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+            <span style="position:absolute;left:9px;bottom:8px;font-size:11px;font-weight:600;color:#fff;background:rgba(23,26,32,0.62);padding:4px 9px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Phoenix</span>
+          </div>
+          <div style="position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:#EBE8E2">
+            <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=600&q=80" alt="Charlotte office site" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,29,34,0.08) 0%,rgba(58,29,34,0.44) 100%);pointer-events:none"></span>
+            <span style="position:absolute;left:9px;bottom:8px;font-size:11px;font-weight:600;color:#fff;background:rgba(23,26,32,0.62);padding:4px 9px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Charlotte</span>
+          </div>
+        </div>
+        <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:22px;color:#171A20;margin-bottom:14px">Workers on assignment</h2>
+        <div style="border:1px solid #E5E2DC;border-radius:14px;overflow:hidden;background:#fff">
+          <sc-for list="{{ onAssign }}" as="w" hint-placeholder-count="4">
+            <div style="padding:15px 18px;border-bottom:1px solid #E5E2DC;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+              <div style="flex:1 1 220px">
+                <p style="font-size:14.5px;font-weight:600;color:#171A20">{{ w.name }}</p>
+                <p style="font-size:12.5px;color:#5D6472;margin-top:2px">{{ w.role }} · {{ w.site }}</p>
+              </div>
+              <div style="text-align:right">
+                <p style="font-size:14px;font-weight:600;color:#171A20">{{ w.hours }} hrs</p>
+                <p style="font-size:12px;color:#5B6270;margin-top:2px">{{ w.week }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+
+    <aside style="flex:0 1 280px;min-width:260px;display:flex;flex-direction:column;gap:16px">
+      <div style="border-radius:18px;padding:22px;background:#22262E">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px">Compliance status</p>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ handledItems }}" as="h" hint-placeholder-count="4">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A98A" stroke-width="2.4" style="flex-shrink:0;margin-top:3px"><path d="M20 6L9 17l-5-5"/></svg>
+              <div>
+                <b style="display:block;font-size:14px;font-weight:600;color:#fff">{{ h.title }}</b>
+                <span style="font-size:12.5px;color:rgba(255,255,255,0.6)">{{ h.note }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <p style="font-size:12.5px;color:rgba(255,255,255,0.6);margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.14);line-height:1.55">All 34 workers on assignment have current I-9, E-Verify, and required credentials on file.</p>
+      </div>
+
+      <div style="border:1px solid #E5E2DC;border-radius:18px;padding:22px;background:#fff">
+        <p style="font-size:11.5px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#5B6270;margin-bottom:14px">This week's invoice</p>
+        <div style="display:flex;justify-content:space-between;font-size:13.5px;color:#5D6472;padding:8px 0"><span>Skilled Trades · 21 workers</span><span style="color:#171A20;font-weight:600">$24,150</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13.5px;color:#5D6472;padding:8px 0;border-top:1px solid #E5E2DC"><span>Healthcare · 4 travel RNs</span><span style="color:#171A20;font-weight:600">$11,600</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13.5px;color:#5D6472;padding:8px 0;border-top:1px solid #E5E2DC"><span>Technical Trades · 5 techs</span><span style="color:#171A20;font-weight:600">$4,340</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13.5px;color:#5D6472;padding:8px 0;border-top:1px solid #E5E2DC"><span>Professional · 4 placements</span><span style="color:#171A20;font-weight:600">$1,190</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:15px;padding:12px 0 0;border-top:1.5px solid #22262E;margin-top:6px"><b style="color:#171A20;font-weight:600">Week to date</b><b style="color:#171A20;font-weight:600">$41,280</b></div>
+        <button style-hover="background:#22262E;color:#fff" style="width:100%;border:1.5px solid #22262E;color:#22262E;padding:11px;border-radius:9px;font-size:13.5px;font-weight:600;white-space:nowrap;margin-top:16px">Download timesheets</button>
+      </div>
+
+      <div style="border-radius:18px;padding:22px;background:#F6EFE7">
+        <p style="font-size:14px;font-weight:600;color:#171A20;margin-bottom:6px">Need coverage tonight?</p>
+        <p style="font-size:13px;color:#5D6472;line-height:1.55;margin-bottom:12px">Dispatch is staffed around the clock and can fill same-day shifts from the local branch bench.</p>
+        <p style="font-size:17px;font-weight:600;color:#171A20">{{ dispatch }}</p>
+      </div>
+    </aside>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isTraction }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#3A1D22;padding:56px 0 52px">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px">
+      <span style="display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:#3A1D22;background:#C9A98A;padding:5px 11px;border-radius:100px;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Illustrative figures</span>
+      <h1 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:44px;line-height:1.08;color:#F5F4F2;letter-spacing:-0.015em;max-width:760px;margin:20px 0 0">One brand, four workforces, one bench that redeploys across all of them.</h1>
+      <p style="font-size:17px;color:rgba(244,244,246,0.72);line-height:1.6;max-width:640px;margin-top:16px">Asepsis operates four dedicated recruiting practices out of a shared branch network. The same 48 branches, the same compliance spine, and the same worker pool serve hospitals, distribution centres, contractors, and back offices.</p>
+      <p style="font-size:13px;color:rgba(244,244,246,0.5);margin-top:22px;max-width:640px;line-height:1.55">Every number on this page is illustrative and shown for layout purposes only. Replace with audited figures before external distribution.</p>
+    </div>
+  </div>
+
+  <section style="max-width:1240px;margin:0 auto;padding:64px 32px 8px">
+    <p style="font-size:11.5px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:#8A6740;margin-bottom:12px">Market</p>
+    <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:32px;line-height:1.15;color:#171A20;max-width:640px">A large market with no consolidated multi-vertical operator</h2>
+    <p style="font-size:15.5px;color:#5D6472;line-height:1.65;max-width:620px;margin-top:12px">Staffing demand is enormous and structurally fragmented. Most firms specialise in one vertical in one metro, so an employer with a hospital, a warehouse, and a back office signs three vendors.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:32px">
+      <sc-for list="{{ marketStats }}" as="m" hint-placeholder-count="3">
+        <div style="border:1px solid #E5E2DC;border-radius:18px;padding:26px;background:#fff">
+          <p style="font-family:'Fraunces',serif;font-size:38px;font-weight:600;color:#3A1D22;line-height:1">{{ m.k }}</p>
+          <p style="font-size:14.5px;font-weight:600;color:#171A20;margin-top:12px">{{ m.v }}</p>
+          <p style="font-size:13px;color:#5D6472;line-height:1.55;margin-top:6px">{{ m.n }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:56px 32px 8px">
+    <p style="font-size:11.5px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:#8A6740;margin-bottom:12px">The model</p>
+    <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:32px;line-height:1.15;color:#171A20;max-width:640px">Four practices that fund each other</h2>
+    <p style="font-size:15.5px;color:#5D6472;line-height:1.65;max-width:620px;margin-top:12px">Skilled Trades volume keeps branches busy and the bench deep. Healthcare and Technical Trades carry the rate. Professional placements convert to fees. The mix is what a single-vertical competitor cannot copy.</p>
+    <div style="display:flex;flex-direction:column;gap:1px;background:#E5E2DC;border:1px solid #E5E2DC;border-radius:18px;overflow:hidden;margin-top:32px">
+      <sc-for list="{{ modelRows }}" as="m" hint-placeholder-count="4">
+        <div style="background:#fff;padding:22px 24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+          <div style="flex:1 1 240px;min-width:220px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:5px">
+              <span style="{{ m.dot }}"></span>
+              <p style="font-size:16px;font-weight:600;color:#171A20">{{ m.name }}</p>
+            </div>
+            <p style="font-size:13.5px;color:#5D6472;line-height:1.55">{{ m.note }}</p>
+          </div>
+          <div style="flex:0 1 200px;min-width:160px">
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:#5D6472;margin-bottom:7px"><span>Share of revenue</span><b style="color:#171A20;font-weight:600">{{ m.share }}</b></div>
+            <div style="height:6px;background:#EBE8E2;border-radius:100px;overflow:hidden"><div style="{{ m.barStyle }}"></div></div>
+          </div>
+          <p style="font-size:13.5px;font-weight:600;color:#3A1D22;white-space:nowrap;min-width:130px;text-align:right">{{ m.margin }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:56px 32px 8px">
+    <div style="background:#3A1D22;border-radius:22px;padding:44px 40px">
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:#C9A98A;margin-bottom:12px">Retention</p>
+      <h2 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:32px;line-height:1.15;color:#F5F4F2;max-width:620px">The second placement is where the margin is</h2>
+      <p style="font-size:15.5px;color:rgba(244,244,246,0.7);line-height:1.65;max-width:620px;margin-top:12px">Acquiring a worker costs money once. Redeploying them across four practices costs almost nothing, and a worker who takes a second assignment is worth several times the first.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:32px">
+        <sc-for list="{{ retentionStats }}" as="r" hint-placeholder-count="4">
+          <div style="background:rgba(244,244,246,0.07);border:1px solid rgba(244,244,246,0.14);border-radius:16px;padding:22px">
+            <p style="font-family:'Fraunces',serif;font-size:32px;font-weight:600;color:#C9A98A;line-height:1">{{ r.k }}</p>
+            <p style="font-size:14px;font-weight:600;color:#F5F4F2;margin-top:11px">{{ r.v }}</p>
+            <p style="font-size:12.5px;color:rgba(244,244,246,0.6);line-height:1.55;margin-top:6px">{{ r.n }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1240px;margin:0 auto;padding:56px 32px 24px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      <div style="border:1px solid #E5E2DC;border-radius:22px;padding:34px;background:#F5F4F2">
+        <h3 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:24px;color:#171A20;margin-bottom:8px">See the operating product</h3>
+        <p style="font-size:14.5px;color:#5D6472;line-height:1.6;margin-bottom:20px">The jobs board, apply flow, worker dashboard, and employer portal that run the business day to day.</p>
+        <button onClick="{{ goJobs }}" style-hover="background:#3A4A63" style="background:#22262E;color:#fff;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease,color .16s ease,border-color .16s ease">Open the product</button>
+      </div>
+      <div style="border-radius:22px;padding:34px;background:#C9A98A">
+        <h3 style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:24px;color:#3A1D22;margin-bottom:8px">Talk to us</h3>
+        <p style="font-size:14.5px;color:rgba(58,29,34,0.78);line-height:1.6;margin-bottom:20px">Founders and operators reach the same 24/7 line the branches use.</p>
+        <p style="font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:#3A1D22">{{ dispatch }}</p>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+</main>
+
+<footer style="background:#171A20;color:rgba(255,255,255,0.55);padding:40px 0 30px;margin-top:40px">
+  <div style="max-width:1240px;margin:0 auto;padding:0 32px 40px;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-end">
+    <div style="max-width:440px">
+      <span style="display:block;width:38px;height:3px;background:#C9A98A;transform:skewX(-22deg);margin-bottom:22px"></span>
+      <p style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-weight:500;font-size:26px;line-height:1.25;color:#F5F4F2;letter-spacing:-0.01em">Every kind of work. One trusted staffing partner.</p>
+      <p style="font-size:13.5px;color:rgba(244,244,246,0.58);line-height:1.6;margin-top:14px">Healthcare, skilled trades, technical trades, and professional staffing across 48 branches — with compliance, payroll, and weekly pay handled.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button onClick="{{ goApply }}" style-hover="background:#B99671" style="background:#C9A98A;color:#3A1D22;padding:13px 22px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .16s ease">Apply now</button>
+      <button onClick="{{ goRequest }}" style="border:1.5px solid rgba(244,244,246,0.32);background:rgba(244,244,246,0.08);color:#F5F4F2;padding:12px 20px;border-radius:10px;font-size:14.5px;font-weight:600;white-space:nowrap">Request workers</button>
+    </div>
+  </div>
+  <div style="max-width:1240px;margin:0 auto;padding:0 32px 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:28px">
+    <div>
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px">For workers</p>
+      <ul style="display:flex;flex-direction:column;gap:10px;font-size:13.5px">
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Healthcare jobs</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Skilled trades jobs</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Technical trades jobs</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Professional jobs</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Weekly pay &amp; benefits</a></li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px">For employers</p>
+      <ul style="display:flex;flex-direction:column;gap:10px;font-size:13.5px">
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Request workers</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Temporary staffing</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Temp-to-hire</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Direct placement</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Per diem &amp; travel healthcare</a></li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px">Company</p>
+      <ul style="display:flex;flex-direction:column;gap:10px;font-size:13.5px">
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">About Asepsis</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Branch locations</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Compliance &amp; safety</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Contact &amp; support</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Careers at Asepsis</a></li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#C9A98A;margin-bottom:14px">Legal</p>
+      <ul style="display:flex;flex-direction:column;gap:10px;font-size:13.5px">
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Privacy policy</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Terms of service</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">Accessibility</a></li>
+        <li><a href="#" style="color:rgba(244,244,246,0.62)">E-Verify notice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="max-width:1240px;margin:0 auto;padding:28px 32px 0;border-top:1px solid rgba(244,244,246,0.14);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center">
+    <div style="display:flex;align-items:center;gap:11px">
+      <svg width="26" height="26" viewBox="0 0 100 100" fill="none"><path d="M6 94V36A8 8 0 0 1 14 28H64Z" fill="#FFFFFF"/><path d="M94 6V64A8 8 0 0 1 86 72H36Z" fill="#C9A98A"/></svg>
+      <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1">
+        <span style="font-family:'Fraunces',serif;font-variation-settings:'opsz' 144,'SOFT' 0,'WONK' 0;font-size:19px;font-weight:600;color:#fff;letter-spacing:-0.025em">Asepsis</span>
+        <span style="font-size:9px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:#C9A98A;margin-top:4px">Staffing</span>
+      </span>
+    </div>
+    <p style="font-size:12.5px;max-width:520px">© 2026 Asepsis Staffing, Inc. · 48 branches nationwide · E-Verify participant · Equal opportunity employer.</p>
+    <p style="font-size:12.5px;color:rgba(255,255,255,0.75)">24/7 dispatch {{ dispatch }}</p>
+  </div>
+</footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;dispatchPhone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;(888) 555-0142&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Brand&quot;},&quot;showOnboardingRail&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Job detail&quot;},&quot;openPractice&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;All practices&quot;,&quot;Healthcare&quot;,&quot;Skilled Trades&quot;,&quot;Technical Trades&quot;,&quot;Professional&quot;],&quot;default&quot;:&quot;All practices&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Jobs board&quot;}}">
+const V = {
+  Healthcare: { color: '#8C3A44', bg: '#F6EBEC', img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80', alt: 'Nurse walking a hospital corridor' },
+  'Skilled Trades': { color: '#3A4A63', bg: '#ECEEF3', img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80', alt: 'Warehouse worker operating a forklift' },
+  'Technical Trades': { color: '#8A6740', deco: '#A8825F', bg: '#F6EFE7', img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80', alt: 'Technician servicing equipment' },
+  Professional: { color: '#3D6B57', bg: '#EAF1ED', img: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80', alt: 'Office professionals in a meeting' }
+};
+
+const MARKET = [
+  { k: '$212B', v: 'US temporary staffing revenue', n: 'Illustrative — sized across all four of our practices.' },
+  { k: '20,000+', v: 'staffing firms in the US', n: 'Highly fragmented; most operate a single vertical in a single metro.' },
+  { k: '<2%', v: 'held by any single mid-market firm', n: 'No regional operator has consolidated multi-vertical demand.' }
+];
+const MODEL = [
+  { name: 'Healthcare', share: '34%', margin: '22% gross margin', note: 'Per diem and 13-week travel contracts. Credential-gated, highest bill rate, stickiest client relationships.', w: '34%' },
+  { name: 'Skilled Trades', share: '41%', margin: '17% gross margin', note: 'Warehouse, manufacturing, construction. Highest volume and fastest fill; the engine of branch utilisation.', w: '41%' },
+  { name: 'Technical Trades', share: '15%', margin: '26% gross margin', note: 'Licensed electricians, HVAC, diesel techs. Scarce supply, premium rates, low churn.', w: '15%' },
+  { name: 'Professional', share: '10%', margin: '31% gross margin', note: 'Accounting, admin, HR. Temp-to-hire and direct placement carry conversion fees.', w: '10%' }
+];
+const RETENTION = [
+  { k: '68%', v: 'of workers take a second assignment', n: 'Within 90 days of their first placement ending.' },
+  { k: '3.4', v: 'assignments per worker, per year', n: 'One application, four practices to redeploy into.' },
+  { k: '11 days', v: 'median bench time between assignments', n: 'Multi-vertical redeployment cuts idle time roughly in half.' },
+  { k: '92%', v: 'of urgent requests filled inside 24 hours', n: 'Local branch bench plus the 24/7 dispatch line.' }
+];
+
+const JOBS = [
+  { id:1, title:'Registered Nurse, ICU — Travel', company:'Baptist Health', location:'Dallas, TX', city:'Dallas', vertical:'Healthcare', type:'Travel contract', shift:'Nights', pay:'$2,600–$3,200 / wk', payRank:3000, posted:'Posted 2d ago', age:2, urgent:true, credLine:'TX RN license', openings:4, start:'Oct 5, 2026', branch:'Dallas', recruiter:'Tasha Merrill', noExp:false,
+    desc:'A 26-bed adult ICU running 13-week contracts with guaranteed 36-hour weeks. Our credentialing team clears TX licensure and hospital onboarding before your first shift, so you start on the floor rather than in an HR office.',
+    duties:['Carry a 2:1 patient assignment on nights, with charge support on every shift.','Manage vents, drips, and post-op cardiac recovery patients.','Chart in Epic; a two-day paid orientation is included.','Extend or transfer to another Asepsis contract at week 11 if you want to stay.'],
+    reqs:['Active TX RN license or compact license eligible','2+ years recent ICU experience','BLS and ACLS current through the contract end date','Two supervisor references we verify before submission'],
+    onboarding:['Upload RN license and BLS/ACLS cards','Complete I-9 and E-Verify at any branch','Physical and 10-panel screen (we schedule and pay)'] },
+  { id:2, title:'CNA — Per Diem', company:'Meadowview Skilled Nursing', location:'Atlanta, GA', city:'Atlanta', vertical:'Healthcare', type:'Per diem', shift:'All shifts', pay:'$19–$24 / hr', payRank:24, posted:'Posted 6h ago', age:0.25, urgent:true, credLine:'GA CNA license', openings:11, start:'Immediately', branch:'Atlanta', recruiter:'Joy Adeyemi', noExp:false,
+    desc:'Pick your own shifts from an open board at four partner facilities across metro Atlanta. Claim a shift the night before or commit to a set weekly pattern — both are paid weekly with a shift differential on nights and weekends.',
+    duties:['Assist residents with ADLs, transfers, and vitals.','Document care in PointClickCare.','Claim open shifts from the Asepsis worker dashboard.','Cancel or swap up to 12 hours ahead with no penalty.'],
+    reqs:['Active GA CNA certification in good standing','Current TB test and physical','Background check (we run and pay for it)'],
+    onboarding:['Upload CNA certification','Complete I-9 and E-Verify','Sign facility orientation packet'] },
+  { id:3, title:'Licensed Practical Nurse', company:'Cardinal Long-Term Care', location:'Indianapolis, IN', city:'Indianapolis', vertical:'Healthcare', type:'Temp-to-hire', shift:'Days', pay:'$27–$31 / hr', payRank:31, posted:'Posted 1d ago', age:1, urgent:false, credLine:'IN LPN license', openings:2, start:'Sep 22, 2026', branch:'Indianapolis', recruiter:'Ray Kaminski', noExp:false,
+    desc:'A 90-day temp-to-hire on a 42-resident long-term care unit. Convert onto the facility payroll with full benefits after the trial; nine of the last ten LPNs we placed here converted.',
+    duties:['Pass medications and manage treatment orders for a 14-resident hall.','Supervise CNAs on the hall and escalate to the charge RN.','Complete admission and change-of-condition assessments.'],
+    reqs:['Active IN LPN license','Long-term care or med-surg experience preferred','Ability to convert to facility payroll at 90 days'],
+    onboarding:['Upload LPN license','Complete I-9 and E-Verify','Two-step TB and flu documentation'] },
+  { id:4, title:'Medical Technologist / Phlebotomist', company:'Gulf Coast Regional Hospital', location:'Tampa, FL', city:'Tampa', vertical:'Healthcare', type:'Temporary', shift:'2nd shift', pay:'$22–$26 / hr', payRank:26, posted:'Posted 3d ago', age:3, urgent:false, credLine:'ASCP preferred', openings:3, start:'Sep 29, 2026', branch:'Tampa', recruiter:'Ana Delgado', noExp:false,
+    desc:'A 16-week lab coverage assignment during a staffing transition, with likely extension into Q1. Evenings draw from the ED and inpatient floors with a dedicated processing tech on shift.',
+    duties:['Perform venipuncture on ED, ICU, and inpatient floors.','Process and label specimens; run routine chemistry panels.','Maintain chain of custody documentation.'],
+    reqs:['Phlebotomy certification; ASCP MLT preferred','1+ year hospital draw experience','Comfortable with 200+ draws per week'],
+    onboarding:['Upload phlebotomy certification','Complete I-9 and E-Verify','Hospital badge appointment'] },
+
+  { id:5, title:'Warehouse Associate / Forklift', company:'Regional Distribution Center', location:'Columbus, OH', city:'Columbus', vertical:'Skilled Trades', type:'Temp-to-hire', shift:'1st shift', pay:'$19–$22 / hr', payRank:22, posted:'Posted 4h ago', age:0.2, urgent:true, credLine:'No experience required', openings:24, start:'Monday', branch:'Columbus', recruiter:'Deon Pratt', noExp:true,
+    desc:'A 900,000 sq ft distribution center adding 24 associates for peak season, converting the top performers to permanent in 60 to 90 days. Forklift certification is free and happens on your first paid day.',
+    duties:['Pick and pack orders to a rate posted on the floor each morning.','Load and unload trailers with a sit-down or reach truck.','Scan and stage pallets for outbound routes.','Free forklift certification on day one if you need it.'],
+    reqs:['18 or older, able to lift 50 lbs repeatedly','Steel-toe boots (we supply a voucher for your first pair)','No experience or resume required'],
+    onboarding:['Bring photo ID and Social Security card to the branch','Complete I-9 and E-Verify','Watch the 20-minute site safety video'] },
+  { id:6, title:'Assembly Line Operator', company:'Midwest Auto Components', location:'Indianapolis, IN', city:'Indianapolis', vertical:'Skilled Trades', type:'Temporary', shift:'2nd shift', pay:'$18–$20 / hr', payRank:20, posted:'Posted 1d ago', age:1, urgent:false, credLine:'No experience required', openings:16, start:'Sep 21, 2026', branch:'Indianapolis', recruiter:'Ray Kaminski', noExp:true,
+    desc:'A twelve-week production ramp on a Tier 1 automotive line, running 3pm to 11:30pm Monday through Friday with voluntary Saturdays at time and a half.',
+    duties:['Assemble and inspect subcomponents at a fixed station.','Record defects and flag line stoppages.','Rotate stations every two hours.'],
+    reqs:['18 or older, able to stand for an 8-hour shift','Steel-toe boots required on the floor','No experience required — paid training on the line'],
+    onboarding:['Bring photo ID and Social Security card','Complete I-9 and E-Verify','Site safety orientation'] },
+  { id:7, title:'General Laborer — Commercial Site', company:'Keystone Commercial Builders', location:'Charlotte, NC', city:'Charlotte', vertical:'Skilled Trades', type:'Temporary', shift:'Days', pay:'$18–$21 / hr', payRank:21, posted:'Posted 2d ago', age:2, urgent:false, credLine:'OSHA-10 provided', openings:8, start:'Sep 15, 2026', branch:'Charlotte', recruiter:'Marcus Hale', noExp:true,
+    desc:'Site support on a four-story medical office build through framing and drywall. Steady 40-hour weeks with a foreman who has kept most of our crew on since the pour.',
+    duties:['Move and stage material for framing and drywall crews.','Keep the site clean and OSHA-compliant.','Assist trades with layout and demolition as directed.'],
+    reqs:['Able to lift 50 lbs and work outdoors','Steel-toe boots and hard hat (hard hat supplied)','OSHA-10 provided free before your first shift'],
+    onboarding:['Bring photo ID and Social Security card','Complete I-9 and E-Verify','OSHA-10 online course (paid time)'] },
+
+  { id:8, title:'HVAC Technician, Commercial', company:'Piedmont Mechanical', location:'Charlotte, NC', city:'Charlotte', vertical:'Technical Trades', type:'Direct placement', shift:'Days', pay:'$26–$34 / hr', payRank:34, posted:'Posted 1d ago', age:1, urgent:false, credLine:'EPA 608 required', openings:2, start:'Negotiable', branch:'Charlotte', recruiter:'Marcus Hale', noExp:false,
+    desc:'A direct-hire service role on rooftop units and chillers across a commercial portfolio. Company truck, fuel card, and tool allowance from day one; you go onto Piedmont\u2019s payroll, not ours.',
+    duties:['Diagnose and repair RTUs, split systems, and chillers.','Run preventive maintenance routes on a service schedule.','On-call rotation of one week in five, paid at premium.'],
+    reqs:['EPA 608 Universal certification','3+ years commercial HVAC service experience','Valid driver license with a clean MVR'],
+    onboarding:['Verify EPA 608 and driver license','Background check and MVR pull','Offer and start date negotiated by your recruiter'] },
+  { id:9, title:'Electrician, Journeyman', company:'Industrial Facilities Group', location:'Sacramento, CA', city:'Sacramento', vertical:'Technical Trades', type:'Temp-to-hire', shift:'Days', pay:'$30–$38 / hr', payRank:38, posted:'Posted 5d ago', age:5, urgent:false, credLine:'CA J-Card required', openings:3, start:'Oct 1, 2026', branch:'Sacramento', recruiter:'Elena Ruiz', noExp:false,
+    desc:'Industrial electrical work in food processing plants — conduit, motor controls, and panel work on a 6-month project with conversion to permanent for the crew that finishes it.',
+    duties:['Bend and run rigid and EMT conduit to spec.','Terminate motor controls and troubleshoot 480V three-phase.','Read single-line diagrams and redline as-builts.'],
+    reqs:['California General Electrician (J-Card) certification','4+ years industrial or commercial experience','Own hand tools; PPE supplied'],
+    onboarding:['Verify J-Card and OSHA-30','Complete I-9 and E-Verify','Arc flash safety orientation'] },
+  { id:10, title:'Diesel Technician, Fleet', company:'Sunbelt Fleet Services', location:'Phoenix, AZ', city:'Phoenix', vertical:'Technical Trades', type:'Temp-to-hire', shift:'2nd shift', pay:'$28–$35 / hr', payRank:35, posted:'Posted 3d ago', age:3, urgent:true, credLine:'ASE T-series', openings:2, start:'Sep 22, 2026', branch:'Phoenix', recruiter:'Cody Brennan', noExp:false,
+    desc:'Evening shift maintaining a 240-truck regional fleet in a covered 12-bay shop. Tool allowance after 90 days and conversion to permanent for techs who hit shop hours.',
+    duties:['Perform DOT inspections and preventive maintenance.','Diagnose aftertreatment, air brake, and electrical faults.','Document repairs in the fleet maintenance system.'],
+    reqs:['ASE T-series certification (T2, T4, or T6)','3+ years heavy-duty diesel experience','Own tools; air tools supplied by the shop'],
+    onboarding:['Verify ASE certifications','Complete I-9 and E-Verify','DOT physical and drug screen'] },
+
+  { id:18, title:'CDL-A Driver — Regional, owner-operated fleet', company:'Keystone Freight (7-truck fleet)', location:'Columbus, OH', city:'Columbus', vertical:'Skilled Trades', type:'Temp-to-hire', shift:'Days', pay:'$1,450–$1,700 / wk', payRank:34, posted:'Posted 1d ago', age:1, urgent:true, credLine:'CDL-A · 1 yr OTR', openings:3, start:'Monday', branch:'Columbus', recruiter:'Deon Pratt', noExp:false, driver:true,
+    desc:'A seven-truck owner-operated fleet needs three regional drivers running Ohio, Indiana, and Kentucky, home most nights and every weekend. The owner keeps the trucks and the authority; Asepsis carries payroll, workers\u2019 comp, and DOT file compliance so the seats stay legal and filled.',
+    duties:['Run dry van freight on a regional lane, 5 days out of 7.','Pre- and post-trip inspections logged in the ELD.','Drop and hook at three fixed customer docks.','Convert onto the fleet owner\u2019s payroll after 90 days if you both want it.'],
+    reqs:['Valid CDL-A with 12 months verifiable OTR or regional experience','Clean MVR; no more than two moving violations in 3 years','Current DOT medical card and clearinghouse query consent'],
+    onboarding:['MVR pull and previous-employer safety verification','DOT physical and drug screen through our consortium','ELD and equipment orientation with the fleet owner'] },
+  { id:19, title:'Box Truck Delivery Driver — courier contract', company:'Metro Courier Partners', location:'Atlanta, GA', city:'Atlanta', vertical:'Skilled Trades', type:'Temporary', shift:'1st shift', pay:'$21–$24 / hr', payRank:24, posted:'Posted 5h ago', age:0.2, urgent:true, credLine:'No CDL required (26ft)', openings:14, start:'This week', branch:'Atlanta', recruiter:'Joy Adeyemi', noExp:false, driver:true,
+    desc:'A last-mile courier company staffing 14 seats for a retail delivery contract. Trucks, fuel cards, and route devices come from the courier; you bring a clean licence. Routes are pre-built, 45 to 60 stops, home daily.',
+    duties:['Run a pre-built route of 45–60 residential stops.','Scan, load, and verify freight against the manifest at the depot.','Two-person handling on appliance and furniture stops.'],
+    reqs:['Valid state driver licence held 2+ years','Clean MVR; DOT physical required (we schedule and pay)','Able to lift 60 lbs with assistance'],
+    onboarding:['MVR pull and licence verification','DOT physical and drug screen','Route device and depot badge issued day one'] },
+  { id:20, title:'Sprinter Van Courier — no CDL', company:'Metro Courier Partners', location:'Charlotte, NC', city:'Charlotte', vertical:'Skilled Trades', type:'Per diem', shift:'All shifts', pay:'$19–$22 / hr', payRank:22, posted:'Posted 2d ago', age:2, urgent:false, credLine:'No experience required', openings:9, start:'Immediately', branch:'Charlotte', recruiter:'Marcus Hale', noExp:true, driver:true,
+    desc:'Pick up medical and parts courier runs shift by shift from the open board. Cargo vans are provided at the depot; mileage and tolls are covered. Claim as few or as many shifts as you want each week.',
+    duties:['Run scheduled medical, pharmacy, and parts routes.','Confirm chain of custody on every pickup and drop.','Claim shifts from the Asepsis worker dashboard.'],
+    reqs:['Valid state driver licence held 2+ years','Clean MVR','Smartphone for route and proof-of-delivery scanning'],
+    onboarding:['MVR pull and licence verification','Background check','Depot orientation and van assignment'] },
+  { id:16, title:'Registered Nurse, Med-Surg — EB-3 sponsored', company:'Baptist Health', location:'Dallas, TX', city:'Dallas', vertical:'Healthcare', type:'Direct placement', shift:'Days', pay:'$34–$40 / hr', payRank:40, posted:'Posted 3d ago', age:3, urgent:false, credLine:'NCLEX + visa sponsorship', openings:12, start:'On visa approval', branch:'Dallas', recruiter:'Tasha Merrill', noExp:false, sponsored:true,
+    desc:'A direct-hire med-surg role for internationally educated nurses, with EB-3 immigrant petition filing and legal fees paid by the employer. Asepsis manages credential evaluation, NCLEX preparation, and the two-year timeline alongside your immigration counsel.',
+    duties:['Carry a 5:1 med-surg assignment on days after a six-week preceptorship.','Complete a paid transition-to-practice programme in your first 90 days.','Work a 24-month commitment; the seat is permanent from day one.'],
+    reqs:['Registered nurse qualification from your home country','NCLEX-RN passed, or willing to sit it with our preparation support','CGFNS credential evaluation (we file and pay for it)','English proficiency: IELTS 6.5 or equivalent'],
+    onboarding:['CGFNS credential evaluation and licence endorsement','I-140 petition filed by employer counsel','Relocation and first-month housing arranged before arrival'] },
+  { id:17, title:'Seasonal Production Worker — H-2B programme', company:'Midwest Food Processing', location:'Columbus, OH', city:'Columbus', vertical:'Skilled Trades', type:'Temporary', shift:'2nd shift', pay:'$20–$23 / hr', payRank:23, posted:'Posted 5d ago', age:5, urgent:false, credLine:'H-2B · housing provided', openings:40, start:'Jan 5, 2027', branch:'Columbus', recruiter:'Deon Pratt', noExp:true, sponsored:true,
+    desc:'A 9-month H-2B seasonal assignment for the winter production run, with certified housing, transport to site, and inbound travel reimbursed in the first paycheck. Wages are set at or above the prevailing wage determination.',
+    duties:['Work a packing or sanitation line on 2nd shift.','Rotate stations weekly across the production floor.','Paid training in your first week; no experience required.'],
+    reqs:['Eligible for an H-2B seasonal visa','Able to commit to the full 9-month season','Steel-toe boots supplied on arrival'],
+    onboarding:['H-2B petition and consular appointment handled by the programme team','I-9 and E-Verify completed on arrival at the Columbus branch','Housing assignment and site transport confirmed before travel'] },
+  { id:14, title:'Medical Billing Specialist — Remote', company:'Regional Health System', location:'Remote (US)', city:'Remote', vertical:'Professional', type:'Temp-to-hire', shift:'Days', setting:'Remote', pay:'$23–$27 / hr', payRank:27, posted:'Posted 8h ago', age:0.3, urgent:false, credLine:'Remote · equipment provided', openings:5, start:'Sep 21, 2026', branch:'Dallas', recruiter:'Tasha Merrill', noExp:false,
+    desc:'Fully remote revenue-cycle work supporting a nine-hospital system on a six-month temp-to-hire. Asepsis ships a laptop and dual monitors before your start date and pays an internet stipend.',
+    duties:['Work denied and aged claims in Epic Resolute.','Post payments and reconcile remittance advice.','Join a 15-minute daily huddle on camera; the rest is heads-down.','Two paid onsite days in Dallas in month one, travel covered.'],
+    reqs:['2+ years medical billing or revenue cycle experience','A private workspace and 50 Mbps home internet','Epic or Cerner exposure preferred'],
+    onboarding:['Complete I-9 and E-Verify at a branch or with a remote agent','Background check','Equipment shipped to your address'] },
+  { id:15, title:'Recruiting Coordinator — Hybrid', company:'Confidential Manufacturer', location:'Phoenix, AZ', city:'Phoenix', vertical:'Professional', type:'Temporary', shift:'Hybrid', setting:'Hybrid', pay:'$25–$29 / hr', payRank:29, posted:'Posted 2d ago', age:2, urgent:false, credLine:'Two days onsite', openings:2, start:'Sep 28, 2026', branch:'Phoenix', recruiter:'Cody Brennan', noExp:false,
+    desc:'A four-month hiring surge on a talent team running three plants. Two days onsite in Phoenix, three from home, on a schedule you agree before you start.',
+    duties:['Schedule interviews across three plant locations.','Keep the ATS current and move candidates through stages.','Run offer paperwork and pre-boarding checks.'],
+    reqs:['1+ year recruiting coordination or scheduling-heavy admin','Comfortable in an ATS (Greenhouse, iCIMS, or similar)','Able to be onsite in Phoenix two days a week'],
+    onboarding:['Complete I-9 and E-Verify','Background check','Badge appointment at the Phoenix plant'] },
+
+  { id:11, title:'Staff Accountant', setting:'Hybrid', company:'Confidential Manufacturer', location:'Phoenix, AZ', city:'Phoenix', vertical:'Professional', type:'Direct placement', shift:'Hybrid', pay:'$58K–$68K / yr', payRank:33, posted:'Posted 3d ago', age:3, urgent:false, credLine:'Full-cycle GL', openings:1, start:'Negotiable', branch:'Phoenix', recruiter:'Cody Brennan', noExp:false,
+    desc:'A direct-hire seat on a four-person accounting team at a $90M manufacturer, reporting to the Controller. Three days onsite, two remote, with a clear path to Senior Accountant in two years.',
+    duties:['Own the month-end close for two entities.','Prepare journal entries, accruals, and account reconciliations.','Support the annual audit and inventory costing reviews.'],
+    reqs:['Bachelor\u2019s in Accounting or equivalent experience','2+ years full-cycle GL, ideally in manufacturing','ERP exposure (NetSuite, Epicor, or similar)'],
+    onboarding:['Reference and education verification','Background check','Offer negotiated by your recruiter'] },
+  { id:12, title:'HR Coordinator', company:'Regional Health System', location:'Dallas, TX', city:'Dallas', vertical:'Professional', type:'Temp-to-hire', shift:'Days', pay:'$24–$28 / hr', payRank:28, posted:'Posted 6d ago', age:6, urgent:false, credLine:'HRIS experience', openings:1, start:'Sep 29, 2026', branch:'Dallas', recruiter:'Tasha Merrill', noExp:false,
+    desc:'Support a 12-person HR team through an HRIS migration on a six-month temp-to-hire. Heavy onboarding coordination and credential file work for clinical staff.',
+    duties:['Coordinate onboarding, I-9s, and new hire paperwork.','Maintain credential files and expiration tracking.','Answer tier-one employee questions in a shared inbox.'],
+    reqs:['2+ years HR support or high-volume administrative work','Workday or UKG experience preferred','Discretion with confidential employee records'],
+    onboarding:['Reference verification','Complete I-9 and E-Verify','Background check'] },
+  { id:13, title:'Executive Assistant', company:'Confidential Investment Firm', location:'Tampa, FL', city:'Tampa', vertical:'Professional', type:'Direct placement', shift:'Onsite', pay:'$65K–$75K / yr', payRank:37, posted:'Posted 1w ago', age:7, urgent:false, credLine:'C-suite support', openings:1, start:'Negotiable', branch:'Tampa', recruiter:'Ana Delgado', noExp:false,
+    desc:'Direct support to two managing partners at a downtown investment firm. Discreet, calendar-heavy, and fully onsite, with a compensation review at twelve months.',
+    duties:['Manage complex calendars across time zones.','Book domestic and international travel end to end.','Prepare board and investor meeting materials.'],
+    reqs:['5+ years supporting senior executives','Advanced Outlook, Excel, and PowerPoint','Comfortable with strict confidentiality expectations'],
+    onboarding:['Reference verification','Background and credit check','Offer negotiated by your recruiter'] }
+];
+
+const HANDLED = [
+  { title: 'Weekly pay', note: 'Direct deposit or pay card every Friday.' },
+  { title: 'E-Verify & I-9', note: 'Completed once, at any branch or online.' },
+  { title: 'Credential verification', note: 'Licenses and certifications confirmed for you.' },
+  { title: "Workers' comp", note: 'Full coverage while you are on assignment.' }
+];
+
+const APPLY_STEPS = [
+  { n: '1', title: 'About you', note: 'Name, contact, and your ZIP code' },
+  { n: '2', title: 'Work eligibility', note: 'I-9, E-Verify, and screening consent' },
+  { n: '3', title: 'Credentials & availability', note: 'Licenses, shifts, and pay setup' },
+  { n: '4', title: 'Review & submit', note: 'One recruiter reviews everything' }
+];
+const CRED_OPTIONS = ['RN license', 'LPN license', 'CNA certification', 'BLS', 'ACLS', 'EPA 608', 'Journeyman electrician', 'ASE T-series', 'OSHA-10 / 30', 'Forklift certification', 'CDL', 'None yet'];
+const PRACTICE_LIST = ['Healthcare', 'Skilled Trades', 'Technical Trades', 'Professional'];
+const AVAIL = ['1st shift', '2nd shift', 'Nights', 'Weekends', 'Per diem / pick-up', 'Travel contracts'];
+
+const MY_SHIFTS = [
+  { day: 'Mon', date: 'Sep 14', role: 'Warehouse Associate', site: 'Regional Distribution Center', time: '6:00a – 2:30p', status: 'Confirmed', tone: 'ok' },
+  { day: 'Tue', date: 'Sep 15', role: 'Warehouse Associate', site: 'Regional Distribution Center', time: '6:00a – 2:30p', status: 'Confirmed', tone: 'ok' },
+  { day: 'Wed', date: 'Sep 16', role: 'Warehouse Associate', site: 'Regional Distribution Center', time: '6:00a – 2:30p', status: 'Confirmed', tone: 'ok' },
+  { day: 'Sat', date: 'Sep 19', role: 'Overtime — inbound dock', site: 'Regional Distribution Center', time: '6:00a – 12:00p', status: 'Open — voluntary', tone: 'open' }
+];
+const MY_CREDS = [
+  { name: 'I-9 & E-Verify', detail: 'Verified at Columbus branch', status: 'Verified', tone: 'ok' },
+  { name: 'Background check', detail: 'Cleared Aug 28, 2026', status: 'Cleared', tone: 'ok' },
+  { name: 'Forklift certification', detail: 'Expires Nov 2, 2026', status: 'Expires in 8 wks', tone: 'warn' },
+  { name: 'OSHA-10', detail: 'Not started — required for site work', status: 'Action needed', tone: 'bad' }
+];
+const MY_PAY = [
+  { week: 'Week of Sep 1', hours: '40.0 hrs', gross: '$812.00', status: 'Paid Fri Sep 5' },
+  { week: 'Week of Aug 25', hours: '42.5 hrs', gross: '$873.75', status: 'Paid Fri Aug 29' },
+  { week: 'Week of Aug 18', hours: '40.0 hrs', gross: '$812.00', status: 'Paid Fri Aug 22' }
+];
+const REQUESTS = [
+  { id: 'R-2841', role: 'Warehouse Associate / Forklift', practice: 'Skilled Trades', tier: 'Temp-to-Hire', site: 'Columbus, OH', need: 24, filled: 21, status: 'Filling', tone: 'warn', opened: 'Sep 2' },
+  { id: 'R-2836', role: 'Registered Nurse, ICU', practice: 'Healthcare', tier: 'Travel', site: 'Dallas, TX', need: 4, filled: 4, status: 'Filled', tone: 'ok', opened: 'Aug 28' },
+  { id: 'R-2829', role: 'Diesel Technician', practice: 'Technical Trades', tier: 'Temp-to-Hire', site: 'Phoenix, AZ', need: 2, filled: 1, status: 'Interviewing', tone: 'warn', opened: 'Aug 24' },
+  { id: 'R-2818', role: 'HR Coordinator', practice: 'Professional', tier: 'Temp-to-Hire', site: 'Dallas, TX', need: 1, filled: 0, status: 'Sourcing', tone: 'info', opened: 'Aug 19' },
+  { id: 'R-2807', role: 'General Laborer', practice: 'Skilled Trades', tier: 'Temporary', site: 'Charlotte, NC', need: 8, filled: 8, status: 'Filled', tone: 'ok', opened: 'Aug 11' }
+];
+const CANDIDATES = [
+  { name: 'Renata Silva', role: 'Diesel Technician', creds: 'ASE T2, T4 · 6 yrs heavy-duty', rate: '$32 / hr', req: 'R-2829', initials: 'RS' },
+  { name: 'Andre Whitcomb', role: 'Warehouse Associate', creds: 'Forklift certified · sit-down + reach', rate: '$20 / hr', req: 'R-2841', initials: 'AW' },
+  { name: 'Priya Raman', role: 'HR Coordinator', creds: 'Workday · 4 yrs HR support', rate: '$27 / hr', req: 'R-2818', initials: 'PR' }
+];
+const ON_ASSIGN = [
+  { name: 'DeShawn Carter', role: 'Forklift Operator', site: 'Columbus, OH', hours: '40.0', week: 'Week 6 of 12' },
+  { name: 'Maria Santos', role: 'RN, ICU — Travel', site: 'Dallas, TX', hours: '36.0', week: 'Week 3 of 13' },
+  { name: 'Miguel Reyes', role: 'HVAC Technician', site: 'Charlotte, NC', hours: '44.5', week: 'Converted Sep 1' },
+  { name: 'Angela Whitfield', role: 'Staff Accountant', site: 'Phoenix, AZ', hours: '40.0', week: 'Week 9 of 12' }
+];
+const EMP_REQS = ['Background check', 'Drug screen (10-panel)', 'E-Verify / I-9', 'License & credential verification', 'OSHA-10 / 30', 'Motor vehicle record', 'Forklift certification', 'Steel-toe boots on site'];
+const TIERS = [
+  { name: 'Temporary', note: 'Short-notice coverage for absences or surges.' },
+  { name: 'Temp-to-Hire', note: 'Trial on our payroll, then convert to yours.' },
+  { name: 'Direct Placement', note: 'Full-cycle search for a permanent hire.' },
+  { name: 'Per Diem & Travel', note: 'Credentialed clinical staff, single shifts to 13 weeks.' }
+];
+
+const TYPES = ['Temporary', 'Temp-to-hire', 'Direct placement', 'Per diem', 'Travel contract'];
+const SHIFTS = ['1st shift', '2nd shift', 'Nights', 'Days', 'All shifts', 'Hybrid'];
+
+class Component extends DCLogic {
+  state = {
+    screen: 'home', vertical: 'All practices', types: [], shifts: [], noExpOnly: false,
+    search: '', zip: '', sort: 'Newest', selectedId: 1, saved: [2, 8],
+    step: 0, submitted: false,
+    form: { first: '', last: '', phone: '', email: '', zip: '', heard: 'Referred by a friend', eligible: 'Yes', over18: true, consent: false, creds: ['BLS'], practices: ['Healthcare'], avail: ['Nights'], start: 'Within a week', transport: 'Own vehicle', payMethod: 'Direct deposit', resume: '' },
+    req: { practice: 'Skilled Trades', role: '', headcount: '6', tier: 'Temp-to-Hire', start: '', duration: '90 days', shift: '1st shift', site: '', cityState: '', reqs: ['Background check', 'E-Verify / I-9'], contact: '', company: 'Cardinal Logistics', email: '', phone: '', notes: '', urgent: false },
+    reqSubmitted: false,
+    claimed: [], handledCands: [], approvedCount: 0, settings: [], sponsoredOnly: false, driversOnly: false
+  };
+
+  goRemote = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: ['Remote', 'Hybrid'], sponsoredOnly: false, search: '' }); window.scrollTo(0, 0); };
+  goSponsored = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: [], sponsoredOnly: true, driversOnly: false, search: '' }); window.scrollTo(0, 0); };
+  goDrivers = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: [], sponsoredOnly: false, driversOnly: true, search: '' }); window.scrollTo(0, 0); };
+
+  claimShift = (date) => () => { this.setState({ claimed: this.state.claimed.concat([date]) }); };
+  handleCand = (name, approve) => () => {
+    this.setState({ handledCands: this.state.handledCands.concat([name]), approvedCount: this.state.approvedCount + (approve ? 1 : 0) });
+  };
+  runSearch = () => { this.setState({ screen: 'jobs' }); window.scrollTo(0, 0); };
+
+  componentDidMount() {
+    const v = this.props.openPractice;
+    if (v && v !== 'All practices') this.setState({ vertical: v });
+  }
+
+  set = (patch) => this.setState(patch);
+  go = (screen) => () => { this.setState({ screen: screen }); window.scrollTo(0, 0); };
+
+  openJob = (id) => () => { this.setState({ screen: 'detail', selectedId: id }); window.scrollTo(0, 0); };
+
+  toggleSave = (id) => (e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const saved = this.state.saved;
+    this.setState({ saved: saved.indexOf(id) > -1 ? saved.filter(function (s) { return s !== id; }) : saved.concat([id]) });
+  };
+
+  toggleIn = (key, val) => () => {
+    const arr = this.state[key];
+    const patch = {};
+    patch[key] = arr.indexOf(val) > -1 ? arr.filter(function (a) { return a !== val; }) : arr.concat([val]);
+    this.setState(patch);
+  };
+
+  filtered() {
+    const s = this.state;
+    const q = s.search.trim().toLowerCase();
+    const z = s.zip.trim().toLowerCase();
+    let out = JOBS.filter((j) => {
+      if (s.vertical !== 'All practices' && j.vertical !== s.vertical) return false;
+      if (s.types.length && s.types.indexOf(j.type) === -1) return false;
+      if (s.shifts.length && s.shifts.indexOf(j.shift) === -1) return false;
+      if (s.settings.length && s.settings.indexOf(j.setting || 'Onsite') === -1) return false;
+      if (s.noExpOnly && !j.noExp) return false;
+      if (s.sponsoredOnly && !j.sponsored) return false;
+      if (s.driversOnly && !j.driver) return false;
+      if (q && (j.title + ' ' + j.company + ' ' + j.credLine + ' ' + j.vertical).toLowerCase().indexOf(q) === -1) return false;
+      if (z && j.location.toLowerCase().indexOf(z) === -1) return false;
+      return true;
+    });
+    if (s.sort === 'Highest pay') out = out.slice().sort(function (a, b) { return b.payRank - a.payRank; });
+    else if (s.sort === 'Nearest branch') out = out.slice().sort(function (a, b) { return a.city.localeCompare(b.city); });
+    else out = out.slice().sort(function (a, b) { return a.age - b.age; });
+    return out;
+  }
+
+  jobRow = (j) => {
+    const v = V[j.vertical];
+    const isSaved = this.state.saved.indexOf(j.id) > -1;
+    return {
+      id: j.id, title: j.title, company: j.company, location: j.location, vertical: j.vertical,
+      type: j.type, shift: j.shift, pay: j.pay, posted: j.posted, urgent: j.urgent, credLine: j.credLine, sponsored: !!j.sponsored,
+      initials: j.company.split(' ').slice(0, 2).map(function (w) { return w[0]; }).join(''),
+      bar: { position: 'absolute', left: 0, top: 0, bottom: 0, width: '4px', background: v.deco || v.color },
+      logo: { width: '46px', height: '46px', borderRadius: '10px', background: v.bg, color: v.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+      pillStyle: { display: 'inline-block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: v.color, background: v.bg, padding: '4px 9px', borderRadius: '100px' },
+      open: this.openJob(j.id),
+      save: this.toggleSave(j.id),
+      saveLabel: isSaved ? 'Saved' : 'Save',
+      saveStyle: { whiteSpace: 'nowrap', border: '1.5px solid ' + (isSaved ? '#22262E' : '#E5E2DC'), color: '#22262E', padding: '9px 14px', borderRadius: '8px', fontSize: '13px', fontWeight: 600, background: isSaved ? '#F5F4F2' : '#fff' }
+    };
+  };
+
+  onForm = (e) => {
+    const f = Object.assign({}, this.state.form);
+    f[e.target.dataset.field] = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    this.setState({ form: f });
+  };
+  onReqField = (e) => {
+    const r = Object.assign({}, this.state.req);
+    r[e.target.dataset.field] = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    this.setState({ req: r });
+  };
+  toggleForm = (key, val) => () => {
+    const f = Object.assign({}, this.state.form);
+    const arr = f[key];
+    f[key] = arr.indexOf(val) > -1 ? arr.filter(function (a) { return a !== val; }) : arr.concat([val]);
+    this.setState({ form: f });
+  };
+  toggleReqItem = (val) => () => {
+    const r = Object.assign({}, this.state.req);
+    r.reqs = r.reqs.indexOf(val) > -1 ? r.reqs.filter(function (a) { return a !== val; }) : r.reqs.concat([val]);
+    this.setState({ req: r });
+  };
+  setReq = (key, val) => () => {
+    const r = Object.assign({}, this.state.req);
+    r[key] = val;
+    this.setState({ req: r });
+  };
+  setForm = (key, val) => () => {
+    const f = Object.assign({}, this.state.form);
+    f[key] = val;
+    this.setState({ form: f });
+  };
+  stepTo = (n) => () => { this.setState({ step: n }); window.scrollTo(0, 0); };
+
+  tone(t) {
+    const map = { ok: ['#3D6B57', '#EAF1ED'], warn: ['#A8825F', '#F6EFE7'], bad: ['#8C3A44', '#F6EBEC'], info: ['#3A4A63', '#ECEEF3'], open: ['#3A4A63', '#ECEEF3'] };
+    const c = map[t] || map.info;
+    return { display: 'inline-block', fontSize: '11.5px', fontWeight: 700, color: c[0], background: c[1], padding: '5px 10px', borderRadius: '100px', whiteSpace: 'nowrap' };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const list = this.filtered();
+    const job = JOBS.filter(function (j) { return j.id === s.selectedId; })[0] || JOBS[0];
+    const jv = V[job.vertical];
+
+    const navDefs = [
+      { label: 'Home', screen: 'home' },
+      { label: 'Find work', screen: 'jobs' },
+      { label: 'My dashboard', screen: 'worker' },
+      { label: 'Request workers', screen: 'request' },
+      { label: 'Employer portal', screen: 'employer' },
+      { label: 'Company', screen: 'traction' }
+    ];
+    const active = { home: 'home', jobs: 'jobs', detail: 'jobs', apply: 'jobs', worker: 'worker', request: 'request', employer: 'employer', traction: 'traction' }[s.screen];
+
+    const counts = {};
+    Object.keys(V).forEach(function (k) { counts[k] = JOBS.filter(function (j) { return j.vertical === k; }).length; });
+
+    const chip = (on) => ({ whiteSpace: 'nowrap', padding: '7px 12px', borderRadius: '100px', fontSize: '12.5px', fontWeight: 600, border: '1px solid ' + (on ? '#22262E' : '#E5E2DC'), background: on ? '#22262E' : '#fff', color: on ? '#fff' : '#5D6472' });
+
+    return {
+      dispatch: this.props.dispatchPhone ?? '(888) 555-0142',
+      showRail: this.props.showOnboardingRail ?? true,
+      isJobs: s.screen === 'jobs',
+      isDetail: s.screen === 'detail',
+      isApply: s.screen === 'apply',
+      isWorker: s.screen === 'worker',
+      isRequest: s.screen === 'request',
+      isEmployer: s.screen === 'employer',
+      isTraction: s.screen === 'traction',
+      isHome: s.screen === 'home',
+      goHome: this.go('home'),
+      practiceCards: [
+        { name: 'Healthcare', desc: 'RNs, CNAs, LPNs, and allied health for per diem shifts, 13-week travel contracts, and permanent placement.', tags: 'RN · CNA · LPN · Med Tech' },
+        { name: 'Skilled Trades', desc: 'Warehouse, manufacturing, construction, and logistics roles. No experience required for most openings.', tags: 'Warehouse · Forklift · Assembly · Construction' },
+        { name: 'Technical Trades', desc: 'Licensed and certified technicians who bring their own credentials — and get paid for them.', tags: 'Electrician · HVAC · Diesel Tech' },
+        { name: 'Professional', desc: 'Accounting, admin, and HR roles on temp-to-hire and direct placement for teams that are growing.', tags: 'Accounting · Admin · HR' }
+      ].map((p) => ({
+        name: p.name, desc: p.desc, tags: p.tags, img: V[p.name].img, alt: V[p.name].alt,
+        count: JOBS.filter(function (j) { return j.vertical === p.name; }).length + ' open now',
+        go: () => { this.setState({ screen: 'jobs', vertical: p.name }); window.scrollTo(0, 0); },
+        pillStyle: { display: 'inline-block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: V[p.name].color, background: V[p.name].bg, padding: '5px 10px', borderRadius: '100px', whiteSpace: 'nowrap' },
+        isHealthcare: p.name === 'Healthcare', isSkilled: p.name === 'Skilled Trades', isTechnical: p.name === 'Technical Trades', isProfessional: p.name === 'Professional'
+      })),
+      tiers: TIERS,
+      locations: [
+        { city: 'Dallas', st: 'TX' }, { city: 'Columbus', st: 'OH' }, { city: 'Charlotte', st: 'NC' }, { city: 'Phoenix', st: 'AZ' },
+        { city: 'Atlanta', st: 'GA' }, { city: 'Sacramento', st: 'CA' }, { city: 'Indianapolis', st: 'IN' }, { city: 'Tampa', st: 'FL' }
+      ],
+      goTraction: this.go('traction'),
+      marketStats: MARKET,
+      modelRows: MODEL.map((m) => ({ name: m.name, share: m.share, margin: m.margin, note: m.note,
+        barStyle: { width: m.w, height: '100%', background: V[m.name].deco || V[m.name].color, borderRadius: '100px' },
+        dot: { width: '9px', height: '9px', borderRadius: '3px', background: V[m.name].deco || V[m.name].color, flexShrink: 0 } })),
+      retentionStats: RETENTION,
+      goJobs: this.go('jobs'),
+      goApply: this.go('apply'),
+      navItems: navDefs.map((n) => ({
+        label: n.label, go: this.go(n.screen),
+        style: { padding: '9px 13px', borderRadius: '8px', fontSize: '14px', fontWeight: active === n.screen ? 600 : 500, color: active === n.screen ? '#171A20' : '#5D6472', background: active === n.screen ? '#F5F4F2' : 'transparent', whiteSpace: 'nowrap' }
+      })),
+      search: s.search, zip: s.zip, sort: s.sort,
+      onSearch: (e) => this.set({ search: e.target.value }),
+      onZip: (e) => this.set({ zip: e.target.value }),
+      onSort: (e) => this.set({ sort: e.target.value }),
+      noExpOnly: s.noExpOnly,
+      toggleNoExp: () => this.set({ noExpOnly: !s.noExpOnly }),
+      clearFilters: () => this.set({ vertical: 'All practices', types: [], shifts: [], settings: [], noExpOnly: false, sponsoredOnly: false, driversOnly: false, search: '', zip: '' }),
+      verticalOptions: ['All practices'].concat(Object.keys(V)).map((name) => {
+        const on = s.vertical === name;
+        const c = V[name] ? V[name].color : '#5B6270';
+        return {
+          name: name, count: name === 'All practices' ? JOBS.length : counts[name],
+          go: () => this.set({ vertical: name }),
+          dot: { width: '8px', height: '8px', borderRadius: '3px', background: (V[name] && V[name].deco) || c, flexShrink: 0 },
+          style: { whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', padding: '9px 10px', borderRadius: '9px', fontSize: '13.5px', fontWeight: on ? 600 : 500, color: on ? '#171A20' : '#5D6472', background: on ? '#F5F4F2' : 'transparent', width: '100%', textAlign: 'left' }
+        };
+      }),
+      typeOptions: TYPES.map((t) => ({ name: t, on: s.types.indexOf(t) > -1, go: this.toggleIn('types', t) })),
+      shiftOptions: SHIFTS.map((sh) => ({ name: sh, go: this.toggleIn('shifts', sh), style: chip(s.shifts.indexOf(sh) > -1) })),
+      resultCount: list.length,
+      filterSummary: s.vertical === 'All practices' ? 'across all four practices' : 'in ' + s.vertical,
+      visibleJobs: list.map(this.jobRow),
+      noResults: list.length === 0,
+      job: {
+        title: job.title, company: job.company, location: job.location, vertical: job.vertical, type: job.type,
+        shift: job.shift, pay: job.pay, start: job.start, desc: job.desc, duties: job.duties, reqs: job.reqs,
+        onboarding: job.onboarding, openings: job.openings, branch: job.branch, recruiter: job.recruiter,
+        recruiterInitials: job.recruiter.split(' ').map(function (w) { return w[0]; }).join(''),
+        isHealthcare: job.vertical === 'Healthcare',
+        isSkilled: job.vertical === 'Skilled Trades',
+        isTechnical: job.vertical === 'Technical Trades',
+        isProfessional: job.vertical === 'Professional',
+        pillStyle: { display: 'inline-block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: jv.color, background: jv.bg, padding: '5px 10px', borderRadius: '100px' }
+      },
+      handledItems: HANDLED,
+      similarJobs: JOBS.filter(function (j) { return j.vertical === job.vertical && j.id !== job.id; }).slice(0, 3).map((j) => ({ title: j.title, location: j.location, pay: j.pay, open: this.openJob(j.id) })),
+      saveCurrent: this.toggleSave(job.id),
+      currentSaveLabel: s.saved.indexOf(job.id) > -1 ? 'Saved to your list' : 'Save for later',
+
+      f: s.form,
+      onForm: this.onForm,
+      submitted: s.submitted,
+      notSubmitted: !s.submitted,
+      applySteps: APPLY_STEPS.map((st, i) => ({
+        n: st.n, title: st.title, note: st.note, go: this.stepTo(i),
+        style: { display: 'flex', gap: '13px', padding: '13px 14px', borderRadius: '11px', width: '100%', textAlign: 'left', background: i === s.step ? '#fff' : 'transparent', border: '1px solid ' + (i === s.step ? '#E5E2DC' : 'transparent') },
+        numStyle: { width: '30px', height: '30px', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Fraunces',serif", fontSize: '14px', fontWeight: 600, background: i < s.step ? '#3D6B57' : i === s.step ? '#22262E' : '#EBE8E2', color: i <= s.step ? '#fff' : '#5B6270' },
+        titleStyle: { fontSize: '14.5px', fontWeight: 600, color: i === s.step ? '#171A20' : '#5D6472' }
+      })),
+      notLastStep: s.step < 3,
+      step1: s.step === 0, step2: s.step === 1, step3: s.step === 2, step4: s.step === 3,
+      stepLabel: 'Step ' + (s.step + 1) + ' of 4',
+      applyJobTitle: job.title,
+      applyJobMeta: job.company + ' · ' + job.location + ' · ' + job.pay,
+      next: this.stepTo(Math.min(3, s.step + 1)),
+      back: this.stepTo(Math.max(0, s.step - 1)),
+      showBack: s.step > 0,
+      submitApply: () => { this.setState({ submitted: true }); window.scrollTo(0, 0); },
+      goWorker: this.go('worker'),
+      goEmployer: this.go('employer'),
+      goRequest: this.go('request'),
+      credOptions: CRED_OPTIONS.map((c) => ({ name: c, on: s.form.creds.indexOf(c) > -1, go: this.toggleForm('creds', c), style: chip(s.form.creds.indexOf(c) > -1) })),
+      practiceOptions: PRACTICE_LIST.map((p) => ({ name: p, go: this.toggleForm('practices', p), style: chip(s.form.practices.indexOf(p) > -1) })),
+      availOptions: AVAIL.map((a) => ({ name: a, go: this.toggleForm('avail', a), style: chip(s.form.avail.indexOf(a) > -1) })),
+      payOptions: ['Direct deposit', 'Pay card'].map((p) => ({ name: p, go: this.setForm('payMethod', p), style: chip(s.form.payMethod === p) })),
+      eligibleOptions: ['Yes', 'Yes, with sponsorship'].map((p) => ({ name: p, go: this.setForm('eligible', p), style: chip(s.form.eligible === p) })),
+      reviewName: (s.form.first + ' ' + s.form.last).trim() || 'Not provided yet',
+      reviewContact: [s.form.phone, s.form.email].filter(Boolean).join(' · ') || 'Not provided yet',
+      reviewPractices: s.form.practices.join(', ') || 'None selected',
+      reviewAvail: s.form.avail.join(', ') || 'None selected',
+      reviewCreds: s.form.creds.join(', ') || 'None listed',
+      reviewPay: s.form.payMethod + ' · paid every Friday',
+      consentOn: s.form.consent,
+
+      workerName: (s.form.first || 'DeShawn'),
+      myShifts: MY_SHIFTS.map((sh) => {
+        const claimed = s.claimed.indexOf(sh.date) > -1;
+        return { day: sh.day, date: sh.date, role: sh.role, site: sh.site, time: sh.time,
+          status: claimed ? 'Confirmed — you claimed it' : sh.status,
+          pill: this.tone(claimed ? 'ok' : sh.tone),
+          isOpen: sh.tone === 'open' && !claimed, claim: this.claimShift(sh.date) };
+      }),
+      candidates: CANDIDATES.filter(function (c) { return s.handledCands.indexOf(c.name) === -1; }).map((c) => Object.assign({}, c, { approve: this.handleCand(c.name, true), pass: this.handleCand(c.name, false) })),
+      candidateQueueLabel: CANDIDATES.length - s.handledCands.length,
+      hasCandidates: s.handledCands.length < CANDIDATES.length,
+      queueCleared: s.handledCands.length >= CANDIDATES.length,
+      approvedNote: s.approvedCount + ' approved this session · start dates confirmed by your account manager',
+      hasApproved: s.approvedCount > 0,
+      savedCount: s.saved.length,
+      activeFilters: (s.vertical !== 'All practices' ? [s.vertical] : []).concat(s.types).concat(s.shifts).concat(s.settings).concat(s.noExpOnly ? ['No experience required'] : []).concat(s.sponsoredOnly ? ['Sponsorship available'] : []).concat(s.driversOnly ? ['Driving & delivery'] : []).concat(s.search ? ['“' + s.search + '”'] : []),
+      hasFilters: s.vertical !== 'All practices' || s.types.length > 0 || s.shifts.length > 0 || s.settings.length > 0 || s.noExpOnly || s.sponsoredOnly || s.driversOnly || s.search.length > 0,
+      runSearch: this.runSearch,
+      goRemote: this.goRemote,
+      goSponsored: this.goSponsored,
+      goDrivers: this.goDrivers,
+      driversOnly: s.driversOnly,
+      toggleDrivers: () => this.set({ driversOnly: !s.driversOnly }),
+      driverSeats: JOBS.filter(function (j) { return j.driver; }).reduce(function (a, j) { return a + j.openings; }, 0),
+      sponsoredOnly: s.sponsoredOnly,
+      toggleSponsored: () => this.set({ sponsoredOnly: !s.sponsoredOnly }),
+      sponsoredCount: JOBS.filter(function (j) { return j.sponsored; }).length,
+      sponsoredOpenings: JOBS.filter(function (j) { return j.sponsored; }).reduce(function (a, j) { return a + j.openings; }, 0),
+      settingOptions: ['Onsite', 'Hybrid', 'Remote'].map((st) => ({ name: st, go: this.toggleIn('settings', st), style: chip(s.settings.indexOf(st) > -1) })),
+      remoteCount: JOBS.filter(function (j) { return j.setting === 'Remote' || j.setting === 'Hybrid'; }).length,
+      crumbPractice: job.vertical,
+      crumbTitle: job.title,
+      myCreds: MY_CREDS.map((c) => ({ name: c.name, detail: c.detail, status: c.status, pill: this.tone(c.tone) })),
+      myPay: MY_PAY,
+      matchedJobs: JOBS.filter(function (j) { return j.vertical === 'Skilled Trades' && j.id !== 5; }).slice(0, 2).map(this.jobRow),
+      savedJobs: JOBS.filter(function (j) { return s.saved.indexOf(j.id) > -1; }).map(this.jobRow),
+      hasSaved: s.saved.length > 0,
+
+      r: s.req,
+      onReqField: this.onReqField,
+      reqSubmitted: s.reqSubmitted,
+      reqNotSubmitted: !s.reqSubmitted,
+      submitRequest: () => { this.setState({ reqSubmitted: true }); window.scrollTo(0, 0); },
+      reqPracticeOptions: PRACTICE_LIST.map((p) => ({ name: p, go: this.setReq('practice', p), style: chip(s.req.practice === p) })),
+      tierOptions: TIERS.map((t) => {
+        const on = s.req.tier === t.name;
+        return { name: t.name, note: t.note, go: this.setReq('tier', t.name),
+          style: { textAlign: 'left', padding: '15px 16px', borderRadius: '12px', border: '1.5px solid ' + (on ? '#22262E' : '#E5E2DC'), background: on ? '#F5F4F2' : '#fff', width: '100%' },
+          titleStyle: { display: 'block', fontSize: '14.5px', fontWeight: 600, color: '#171A20', marginBottom: '3px' } };
+      }),
+      reqShiftOptions: ['1st shift', '2nd shift', '3rd shift / nights', 'Weekends', 'Rotating'].map((sh) => ({ name: sh, go: this.setReq('shift', sh), style: chip(s.req.shift === sh) })),
+      reqDurationOptions: ['One shift', '2–4 weeks', '90 days', '13 weeks', 'Ongoing'].map((d) => ({ name: d, go: this.setReq('duration', d), style: chip(s.req.duration === d) })),
+      empReqOptions: EMP_REQS.map((rq) => ({ name: rq, on: s.req.reqs.indexOf(rq) > -1, go: this.toggleReqItem(rq) })),
+      reqSummaryLine: s.req.headcount + ' × ' + (s.req.role || 'role TBD') + ' · ' + s.req.tier + ' · ' + (s.req.cityState || 'location TBD'),
+
+      requests: REQUESTS.map((rq) => ({ id: rq.id, role: rq.role, practice: rq.practice, tier: rq.tier, site: rq.site, opened: rq.opened, fill: rq.filled + ' of ' + rq.need, status: rq.status, pill: this.tone(rq.tone), barStyle: { width: Math.round((rq.filled / rq.need) * 100) + '%', height: '100%', background: rq.tone === 'ok' ? '#3D6B57' : '#C9A98A', borderRadius: '100px' } })),
+      onAssign: ON_ASSIGN,
+      newRequestRow: s.reqSubmitted
+    };
+  }
+}
+
+</script>
+</body>
+</html>
