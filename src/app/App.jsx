@@ -1,3 +1,4 @@
+import { SPECIALISMS, matchesSpecialism } from '../data/specialisms.js';
 import React from 'react';
 import AppView from './AppView.jsx';
 import { V, MARKET, MODEL, RETENTION, JOBS, HANDLED, APPLY_STEPS, CRED_OPTIONS, PRACTICE_LIST, AVAIL, MY_SHIFTS, MY_CREDS, MY_PAY, REQUESTS, CANDIDATES, ON_ASSIGN, EMP_REQS, TIERS, TYPES, SHIFTS } from '../data/demo.js';
@@ -11,18 +12,19 @@ export default class App extends React.Component {
     form: { first: '', last: '', phone: '', email: '', zip: '', heard: 'Referred by a friend', eligible: 'Yes', over18: true, consent: false, creds: ['BLS'], practices: ['Healthcare'], avail: ['Nights'], start: 'Within a week', transport: 'Own vehicle', payMethod: 'Direct deposit', resume: '' },
     req: { practice: 'Skilled Trades', role: '', headcount: '6', tier: 'Temp-to-Hire', start: '', duration: '90 days', shift: '1st shift', site: '', cityState: '', reqs: ['Background check', 'E-Verify / I-9'], contact: '', company: 'Cardinal Logistics', email: '', phone: '', notes: '', urgent: false },
     reqSubmitted: false,
-    claimed: [], handledCands: [], approvedCount: 0, settings: [], sponsoredOnly: false, driversOnly: false
+    claimed: [], handledCands: [], approvedCount: 0, settings: [], sponsoredOnly: false, internationalOnly: false, driversOnly: false
   };
 
-  goRemote = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: ['Remote', 'Hybrid'], sponsoredOnly: false, search: '' }); window.scrollTo(0, 0); };
-  goSponsored = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: [], sponsoredOnly: true, driversOnly: false, search: '' }); window.scrollTo(0, 0); };
-  goDrivers = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: [], sponsoredOnly: false, driversOnly: true, search: '' }); window.scrollTo(0, 0); };
+  goRemote = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: ['Remote', 'Hybrid'], sponsoredOnly: false, internationalOnly: false, search: '' }); window.scrollTo(0, 0); };
+  goSponsored = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: [], sponsoredOnly: true, internationalOnly: false, driversOnly: false, search: '' }); window.scrollTo(0, 0); };
+  goInternational = () => { this.setState({ screen: 'jobs', vertical: 'International', types: [], shifts: [], settings: [], sponsoredOnly: false, driversOnly: false, noExpOnly: false, internationalOnly: false, search: '', zip: '' }); window.scrollTo(0, 0); };
+  goDrivers = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: [], sponsoredOnly: false, internationalOnly: false, driversOnly: true, search: '' }); window.scrollTo(0, 0); };
 
   claimShift = (date) => () => { this.setState({ claimed: this.state.claimed.concat([date]) }); };
   handleCand = (name, approve) => () => {
     this.setState({ handledCands: this.state.handledCands.concat([name]), approvedCount: this.state.approvedCount + (approve ? 1 : 0) });
   };
-  runSearch = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: [], noExpOnly: false, driversOnly: false, sponsoredOnly: false }); window.scrollTo(0, 0); };
+  runSearch = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: [], noExpOnly: false, driversOnly: false, sponsoredOnly: false, internationalOnly: false }); window.scrollTo(0, 0); };
 
   componentDidMount() {
     this.readRoute();
@@ -34,6 +36,7 @@ export default class App extends React.Component {
 
   readRoute = () => {
     const [screen, id] = location.hash.slice(1).split('/');
+    if (screen === 'international') { this.goInternational(); return; }
     if (['home','jobs','detail','apply','worker','request','employer','traction'].includes(screen)) {
       this.setState({ screen, ...(screen === 'detail' && JOBS.some(j => j.id === Number(id)) ? { selectedId: Number(id) } : {}) });
       window.scrollTo(0, 0);
@@ -41,7 +44,7 @@ export default class App extends React.Component {
   };
   onNavigate = (event) => {
     const { screen, vertical, section } = event.detail;
-    this.setState({ screen, ...(vertical ? { vertical, search: '', types: [], shifts: [], settings: [], driversOnly: false, sponsoredOnly: false } : {}) });
+    this.setState({ screen, ...(vertical ? { vertical, search: '', types: [], shifts: [], settings: [], driversOnly: false, sponsoredOnly: false, internationalOnly: false } : {}) });
     if (section) setTimeout(() => document.getElementById(section)?.scrollIntoView(), 100);
   };
   componentDidUpdate() {
@@ -89,12 +92,13 @@ export default class App extends React.Component {
     const q = s.search.trim().toLowerCase();
     const z = s.zip.trim().toLowerCase();
     let out = JOBS.filter((j) => {
-      if (s.vertical !== 'All practices' && j.vertical !== s.vertical) return false;
+      if (s.vertical !== 'All practices' && !matchesSpecialism(j, s.vertical)) return false;
       if (s.types.length && s.types.indexOf(j.type) === -1) return false;
       if (s.shifts.length && s.shifts.indexOf(j.shift) === -1) return false;
       if (s.settings.length && s.settings.indexOf(j.setting || 'Onsite') === -1) return false;
       if (s.noExpOnly && !j.noExp) return false;
       if (s.sponsoredOnly && !j.sponsored) return false;
+      if (s.internationalOnly && !j.sponsored && j.setting !== 'Remote') return false;
       if (s.driversOnly && !j.driver) return false;
       if (q && (j.title + ' ' + j.company + ' ' + j.credLine + ' ' + j.vertical).toLowerCase().indexOf(q) === -1) return false;
       if (z && j.location.toLowerCase().indexOf(z) === -1) return false;
@@ -170,7 +174,7 @@ export default class App extends React.Component {
 
 
     const counts = {};
-    Object.keys(V).forEach(function (k) { counts[k] = JOBS.filter(function (j) { return j.vertical === k; }).length; });
+    Object.keys(V).forEach(function (k) { counts[k] = JOBS.filter(function (j) { return matchesSpecialism(j, k); }).length; });
 
     const chip = (on) => ({ whiteSpace: 'nowrap', padding: '7px 12px', borderRadius: '100px', fontSize: '12.5px', fontWeight: 600, border: '1px solid ' + (on ? '#22262E' : '#E5E2DC'), background: on ? '#22262E' : '#fff', color: on ? '#fff' : '#5D6472' });
 
@@ -188,17 +192,12 @@ export default class App extends React.Component {
       isTraction: s.screen === 'traction',
       isHome: s.screen === 'home',
       goHome: this.go('home'),
-      practiceCards: [
-        { name: 'Healthcare', desc: 'RNs, CNAs, LPNs, and allied health for per diem shifts, 13-week travel contracts, and permanent placement.', tags: 'RN · CNA · LPN · Med Tech' },
-        { name: 'Skilled Trades', desc: 'Warehouse, manufacturing, construction, and logistics roles. No experience required for most openings.', tags: 'Warehouse · Forklift · Assembly · Construction' },
-        { name: 'Technical Trades', desc: 'Licensed and certified technicians who bring their own credentials — and get paid for them.', tags: 'Electrician · HVAC · Diesel Tech' },
-        { name: 'Professional', desc: 'Accounting, admin, and HR roles on temp-to-hire and direct placement for teams that are growing.', tags: 'Accounting · Admin · HR' }
-      ].map((p) => ({
+      practiceCards: SPECIALISMS.map((p) => ({
         name: p.name, desc: p.desc, tags: p.tags, img: V[p.name].img, alt: V[p.name].alt,
-        count: JOBS.filter(function (j) { return j.vertical === p.name; }).length + ' open now',
-        go: () => { this.setState({ screen: 'jobs', vertical: p.name, search: '', zip: '', types: [], shifts: [], settings: [], noExpOnly: false, driversOnly: false, sponsoredOnly: false }); window.scrollTo(0, 0); },
+        count: JOBS.filter(function (j) { return matchesSpecialism(j, p.name); }).length + ' open now',
+        go: () => { this.setState({ screen: 'jobs', vertical: p.name, search: '', zip: '', types: [], shifts: [], settings: [], noExpOnly: false, driversOnly: false, sponsoredOnly: false, internationalOnly: false }); window.scrollTo(0, 0); },
         pillStyle: { display: 'inline-block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: V[p.name].color, background: V[p.name].bg, padding: '5px 10px', borderRadius: '100px', whiteSpace: 'nowrap' },
-        isHealthcare: p.name === 'Healthcare', isSkilled: p.name === 'Skilled Trades', isTechnical: p.name === 'Technical Trades', isProfessional: p.name === 'Professional'
+        isHealthcare: p.name === 'Healthcare', isSkilled: p.name === 'Skilled Trades', isTechnical: p.name === 'Technical Trades', isProfessional: p.name === 'Professional', isInternational: p.name === 'International'
       })),
       tiers: TIERS,
       locations: [
@@ -207,7 +206,7 @@ export default class App extends React.Component {
       ],
       goTraction: this.go('traction'),
       marketStats: MARKET,
-      modelRows: MODEL.map((m) => ({ name: m.name, share: m.share, margin: m.margin, note: m.note,
+      modelRows: [...MODEL, { name: 'International', share: 'Remote and sponsored', margin: 'Cross-practice opportunities', note: 'Connects remote roles and internationally sponsored assignments across our specialisms.', w: '0%' }].map((m) => ({ name: m.name, share: m.share, margin: m.margin, note: m.note,
         barStyle: { width: m.w, height: '100%', background: V[m.name].deco || V[m.name].color, borderRadius: '100px' },
         dot: { width: '9px', height: '9px', borderRadius: '3px', background: V[m.name].deco || V[m.name].color, flexShrink: 0 } })),
       retentionStats: RETENTION,
@@ -219,13 +218,13 @@ export default class App extends React.Component {
       onSort: (e) => this.set({ sort: e.target.value }),
       noExpOnly: s.noExpOnly,
       toggleNoExp: () => this.set({ noExpOnly: !s.noExpOnly }),
-      clearFilters: () => this.set({ vertical: 'All practices', types: [], shifts: [], settings: [], noExpOnly: false, sponsoredOnly: false, driversOnly: false, search: '', zip: '' }),
+      clearFilters: () => this.set({ vertical: 'All practices', types: [], shifts: [], settings: [], noExpOnly: false, sponsoredOnly: false, internationalOnly: false, driversOnly: false, search: '', zip: '' }),
       verticalOptions: ['All practices'].concat(Object.keys(V)).map((name) => {
         const on = s.vertical === name;
         const c = V[name] ? V[name].color : '#5B6270';
         return {
           name: name, count: name === 'All practices' ? JOBS.length : counts[name],
-          go: () => this.set({ vertical: name }),
+          go: () => this.set({ vertical: name, internationalOnly: false }),
           dot: { width: '8px', height: '8px', borderRadius: '3px', background: (V[name] && V[name].deco) || c, flexShrink: 0 },
           style: { whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', padding: '9px 10px', borderRadius: '9px', fontSize: '13.5px', fontWeight: on ? 600 : 500, color: on ? '#171A20' : '#5D6472', background: on ? '#F5F4F2' : 'transparent', width: '100%', textAlign: 'left' }
         };
@@ -233,7 +232,7 @@ export default class App extends React.Component {
       typeOptions: TYPES.map((t) => ({ name: t, on: s.types.indexOf(t) > -1, go: this.toggleIn('types', t) })),
       shiftOptions: SHIFTS.map((sh) => ({ name: sh, go: this.toggleIn('shifts', sh), style: chip(s.shifts.indexOf(sh) > -1) })),
       resultCount: list.length,
-      filterSummary: s.vertical === 'All practices' ? 'across all four practices' : 'in ' + s.vertical,
+      filterSummary: s.internationalOnly ? 'remote roles and international opportunities' : s.vertical === 'All practices' ? 'across our specialisms' : 'in ' + s.vertical,
       visibleJobs: list.map(this.jobRow),
       noResults: list.length === 0,
       job: {
@@ -303,9 +302,10 @@ export default class App extends React.Component {
       approvedNote: s.approvedCount + ' approved this session · start dates confirmed by your account manager',
       hasApproved: s.approvedCount > 0,
       savedCount: s.saved.length,
-      activeFilters: (s.vertical !== 'All practices' ? [s.vertical] : []).concat(s.types).concat(s.shifts).concat(s.settings).concat(s.noExpOnly ? ['No experience required'] : []).concat(s.sponsoredOnly ? ['Sponsorship available'] : []).concat(s.driversOnly ? ['Driving & delivery'] : []).concat(s.search ? ['“' + s.search + '”'] : []),
-      hasFilters: s.vertical !== 'All practices' || s.types.length > 0 || s.shifts.length > 0 || s.settings.length > 0 || s.noExpOnly || s.sponsoredOnly || s.driversOnly || s.search.length > 0,
+      activeFilters: (s.vertical !== 'All practices' ? [s.vertical] : []).concat(s.types).concat(s.shifts).concat(s.settings).concat(s.internationalOnly ? ['International'] : []).concat(s.noExpOnly ? ['No experience required'] : []).concat(s.sponsoredOnly ? ['Sponsorship available'] : []).concat(s.driversOnly ? ['Driving & delivery'] : []).concat(s.search ? ['“' + s.search + '”'] : []),
+      hasFilters: s.vertical !== 'All practices' || s.types.length > 0 || s.shifts.length > 0 || s.settings.length > 0 || s.noExpOnly || s.sponsoredOnly || s.internationalOnly || s.driversOnly || s.search.length > 0,
       runSearch: this.runSearch,
+      goInternational: this.goInternational,
       goRemote: this.goRemote,
       goSponsored: this.goSponsored,
       goDrivers: this.goDrivers,

@@ -6,8 +6,8 @@ export default function TractionScreen(values) {
 <div style={{"background": "#3A1D22", "padding": "56px 0 52px"}}>
 <div style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "0 32px"}}>
 <span style={{"display": "inline-block", "fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.09em", "textTransform": "uppercase", "color": "#3A1D22", "background": "#C9A98A", "padding": "5px 11px", "borderRadius": "100px", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"Illustrative figures"}</span>
-<h1 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "44px", "lineHeight": "1.08", "color": "#F5F4F2", "letterSpacing": "-0.015em", "maxWidth": "760px", "margin": "20px 0 0"}}>{"One brand, four workforces, one bench that redeploys across all of them."}</h1>
-<p style={{"fontSize": "17px", "color": "rgba(244,244,246,0.72)", "lineHeight": "1.6", "maxWidth": "640px", "marginTop": "16px"}}>{"Asepsis operates four dedicated recruiting practices out of a shared branch network. The same 48 branches, the same compliance spine, and the same worker pool serve hospitals, distribution centres, contractors, and back offices."}</p>
+<h1 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "44px", "lineHeight": "1.08", "color": "#F5F4F2", "letterSpacing": "-0.015em", "maxWidth": "760px", "margin": "20px 0 0"}}>{"One brand, five specialisms, one bench that redeploys across all of them."}</h1>
+<p style={{"fontSize": "17px", "color": "rgba(244,244,246,0.72)", "lineHeight": "1.6", "maxWidth": "640px", "marginTop": "16px"}}>{"Asepsis operates five dedicated specialisms out of a shared branch network. The same 48 branches, the same compliance spine, and the same worker pool serve hospitals, distribution centres, contractors, and back offices."}</p>
 <p style={{"fontSize": "13px", "color": "rgba(244,244,246,0.5)", "marginTop": "22px", "maxWidth": "640px", "lineHeight": "1.55"}}>{"Every number on this page is illustrative and shown for layout purposes only. Replace with audited figures before external distribution."}</p>
 </div>
 </div>
@@ -27,8 +27,8 @@ export default function TractionScreen(values) {
 </section>
 <section style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "56px 32px 8px"}}>
 <p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.09em", "textTransform": "uppercase", "color": "#8A6740", "marginBottom": "12px"}}>{"The model"}</p>
-<h2 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "32px", "lineHeight": "1.15", "color": "#171A20", "maxWidth": "640px"}}>{"Four practices that fund each other"}</h2>
-<p style={{"fontSize": "15.5px", "color": "#5D6472", "lineHeight": "1.65", "maxWidth": "620px", "marginTop": "12px"}}>{"Skilled Trades volume keeps branches busy and the bench deep. Healthcare and Technical Trades carry the rate. Professional placements convert to fees. The mix is what a single-vertical competitor cannot copy."}</p>
+<h2 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "32px", "lineHeight": "1.15", "color": "#171A20", "maxWidth": "640px"}}>{"Five specialisms that fund each other"}</h2>
+<p style={{"fontSize": "15.5px", "color": "#5D6472", "lineHeight": "1.65", "maxWidth": "620px", "marginTop": "12px"}}>{"Skilled Trades volume keeps branches busy and the bench deep. Healthcare and Technical Trades carry the rate. Professional placements convert to fees. International connects remote and sponsored opportunities across these fields. The mix is what a single-vertical competitor cannot copy."}</p>
 <div style={{"display": "flex", "flexDirection": "column", "gap": "1px", "background": "#E5E2DC", "border": "1px solid #E5E2DC", "borderRadius": "18px", "overflow": "hidden", "marginTop": "32px"}}>
 {(modelRows ?? []).map((m, index69) => <React.Fragment key={index69}>
 <div style={{"background": "#fff", "padding": "22px 24px", "display": "flex", "gap": "20px", "alignItems": "center", "flexWrap": "wrap"}}>
@@ -52,7 +52,7 @@ export default function TractionScreen(values) {
 <div style={{"background": "#3A1D22", "borderRadius": "22px", "padding": "44px 40px"}}>
 <p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.09em", "textTransform": "uppercase", "color": "#C9A98A", "marginBottom": "12px"}}>{"Retention"}</p>
 <h2 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "32px", "lineHeight": "1.15", "color": "#F5F4F2", "maxWidth": "620px"}}>{"The second placement is where the margin is"}</h2>
-<p style={{"fontSize": "15.5px", "color": "rgba(244,244,246,0.7)", "lineHeight": "1.65", "maxWidth": "620px", "marginTop": "12px"}}>{"Acquiring a worker costs money once. Redeploying them across four practices costs almost nothing, and a worker who takes a second assignment is worth several times the first."}</p>
+<p style={{"fontSize": "15.5px", "color": "rgba(244,244,246,0.7)", "lineHeight": "1.65", "maxWidth": "620px", "marginTop": "12px"}}>{"Acquiring a worker costs money once. Redeploying them across five specialisms costs almost nothing, and a worker who takes a second assignment is worth several times the first."}</p>
 <div style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit,minmax(220px,1fr))", "gap": "14px", "marginTop": "32px"}}>
 {(retentionStats ?? []).map((r, index70) => <React.Fragment key={index70}>
 <div style={{"background": "rgba(244,244,246,0.07)", "border": "1px solid rgba(244,244,246,0.14)", "borderRadius": "16px", "padding": "22px"}}>

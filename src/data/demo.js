@@ -1,13 +1,8 @@
 // Sample data supplied with the design handoff. Replace with API data when available.
-export const V = {
-  Healthcare: { color: '#8C3A44', bg: '#F6EBEC', img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80', alt: 'Nurse walking a hospital corridor' },
-  'Skilled Trades': { color: '#3A4A63', bg: '#ECEEF3', img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80', alt: 'Warehouse worker operating a forklift' },
-  'Technical Trades': { color: '#8A6740', deco: '#A8825F', bg: '#F6EFE7', img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80', alt: 'Technician servicing equipment' },
-  Professional: { color: '#3D6B57', bg: '#EAF1ED', img: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80', alt: 'Office professionals in a meeting' }
-};
+export { V, PRACTICE_LIST } from './specialisms.js';
 
 export const MARKET = [
-  { k: '$212B', v: 'US temporary staffing revenue', n: 'Illustrative — sized across all four of our practices.' },
+  { k: '$212B', v: 'US temporary staffing revenue', n: 'Illustrative — sized across all of our specialisms.' },
   { k: '20,000+', v: 'staffing firms in the US', n: 'Highly fragmented; most operate a single vertical in a single metro.' },
   { k: '<2%', v: 'held by any single mid-market firm', n: 'No regional operator has consolidated multi-vertical demand.' }
 ];
@@ -19,7 +14,7 @@ export const MODEL = [
 ];
 export const RETENTION = [
   { k: '68%', v: 'of workers take a second assignment', n: 'Within 90 days of their first placement ending.' },
-  { k: '3.4', v: 'assignments per worker, per year', n: 'One application, four practices to redeploy into.' },
+  { k: '3.4', v: 'assignments per worker, per year', n: 'One application, five specialisms to redeploy into.' },
   { k: '11 days', v: 'median bench time between assignments', n: 'Multi-vertical redeployment cuts idle time roughly in half.' },
   { k: '92%', v: 'of urgent requests filled inside 24 hours', n: 'Local branch bench plus the 24/7 dispatch line.' }
 ];
@@ -145,7 +140,6 @@ export const APPLY_STEPS = [
   { n: '4', title: 'Review & submit', note: 'One recruiter reviews everything' }
 ];
 export const CRED_OPTIONS = ['RN license', 'LPN license', 'CNA certification', 'BLS', 'ACLS', 'EPA 608', 'Journeyman electrician', 'ASE T-series', 'OSHA-10 / 30', 'Forklift certification', 'CDL', 'None yet'];
-export const PRACTICE_LIST = ['Healthcare', 'Skilled Trades', 'Technical Trades', 'Professional'];
 export const AVAIL = ['1st shift', '2nd shift', 'Nights', 'Weekends', 'Per diem / pick-up', 'Travel contracts'];
 
 export const MY_SHIFTS = [

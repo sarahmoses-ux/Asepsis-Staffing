@@ -4,7 +4,7 @@ import LandingView from './LandingView.jsx';
 const COPY = {
   Workers: {
     headline: 'Work this week. Paid this Friday.',
-    subhead: 'One application puts you in front of every Asepsis practice — healthcare, skilled trades, technical trades, and professional roles. No resume needed for most openings.',
+    subhead: 'One application puts you in front of every Asepsis practice — healthcare, skilled trades, technical trades, professional, and international roles. No resume needed for most openings.',
     ctaLabel: 'Apply now',
     ctaNote: 'Takes about four minutes',
     proof: [
@@ -18,7 +18,7 @@ const COPY = {
       { n: '03', t: 'Start working', d: 'Clock in on your first assignment and get paid weekly from day one.' }
     ],
     closeHead: 'Your next shift is already open.',
-    closeNote: 'Openings across all four practices, in 48 markets, updated through the day.'
+    closeNote: 'Openings across all five specialisms, in 48 markets, updated through the day.'
   },
   Employers: {
     headline: 'Workers on site this week — screened, insured, on our payroll.',
@@ -28,7 +28,7 @@ const COPY = {
     proof: [
       { k: '92%', v: 'of urgent requests filled inside 24 hours' },
       { k: '24/7', v: 'dispatch line, answered by a person' },
-      { k: '4', v: 'dedicated practices, one account manager' }
+      { k: '5', v: 'dedicated specialisms, one account manager' }
     ],
     steps: [
       { n: '01', t: 'Tell us what you need', d: 'Role, headcount, shift, and site — plus the screening your industry requires.' },

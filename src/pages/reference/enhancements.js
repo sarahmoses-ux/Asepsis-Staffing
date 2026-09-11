@@ -1,5 +1,5 @@
 const route = (detail) => {
-  if (location.pathname.endsWith('platform.html')) { location.href = './index.html#' + detail.screen; return; }
+  if (location.pathname.endsWith('platform.html')) { location.href = './index.html#' + (detail.vertical === 'International' ? 'international' : detail.screen); return; }
   window.dispatchEvent(new CustomEvent('asepsis:navigate', { detail }));
 };
 const sections = {
@@ -12,6 +12,7 @@ const footerRoutes = {
   'Healthcare jobs': { screen: 'jobs', vertical: 'Healthcare' },
   'Skilled trades jobs': { screen: 'jobs', vertical: 'Skilled Trades' },
   'Technical trades jobs': { screen: 'jobs', vertical: 'Technical Trades' },
+  'International jobs': { screen: 'jobs', vertical: 'International' },
   'Professional jobs': { screen: 'jobs', vertical: 'Professional' },
   'Weekly pay & benefits': { screen: 'home', section: 'benefits' },
   'Request workers': { screen: 'request' },

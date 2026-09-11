@@ -1,15 +1,11 @@
+import { V, PRACTICE_LIST, JOBS } from '../../data/demo.js';
+import { SPECIALISMS, matchesSpecialism } from '../../data/specialisms.js';
 import React from 'react';
 import PlatformView from './PlatformView.jsx';
 
-const V = {
-  Healthcare: { color: '#8C3A44', bg: '#F6EBEC', img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80', alt: 'Nurse walking a hospital corridor' },
-  'Skilled Trades': { color: '#3A4A63', bg: '#ECEEF3', img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80', alt: 'Warehouse worker operating a forklift' },
-  'Technical Trades': { color: '#A8825F', bg: '#F6EFE7', img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80', alt: 'Technician servicing equipment' },
-  Professional: { color: '#3D6B57', bg: '#EAF1ED', img: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80', alt: 'Office professionals in a meeting' }
-};
 
 const MARKET = [
-  { k: '$212B', v: 'US temporary staffing revenue', n: 'Illustrative — sized across all four of our practices.' },
+  { k: '$212B', v: 'US temporary staffing revenue', n: 'Illustrative — sized across all of our specialisms.' },
   { k: '20,000+', v: 'staffing firms in the US', n: 'Highly fragmented; most operate a single vertical in a single metro.' },
   { k: '<2%', v: 'held by any single mid-market firm', n: 'No regional operator has consolidated multi-vertical demand.' }
 ];
@@ -21,81 +17,11 @@ const MODEL = [
 ];
 const RETENTION = [
   { k: '68%', v: 'of workers take a second assignment', n: 'Within 90 days of their first placement ending.' },
-  { k: '3.4', v: 'assignments per worker, per year', n: 'One application, four practices to redeploy into.' },
+  { k: '3.4', v: 'assignments per worker, per year', n: 'One application, five specialisms to redeploy into.' },
   { k: '11 days', v: 'median bench time between assignments', n: 'Multi-vertical redeployment cuts idle time roughly in half.' },
   { k: '92%', v: 'of urgent requests filled inside 24 hours', n: 'Local branch bench plus the 24/7 dispatch line.' }
 ];
 
-const JOBS = [
-  { id:1, title:'Registered Nurse, ICU — Travel', company:'Baptist Health', location:'Dallas, TX', city:'Dallas', vertical:'Healthcare', type:'Travel contract', shift:'Nights', pay:'$2,600–$3,200 / wk', payRank:3000, posted:'Posted 2d ago', age:2, urgent:true, credLine:'TX RN license', openings:4, start:'Oct 5, 2026', branch:'Dallas', recruiter:'Tasha Merrill', noExp:false,
-    desc:'A 26-bed adult ICU running 13-week contracts with guaranteed 36-hour weeks. Our credentialing team clears TX licensure and hospital onboarding before your first shift, so you start on the floor rather than in an HR office.',
-    duties:['Carry a 2:1 patient assignment on nights, with charge support on every shift.','Manage vents, drips, and post-op cardiac recovery patients.','Chart in Epic; a two-day paid orientation is included.','Extend or transfer to another Asepsis contract at week 11 if you want to stay.'],
-    reqs:['Active TX RN license or compact license eligible','2+ years recent ICU experience','BLS and ACLS current through the contract end date','Two supervisor references we verify before submission'],
-    onboarding:['Upload RN license and BLS/ACLS cards','Complete I-9 and E-Verify at any branch','Physical and 10-panel screen (we schedule and pay)'] },
-  { id:2, title:'CNA — Per Diem', company:'Meadowview Skilled Nursing', location:'Atlanta, GA', city:'Atlanta', vertical:'Healthcare', type:'Per diem', shift:'All shifts', pay:'$19–$24 / hr', payRank:24, posted:'Posted 6h ago', age:0.25, urgent:true, credLine:'GA CNA license', openings:11, start:'Immediately', branch:'Atlanta', recruiter:'Joy Adeyemi', noExp:false,
-    desc:'Pick your own shifts from an open board at four partner facilities across metro Atlanta. Claim a shift the night before or commit to a set weekly pattern — both are paid weekly with a shift differential on nights and weekends.',
-    duties:['Assist residents with ADLs, transfers, and vitals.','Document care in PointClickCare.','Claim open shifts from the Asepsis worker dashboard.','Cancel or swap up to 12 hours ahead with no penalty.'],
-    reqs:['Active GA CNA certification in good standing','Current TB test and physical','Background check (we run and pay for it)'],
-    onboarding:['Upload CNA certification','Complete I-9 and E-Verify','Sign facility orientation packet'] },
-  { id:3, title:'Licensed Practical Nurse', company:'Cardinal Long-Term Care', location:'Indianapolis, IN', city:'Indianapolis', vertical:'Healthcare', type:'Temp-to-hire', shift:'Days', pay:'$27–$31 / hr', payRank:31, posted:'Posted 1d ago', age:1, urgent:false, credLine:'IN LPN license', openings:2, start:'Sep 22, 2026', branch:'Indianapolis', recruiter:'Ray Kaminski', noExp:false,
-    desc:'A 90-day temp-to-hire on a 42-resident long-term care unit. Convert onto the facility payroll with full benefits after the trial; nine of the last ten LPNs we placed here converted.',
-    duties:['Pass medications and manage treatment orders for a 14-resident hall.','Supervise CNAs on the hall and escalate to the charge RN.','Complete admission and change-of-condition assessments.'],
-    reqs:['Active IN LPN license','Long-term care or med-surg experience preferred','Ability to convert to facility payroll at 90 days'],
-    onboarding:['Upload LPN license','Complete I-9 and E-Verify','Two-step TB and flu documentation'] },
-  { id:4, title:'Medical Technologist / Phlebotomist', company:'Gulf Coast Regional Hospital', location:'Tampa, FL', city:'Tampa', vertical:'Healthcare', type:'Temporary', shift:'2nd shift', pay:'$22–$26 / hr', payRank:26, posted:'Posted 3d ago', age:3, urgent:false, credLine:'ASCP preferred', openings:3, start:'Sep 29, 2026', branch:'Tampa', recruiter:'Ana Delgado', noExp:false,
-    desc:'A 16-week lab coverage assignment during a staffing transition, with likely extension into Q1. Evenings draw from the ED and inpatient floors with a dedicated processing tech on shift.',
-    duties:['Perform venipuncture on ED, ICU, and inpatient floors.','Process and label specimens; run routine chemistry panels.','Maintain chain of custody documentation.'],
-    reqs:['Phlebotomy certification; ASCP MLT preferred','1+ year hospital draw experience','Comfortable with 200+ draws per week'],
-    onboarding:['Upload phlebotomy certification','Complete I-9 and E-Verify','Hospital badge appointment'] },
-
-  { id:5, title:'Warehouse Associate / Forklift', company:'Regional Distribution Center', location:'Columbus, OH', city:'Columbus', vertical:'Skilled Trades', type:'Temp-to-hire', shift:'1st shift', pay:'$19–$22 / hr', payRank:22, posted:'Posted 4h ago', age:0.2, urgent:true, credLine:'No experience required', openings:24, start:'Monday', branch:'Columbus', recruiter:'Deon Pratt', noExp:true,
-    desc:'A 900,000 sq ft distribution center adding 24 associates for peak season, converting the top performers to permanent in 60 to 90 days. Forklift certification is free and happens on your first paid day.',
-    duties:['Pick and pack orders to a rate posted on the floor each morning.','Load and unload trailers with a sit-down or reach truck.','Scan and stage pallets for outbound routes.','Free forklift certification on day one if you need it.'],
-    reqs:['18 or older, able to lift 50 lbs repeatedly','Steel-toe boots (we supply a voucher for your first pair)','No experience or resume required'],
-    onboarding:['Bring photo ID and Social Security card to the branch','Complete I-9 and E-Verify','Watch the 20-minute site safety video'] },
-  { id:6, title:'Assembly Line Operator', company:'Midwest Auto Components', location:'Indianapolis, IN', city:'Indianapolis', vertical:'Skilled Trades', type:'Temporary', shift:'2nd shift', pay:'$18–$20 / hr', payRank:20, posted:'Posted 1d ago', age:1, urgent:false, credLine:'No experience required', openings:16, start:'Sep 21, 2026', branch:'Indianapolis', recruiter:'Ray Kaminski', noExp:true,
-    desc:'A twelve-week production ramp on a Tier 1 automotive line, running 3pm to 11:30pm Monday through Friday with voluntary Saturdays at time and a half.',
-    duties:['Assemble and inspect subcomponents at a fixed station.','Record defects and flag line stoppages.','Rotate stations every two hours.'],
-    reqs:['18 or older, able to stand for an 8-hour shift','Steel-toe boots required on the floor','No experience required — paid training on the line'],
-    onboarding:['Bring photo ID and Social Security card','Complete I-9 and E-Verify','Site safety orientation'] },
-  { id:7, title:'General Laborer — Commercial Site', company:'Keystone Commercial Builders', location:'Charlotte, NC', city:'Charlotte', vertical:'Skilled Trades', type:'Temporary', shift:'Days', pay:'$18–$21 / hr', payRank:21, posted:'Posted 2d ago', age:2, urgent:false, credLine:'OSHA-10 provided', openings:8, start:'Sep 15, 2026', branch:'Charlotte', recruiter:'Marcus Hale', noExp:true,
-    desc:'Site support on a four-story medical office build through framing and drywall. Steady 40-hour weeks with a foreman who has kept most of our crew on since the pour.',
-    duties:['Move and stage material for framing and drywall crews.','Keep the site clean and OSHA-compliant.','Assist trades with layout and demolition as directed.'],
-    reqs:['Able to lift 50 lbs and work outdoors','Steel-toe boots and hard hat (hard hat supplied)','OSHA-10 provided free before your first shift'],
-    onboarding:['Bring photo ID and Social Security card','Complete I-9 and E-Verify','OSHA-10 online course (paid time)'] },
-
-  { id:8, title:'HVAC Technician, Commercial', company:'Piedmont Mechanical', location:'Charlotte, NC', city:'Charlotte', vertical:'Technical Trades', type:'Direct placement', shift:'Days', pay:'$26–$34 / hr', payRank:34, posted:'Posted 1d ago', age:1, urgent:false, credLine:'EPA 608 required', openings:2, start:'Negotiable', branch:'Charlotte', recruiter:'Marcus Hale', noExp:false,
-    desc:'A direct-hire service role on rooftop units and chillers across a commercial portfolio. Company truck, fuel card, and tool allowance from day one; you go onto Piedmont\u2019s payroll, not ours.',
-    duties:['Diagnose and repair RTUs, split systems, and chillers.','Run preventive maintenance routes on a service schedule.','On-call rotation of one week in five, paid at premium.'],
-    reqs:['EPA 608 Universal certification','3+ years commercial HVAC service experience','Valid driver license with a clean MVR'],
-    onboarding:['Verify EPA 608 and driver license','Background check and MVR pull','Offer and start date negotiated by your recruiter'] },
-  { id:9, title:'Electrician, Journeyman', company:'Industrial Facilities Group', location:'Sacramento, CA', city:'Sacramento', vertical:'Technical Trades', type:'Temp-to-hire', shift:'Days', pay:'$30–$38 / hr', payRank:38, posted:'Posted 5d ago', age:5, urgent:false, credLine:'CA J-Card required', openings:3, start:'Oct 1, 2026', branch:'Sacramento', recruiter:'Elena Ruiz', noExp:false,
-    desc:'Industrial electrical work in food processing plants — conduit, motor controls, and panel work on a 6-month project with conversion to permanent for the crew that finishes it.',
-    duties:['Bend and run rigid and EMT conduit to spec.','Terminate motor controls and troubleshoot 480V three-phase.','Read single-line diagrams and redline as-builts.'],
-    reqs:['California General Electrician (J-Card) certification','4+ years industrial or commercial experience','Own hand tools; PPE supplied'],
-    onboarding:['Verify J-Card and OSHA-30','Complete I-9 and E-Verify','Arc flash safety orientation'] },
-  { id:10, title:'Diesel Technician, Fleet', company:'Sunbelt Fleet Services', location:'Phoenix, AZ', city:'Phoenix', vertical:'Technical Trades', type:'Temp-to-hire', shift:'2nd shift', pay:'$28–$35 / hr', payRank:35, posted:'Posted 3d ago', age:3, urgent:true, credLine:'ASE T-series', openings:2, start:'Sep 22, 2026', branch:'Phoenix', recruiter:'Cody Brennan', noExp:false,
-    desc:'Evening shift maintaining a 240-truck regional fleet in a covered 12-bay shop. Tool allowance after 90 days and conversion to permanent for techs who hit shop hours.',
-    duties:['Perform DOT inspections and preventive maintenance.','Diagnose aftertreatment, air brake, and electrical faults.','Document repairs in the fleet maintenance system.'],
-    reqs:['ASE T-series certification (T2, T4, or T6)','3+ years heavy-duty diesel experience','Own tools; air tools supplied by the shop'],
-    onboarding:['Verify ASE certifications','Complete I-9 and E-Verify','DOT physical and drug screen'] },
-
-  { id:11, title:'Staff Accountant', company:'Confidential Manufacturer', location:'Phoenix, AZ', city:'Phoenix', vertical:'Professional', type:'Direct placement', shift:'Hybrid', pay:'$58K–$68K / yr', payRank:33, posted:'Posted 3d ago', age:3, urgent:false, credLine:'Full-cycle GL', openings:1, start:'Negotiable', branch:'Phoenix', recruiter:'Cody Brennan', noExp:false,
-    desc:'A direct-hire seat on a four-person accounting team at a $90M manufacturer, reporting to the Controller. Three days onsite, two remote, with a clear path to Senior Accountant in two years.',
-    duties:['Own the month-end close for two entities.','Prepare journal entries, accruals, and account reconciliations.','Support the annual audit and inventory costing reviews.'],
-    reqs:['Bachelor\u2019s in Accounting or equivalent experience','2+ years full-cycle GL, ideally in manufacturing','ERP exposure (NetSuite, Epicor, or similar)'],
-    onboarding:['Reference and education verification','Background check','Offer negotiated by your recruiter'] },
-  { id:12, title:'HR Coordinator', company:'Regional Health System', location:'Dallas, TX', city:'Dallas', vertical:'Professional', type:'Temp-to-hire', shift:'Days', pay:'$24–$28 / hr', payRank:28, posted:'Posted 6d ago', age:6, urgent:false, credLine:'HRIS experience', openings:1, start:'Sep 29, 2026', branch:'Dallas', recruiter:'Tasha Merrill', noExp:false,
-    desc:'Support a 12-person HR team through an HRIS migration on a six-month temp-to-hire. Heavy onboarding coordination and credential file work for clinical staff.',
-    duties:['Coordinate onboarding, I-9s, and new hire paperwork.','Maintain credential files and expiration tracking.','Answer tier-one employee questions in a shared inbox.'],
-    reqs:['2+ years HR support or high-volume administrative work','Workday or UKG experience preferred','Discretion with confidential employee records'],
-    onboarding:['Reference verification','Complete I-9 and E-Verify','Background check'] },
-  { id:13, title:'Executive Assistant', company:'Confidential Investment Firm', location:'Tampa, FL', city:'Tampa', vertical:'Professional', type:'Direct placement', shift:'Onsite', pay:'$65K–$75K / yr', payRank:37, posted:'Posted 1w ago', age:7, urgent:false, credLine:'C-suite support', openings:1, start:'Negotiable', branch:'Tampa', recruiter:'Ana Delgado', noExp:false,
-    desc:'Direct support to two managing partners at a downtown investment firm. Discreet, calendar-heavy, and fully onsite, with a compensation review at twelve months.',
-    duties:['Manage complex calendars across time zones.','Book domestic and international travel end to end.','Prepare board and investor meeting materials.'],
-    reqs:['5+ years supporting senior executives','Advanced Outlook, Excel, and PowerPoint','Comfortable with strict confidentiality expectations'],
-    onboarding:['Reference verification','Background and credit check','Offer negotiated by your recruiter'] }
-];
 
 const HANDLED = [
   { title: 'Weekly pay', note: 'Direct deposit or pay card every Friday.' },
@@ -111,7 +37,6 @@ const APPLY_STEPS = [
   { n: '4', title: 'Review & submit', note: 'One recruiter reviews everything' }
 ];
 const CRED_OPTIONS = ['RN license', 'LPN license', 'CNA certification', 'BLS', 'ACLS', 'EPA 608', 'Journeyman electrician', 'ASE T-series', 'OSHA-10 / 30', 'Forklift certification', 'CDL', 'None yet'];
-const PRACTICE_LIST = ['Healthcare', 'Skilled Trades', 'Technical Trades', 'Professional'];
 const AVAIL = ['1st shift', '2nd shift', 'Nights', 'Weekends', 'Per diem / pick-up', 'Travel contracts'];
 
 const MY_SHIFTS = [
@@ -200,7 +125,7 @@ export default class Platform extends React.Component {
     const q = s.search.trim().toLowerCase();
     const z = s.zip.trim().toLowerCase();
     let out = JOBS.filter((j) => {
-      if (s.vertical !== 'All practices' && j.vertical !== s.vertical) return false;
+      if (s.vertical !== 'All practices' && !matchesSpecialism(j, s.vertical)) return false;
       if (s.types.length && s.types.indexOf(j.type) === -1) return false;
       if (s.shifts.length && s.shifts.indexOf(j.shift) === -1) return false;
       if (s.noExpOnly && !j.noExp) return false;
@@ -287,7 +212,7 @@ export default class Platform extends React.Component {
     const active = { home: 'home', jobs: 'jobs', detail: 'jobs', apply: 'jobs', worker: 'worker', request: 'request', employer: 'employer', traction: 'traction' }[s.screen];
 
     const counts = {};
-    Object.keys(V).forEach(function (k) { counts[k] = JOBS.filter(function (j) { return j.vertical === k; }).length; });
+    Object.keys(V).forEach(function (k) { counts[k] = JOBS.filter(function (j) { return matchesSpecialism(j, k); }).length; });
 
     const chip = (on) => ({ whiteSpace: 'nowrap', padding: '7px 12px', borderRadius: '100px', fontSize: '12.5px', fontWeight: 600, border: '1px solid ' + (on ? '#22262E' : '#E4E4E9'), background: on ? '#22262E' : '#fff', color: on ? '#fff' : '#5D6472' });
 
@@ -303,17 +228,12 @@ export default class Platform extends React.Component {
       isTraction: s.screen === 'traction',
       isHome: s.screen === 'home',
       goHome: this.go('home'),
-      practiceCards: [
-        { name: 'Healthcare', desc: 'RNs, CNAs, LPNs, and allied health for per diem shifts, 13-week travel contracts, and permanent placement.', tags: 'RN · CNA · LPN · Med Tech' },
-        { name: 'Skilled Trades', desc: 'Warehouse, manufacturing, construction, and logistics roles. No experience required for most openings.', tags: 'Warehouse · Forklift · Assembly · Construction' },
-        { name: 'Technical Trades', desc: 'Licensed and certified technicians who bring their own credentials — and get paid for them.', tags: 'Electrician · HVAC · Diesel Tech' },
-        { name: 'Professional', desc: 'Accounting, admin, and HR roles on temp-to-hire and direct placement for teams that are growing.', tags: 'Accounting · Admin · HR' }
-      ].map((p) => ({
+      practiceCards: SPECIALISMS.map((p) => ({
         name: p.name, desc: p.desc, tags: p.tags, img: V[p.name].img, alt: V[p.name].alt,
-        count: JOBS.filter(function (j) { return j.vertical === p.name; }).length + ' open now',
+        count: JOBS.filter(function (j) { return matchesSpecialism(j, p.name); }).length + ' open now',
         go: () => { this.setState({ screen: 'jobs', vertical: p.name }); window.scrollTo(0, 0); },
         pillStyle: { display: 'inline-block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: V[p.name].color, background: V[p.name].bg, padding: '5px 10px', borderRadius: '100px', whiteSpace: 'nowrap' },
-        isHealthcare: p.name === 'Healthcare', isSkilled: p.name === 'Skilled Trades', isTechnical: p.name === 'Technical Trades', isProfessional: p.name === 'Professional'
+        isHealthcare: p.name === 'Healthcare', isSkilled: p.name === 'Skilled Trades', isTechnical: p.name === 'Technical Trades', isProfessional: p.name === 'Professional', isInternational: p.name === 'International'
       })),
       tiers: TIERS,
       locations: [
@@ -322,7 +242,7 @@ export default class Platform extends React.Component {
       ],
       goTraction: this.go('traction'),
       marketStats: MARKET,
-      modelRows: MODEL.map((m) => ({ name: m.name, share: m.share, margin: m.margin, note: m.note,
+      modelRows: [...MODEL, { name: 'International', share: 'Remote and sponsored', margin: 'Cross-practice opportunities', note: 'Connects remote roles and internationally sponsored assignments across our specialisms.', w: '0%' }].map((m) => ({ name: m.name, share: m.share, margin: m.margin, note: m.note,
         barStyle: { width: m.w, height: '100%', background: V[m.name].color, borderRadius: '100px' },
         dot: { width: '9px', height: '9px', borderRadius: '3px', background: V[m.name].color, flexShrink: 0 } })),
       retentionStats: RETENTION,
@@ -352,7 +272,7 @@ export default class Platform extends React.Component {
       typeOptions: TYPES.map((t) => ({ name: t, on: s.types.indexOf(t) > -1, go: this.toggleIn('types', t) })),
       shiftOptions: SHIFTS.map((sh) => ({ name: sh, go: this.toggleIn('shifts', sh), style: chip(s.shifts.indexOf(sh) > -1) })),
       resultCount: list.length,
-      filterSummary: s.vertical === 'All practices' ? 'across all four practices' : 'in ' + s.vertical,
+      filterSummary: s.vertical === 'All practices' ? 'across all five specialisms' : 'in ' + s.vertical,
       visibleJobs: list.map(this.jobRow),
       noResults: list.length === 0,
       job: {

@@ -1,3 +1,4 @@
+import SpecialismPhotos from '../../components/ui/SpecialismPhotos.jsx';
 
 import React from 'react';
 import './platform.css';
@@ -35,7 +36,7 @@ export default function PlatformView(values) {
 <div style={{"background": "#3A1D22", "overflow": "hidden"}}>
 <div style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "0 32px", "display": "flex", "gap": "48px", "alignItems": "center", "flexWrap": "wrap"}}>
 <div style={{"flex": "1 1 480px", "minWidth": "300px", "padding": "72px 0"}}>
-<p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.14em", "textTransform": "uppercase", "color": "#C9A98A", "marginBottom": "20px"}}>{"US staffing · four practices · 48 branches"}</p>
+<p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.14em", "textTransform": "uppercase", "color": "#C9A98A", "marginBottom": "20px"}}>{"US staffing · five specialisms · 48 branches"}</p>
 <h1 style={{"fontFamily": "'Fraunces',serif", "fontWeight": "500", "fontSize": "52px", "lineHeight": "1.04", "letterSpacing": "-0.02em", "color": "#F4F4F6", "maxWidth": "620px"}}>{"Every kind of work. One trusted staffing partner."}</h1>
 <p style={{"fontSize": "17.5px", "lineHeight": "1.6", "color": "rgba(244,244,246,0.74)", "maxWidth": "520px", "marginTop": "20px"}}>{"From hospital floors to warehouse docks to job sites to corner offices — we place people in real shifts, fast, and pay weekly."}</p>
 <div style={{"display": "flex", "gap": "10px", "flexWrap": "wrap", "marginTop": "30px"}}>
@@ -48,34 +49,17 @@ export default function PlatformView(values) {
 <div><p style={{"fontFamily": "'Fraunces',serif", "fontSize": "26px", "fontWeight": "600", "color": "#F4F4F6"}}>{"Friday"}</p><p style={{"fontSize": "13px", "color": "rgba(244,244,246,0.6)", "marginTop": "3px"}}>{"pay, every week"}</p></div>
 </div>
 </div>
-<div style={{"flex": "1 1 380px", "minWidth": "300px", "display": "grid", "gridTemplateColumns": "1fr 1fr", "gap": "4px", "alignSelf": "stretch", "minHeight": "520px"}}>
-<div style={{"position": "relative", "overflow": "hidden", "background": "#2A1418"}}>
-<img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80" alt="Nurse in a hospital hallway" style={{"width": "100%", "height": "100%", "objectFit": "cover", "display": "block"}} />
-<span style={{"position": "absolute", "left": "12px", "bottom": "11px", "fontSize": "11px", "fontWeight": "600", "color": "#fff", "background": "rgba(23,26,32,0.6)", "padding": "4px 10px", "borderRadius": "100px", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"Healthcare"}</span>
-</div>
-<div style={{"position": "relative", "overflow": "hidden", "background": "#2A1418"}}>
-<img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=700&q=80" alt="Warehouse worker operating a forklift" style={{"width": "100%", "height": "100%", "objectFit": "cover", "display": "block"}} />
-<span style={{"position": "absolute", "left": "12px", "bottom": "11px", "fontSize": "11px", "fontWeight": "600", "color": "#fff", "background": "rgba(23,26,32,0.6)", "padding": "4px 10px", "borderRadius": "100px", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"Skilled Trades"}</span>
-</div>
-<div style={{"position": "relative", "overflow": "hidden", "background": "#2A1418"}}>
-<img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700&q=80" alt="Technician servicing equipment" style={{"width": "100%", "height": "100%", "objectFit": "cover", "display": "block"}} />
-<span style={{"position": "absolute", "left": "12px", "bottom": "11px", "fontSize": "11px", "fontWeight": "600", "color": "#fff", "background": "rgba(23,26,32,0.6)", "padding": "4px 10px", "borderRadius": "100px", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"Technical Trades"}</span>
-</div>
-<div style={{"position": "relative", "overflow": "hidden", "background": "#2A1418"}}>
-<img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=700&q=80" alt="Office professionals in a meeting" style={{"width": "100%", "height": "100%", "objectFit": "cover", "display": "block"}} />
-<span style={{"position": "absolute", "left": "12px", "bottom": "11px", "fontSize": "11px", "fontWeight": "600", "color": "#fff", "background": "rgba(23,26,32,0.6)", "padding": "4px 10px", "borderRadius": "100px", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"Professional"}</span>
-</div>
-</div>
+<div style={{flex: "1 1 380px", minWidth: 0}}><SpecialismPhotos practiceCards={practiceCards} /></div>
 </div>
 </div>
 <div style={{"background": "#F4F4F6", "borderBottom": "1px solid #E4E4E9", "padding": "26px 0"}}>
 <p style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "0 32px", "textAlign": "center", "fontSize": "13.5px", "color": "#5D6472"}}>{"Trusted by hospitals, distribution centres, contractors, and employers across the country"}</p>
 </div>
 <section style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "72px 32px 8px"}}>
-<p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.12em", "textTransform": "uppercase", "color": "#A8825F", "marginBottom": "14px"}}>{"Four practices"}</p>
+<p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.12em", "textTransform": "uppercase", "color": "#A8825F", "marginBottom": "14px"}}>{"Five specialisms"}</p>
 <div style={{"display": "flex", "justifyContent": "space-between", "gap": "28px", "flexWrap": "wrap", "alignItems": "flex-end"}}>
 <h2 style={{"fontFamily": "'Fraunces',serif", "fontWeight": "500", "fontSize": "36px", "lineHeight": "1.12", "color": "#171A20", "maxWidth": "520px", "letterSpacing": "-0.015em"}}>{"We staff every kind of work — with a dedicated team for each"}</h2>
-<p style={{"fontSize": "15.5px", "color": "#5D6472", "lineHeight": "1.6", "maxWidth": "400px"}}>{"Four recruiting practices, one branch network, one application. Not a generic job board with four filters."}</p>
+<p style={{"fontSize": "15.5px", "color": "#5D6472", "lineHeight": "1.6", "maxWidth": "400px"}}>{"Five specialisms, one branch network, one application. Not a generic job board with separate filters."}</p>
 </div>
 <div style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit,minmax(260px,1fr))", "gap": "16px", "marginTop": "36px"}}>
 {(practiceCards ?? []).map((p, index4) => <React.Fragment key={index4}>
@@ -90,7 +74,7 @@ export default function PlatformView(values) {
 {(p.isTechnical) ? <> 
 <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700&q=80" alt="Technician servicing equipment" style={{"width": "100%", "height": "100%", "objectFit": "cover", "display": "block"}} />
  </> : null}
-{(p.isProfessional) ? <> 
+{(p.isProfessional || p.isInternational) ? <>
 <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=700&q=80" alt="Office professionals in a meeting" style={{"width": "100%", "height": "100%", "objectFit": "cover", "display": "block"}} />
  </> : null}
 </span>
@@ -223,7 +207,7 @@ export default function PlatformView(values) {
 <div style={{"background": "#22262E", "padding": "38px 0 32px"}}>
 <div style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "0 32px"}}>
 <p style={{"fontSize": "12px", "fontWeight": "700", "letterSpacing": "0.1em", "textTransform": "uppercase", "color": "#C9A98A", "marginBottom": "10px"}}>{"Open shifts & roles"}</p>
-<h1 style={{"fontFamily": "'Fraunces',serif", "fontWeight": "500", "fontSize": "38px", "lineHeight": "1.1", "color": "#fff", "letterSpacing": "-0.01em", "maxWidth": "620px"}}>{"Find work in every one of our four practices"}</h1>
+<h1 style={{"fontFamily": "'Fraunces',serif", "fontWeight": "500", "fontSize": "38px", "lineHeight": "1.1", "color": "#fff", "letterSpacing": "-0.01em", "maxWidth": "620px"}}>{"Find work in every one of our five specialisms"}</h1>
 <p style={{"color": "rgba(255,255,255,0.68)", "fontSize": "15.5px", "marginTop": "12px", "maxWidth": "560px"}}>{"One application covers all of them. Weekly pay, every Friday. Apply online or walk into any of our 48 branches."}</p>
 <div style={{"display": "flex", "gap": "8px", "background": "#fff", "borderRadius": "14px", "padding": "9px", "marginTop": "24px", "boxShadow": "0 20px 60px -20px rgba(23,26,32,0.30)", "flexWrap": "wrap", "maxWidth": "820px"}}>
 <label style={{"flex": "1 1 240px", "display": "flex", "alignItems": "center", "gap": "10px", "padding": "11px 13px", "borderRadius": "9px", "background": "#F4F4F6"}}>
@@ -1037,8 +1021,8 @@ export default function PlatformView(values) {
 <div style={{"background": "#3A1D22", "padding": "56px 0 52px"}}>
 <div style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "0 32px"}}>
 <span style={{"display": "inline-block", "fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.09em", "textTransform": "uppercase", "color": "#3A1D22", "background": "#C9A98A", "padding": "5px 11px", "borderRadius": "100px", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"Illustrative figures"}</span>
-<h1 style={{"fontFamily": "'Fraunces',serif", "fontWeight": "500", "fontSize": "44px", "lineHeight": "1.08", "color": "#F4F4F6", "letterSpacing": "-0.015em", "maxWidth": "760px", "margin": "20px 0 0"}}>{"One brand, four workforces, one bench that redeploys across all of them."}</h1>
-<p style={{"fontSize": "17px", "color": "rgba(244,244,246,0.72)", "lineHeight": "1.6", "maxWidth": "640px", "marginTop": "16px"}}>{"Asepsis operates four dedicated recruiting practices out of a shared branch network. The same 48 branches, the same compliance spine, and the same worker pool serve hospitals, distribution centres, contractors, and back offices."}</p>
+<h1 style={{"fontFamily": "'Fraunces',serif", "fontWeight": "500", "fontSize": "44px", "lineHeight": "1.08", "color": "#F4F4F6", "letterSpacing": "-0.015em", "maxWidth": "760px", "margin": "20px 0 0"}}>{"One brand, five specialisms, one bench that redeploys across all of them."}</h1>
+<p style={{"fontSize": "17px", "color": "rgba(244,244,246,0.72)", "lineHeight": "1.6", "maxWidth": "640px", "marginTop": "16px"}}>{"Asepsis operates five dedicated specialisms out of a shared branch network. The same 48 branches, the same compliance spine, and the same worker pool serve hospitals, distribution centres, contractors, and back offices."}</p>
 <p style={{"fontSize": "13px", "color": "rgba(244,244,246,0.5)", "marginTop": "22px", "maxWidth": "640px", "lineHeight": "1.55"}}>{"Every number on this page is illustrative and shown for layout purposes only. Replace with audited figures before external distribution."}</p>
 </div>
 </div>
@@ -1058,8 +1042,8 @@ export default function PlatformView(values) {
 </section>
 <section style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "56px 32px 8px"}}>
 <p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.09em", "textTransform": "uppercase", "color": "#A8825F", "marginBottom": "12px"}}>{"The model"}</p>
-<h2 style={{"fontFamily": "'Fraunces',serif", "fontWeight": "500", "fontSize": "32px", "lineHeight": "1.15", "color": "#171A20", "maxWidth": "640px"}}>{"Four practices that fund each other"}</h2>
-<p style={{"fontSize": "15.5px", "color": "#5D6472", "lineHeight": "1.65", "maxWidth": "620px", "marginTop": "12px"}}>{"Skilled Trades volume keeps branches busy and the bench deep. Healthcare and Technical Trades carry the rate. Professional placements convert to fees. The mix is what a single-vertical competitor cannot copy."}</p>
+<h2 style={{"fontFamily": "'Fraunces',serif", "fontWeight": "500", "fontSize": "32px", "lineHeight": "1.15", "color": "#171A20", "maxWidth": "640px"}}>{"Five specialisms that fund each other"}</h2>
+<p style={{"fontSize": "15.5px", "color": "#5D6472", "lineHeight": "1.65", "maxWidth": "620px", "marginTop": "12px"}}>{"Skilled Trades volume keeps branches busy and the bench deep. Healthcare and Technical Trades carry the rate. Professional placements convert to fees. International connects remote and sponsored opportunities across these fields. The mix is what a single-vertical competitor cannot copy."}</p>
 <div style={{"display": "flex", "flexDirection": "column", "gap": "1px", "background": "#E4E4E9", "border": "1px solid #E4E4E9", "borderRadius": "18px", "overflow": "hidden", "marginTop": "32px"}}>
 {(modelRows ?? []).map((m, index62) => <React.Fragment key={index62}>
 <div style={{"background": "#fff", "padding": "22px 24px", "display": "flex", "gap": "20px", "alignItems": "center", "flexWrap": "wrap"}}>
@@ -1083,7 +1067,7 @@ export default function PlatformView(values) {
 <div style={{"background": "#3A1D22", "borderRadius": "22px", "padding": "44px 40px"}}>
 <p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.09em", "textTransform": "uppercase", "color": "#C9A98A", "marginBottom": "12px"}}>{"Retention"}</p>
 <h2 style={{"fontFamily": "'Fraunces',serif", "fontWeight": "500", "fontSize": "32px", "lineHeight": "1.15", "color": "#F4F4F6", "maxWidth": "620px"}}>{"The second placement is where the margin is"}</h2>
-<p style={{"fontSize": "15.5px", "color": "rgba(244,244,246,0.7)", "lineHeight": "1.65", "maxWidth": "620px", "marginTop": "12px"}}>{"Acquiring a worker costs money once. Redeploying them across four practices costs almost nothing, and a worker who takes a second assignment is worth several times the first."}</p>
+<p style={{"fontSize": "15.5px", "color": "rgba(244,244,246,0.7)", "lineHeight": "1.65", "maxWidth": "620px", "marginTop": "12px"}}>{"Acquiring a worker costs money once. Redeploying them across five specialisms costs almost nothing, and a worker who takes a second assignment is worth several times the first."}</p>
 <div style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit,minmax(220px,1fr))", "gap": "14px", "marginTop": "32px"}}>
 {(retentionStats ?? []).map((r, index63) => <React.Fragment key={index63}>
 <div style={{"background": "rgba(244,244,246,0.07)", "border": "1px solid rgba(244,244,246,0.14)", "borderRadius": "16px", "padding": "22px"}}>
@@ -1120,6 +1104,7 @@ export default function PlatformView(values) {
 <li><a href="#" style={{"color": "rgba(244,244,246,0.62)"}}>{"Skilled trades jobs"}</a></li>
 <li><a href="#" style={{"color": "rgba(244,244,246,0.62)"}}>{"Technical trades jobs"}</a></li>
 <li><a href="#" style={{"color": "rgba(244,244,246,0.62)"}}>{"Professional jobs"}</a></li>
+<li><a href="#" style={{color: "rgba(244,244,246,0.62)"}}>International jobs</a></li>
 <li><a href="#" style={{"color": "rgba(244,244,246,0.62)"}}>{"Weekly pay & benefits"}</a></li>
 </ul>
 </div>

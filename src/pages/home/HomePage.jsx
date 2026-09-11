@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import Hero from './Hero.jsx';
 import Practices from './Practices.jsx';
 import HowItWorks from './HowItWorks.jsx';

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import Brand from '../ui/Brand.jsx';
 
 export default function Footer({ goHome, goJobs, goRequest, goSection }) {

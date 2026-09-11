@@ -136,7 +136,7 @@ export default function BrandView(values) {
 </div>
 </React.Fragment>)}
 </div>
-<p style={{"fontSize": "13px", "color": "#5B6270", "lineHeight": "1.6", "marginTop": "18px", "maxWidth": "660px"}}>{"Practice colours are tonal cousins, not a rainbow: Healthcare #8C3A44, Skilled Trades #3A4A63, Technical Trades #8A6740, Professional #3D6B57 — each with a light tint for pill backgrounds. Type under 16px always uses the text-safe value, never the lighter decorative sand."}</p>
+<p style={{"fontSize": "13px", "color": "#5B6270", "lineHeight": "1.6", "marginTop": "18px", "maxWidth": "660px"}}>{"Practice colours are tonal cousins, not a rainbow: Healthcare #8C3A44, Skilled Trades #3A4A63, Technical Trades #8A6740, Professional #3D6B57, International #3A1D22 — each with a light tint for pill backgrounds. Type under 16px always uses the text-safe value, never the lighter decorative sand."}</p>
 </section>
 <section style={{"maxWidth": "1080px", "margin": "0 auto", "padding": "64px 40px 88px"}}>
 <p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.12em", "textTransform": "uppercase", "color": "#8A6740", "marginBottom": "14px"}}>{"05 · Typography"}</p>

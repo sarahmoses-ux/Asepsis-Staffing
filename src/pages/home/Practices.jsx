@@ -1,12 +1,13 @@
-﻿import React from 'react';
+import React from 'react';
 
 export default function Practices({ practiceCards }) {
+
   return (
     <section className="home-section" aria-labelledby="practices-title">
       <div className="container">
         <div className="section-heading">
           <p className="eyebrow">Our specialisms</p>
-          <h2 id="practices-title">Four practices. A world of opportunity.</h2>
+          <h2 id="practices-title">Your skills. A world of opportunity.</h2>
         </div>
         <div className="practice-grid">
           {practiceCards.map((practice, index) => (

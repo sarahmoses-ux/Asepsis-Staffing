@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Brand from '../ui/Brand.jsx';
 
 export default function Header({ screen, goHome, goJobs, goRequest, goApply, goWorker, goEmployer, goSection, savedCount }) {

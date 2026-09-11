@@ -29,6 +29,8 @@ try {
   });
   await page.goto(origin, {waitUntil:'networkidle'});
   await expect(page.getByRole('heading', {name:/Every kind of work/})).toBeVisible();
+  await expect(page.locator('.hero-photos figure')).toHaveCount(5);
+  await expect(page.locator('.hero-photos figcaption').getByText('International', {exact:true})).toBeVisible();
   await page.screenshot({path:'.artifacts/browser/desktop.png',fullPage:true});
   await page.screenshot({path:'.artifacts/browser/desktop-viewport.png'});
   const results=[];
@@ -70,10 +72,12 @@ try {
   await page.getByRole('button',{name:'Continue',exact:true}).click();
   await page.locator('[data-field="consent"]').check();
   await page.getByRole('button',{name:'Continue',exact:true}).click();
+  await page.getByRole('button',{name:'International',exact:true}).click();
   await page.getByRole('button',{name:'Continue',exact:true}).click();
   await page.getByRole('button',{name:'Submit application',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Demo application complete.'})).toBeVisible();
   await page.goto(origin+'/#request');
+  await page.getByRole('button',{name:'International',exact:true}).click();
   await page.getByRole('button',{name:'Send request to a recruiter'}).click();
   await expect(page.getByRole('alert')).toBeVisible();
   for (const [field,value] of Object.entries({role:'Warehouse operator',start:'2026-10-01',site:'123 Test Street',cityState:'Columbus, OH',contact:'Test Employer',company:'Example Company',email:'employer@example.com',phone:'6145550100'})) await page.locator('[data-field="'+field+'"]').fill(value);
@@ -86,6 +90,17 @@ try {
   await expect(page).toHaveURL(/#jobs$/);
   await page.goBack();
   await expect(page).toHaveURL(/#home$/);
+  await page.getByRole('button',{name:'Browse International jobs',exact:true}).click();
+  await expect(page).toHaveURL(/#jobs$/);
+  await expect(page.getByText('Medical Billing Specialist', {exact:false}).first()).toBeVisible();
+  await expect(page.getByText('Remote (US)', {exact:false}).first()).toBeVisible();
+  await expect(page.getByText('Registered Nurse, Med-Surg', {exact:false}).first()).toBeVisible();
+  await expect(page.getByText('Warehouse Associate / Forklift', {exact:true})).toHaveCount(0);
+  await page.getByRole('button',{name:'Clear all',exact:true}).click();
+  await page.getByRole('button', {name:/^International\s*\d+$/}).click();
+  await expect(page.getByText('Medical Billing Specialist', {exact:false}).first()).toBeVisible();
+  await page.getByRole('button',{name:'Clear all',exact:true}).click();
+  await expect(page.getByText('Warehouse Associate / Forklift', {exact:true})).toBeVisible();
   for (const file of ['platform.html','landing.html','brand.html']) {
     await page.goto(origin+'/'+file,{waitUntil:'networkidle'});
     await expect(page.locator('#root')).not.toBeEmpty();

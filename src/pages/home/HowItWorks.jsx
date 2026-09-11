@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 const steps = [
   { title: 'Apply in minutes', text: 'Tell us your skills, experience, and the shifts you can take.' },

@@ -6,7 +6,7 @@ export default function JobsScreen(values) {
 <div style={{"background": "#22262E", "padding": "38px 0 32px"}}>
 <div style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "0 32px"}}>
 <p style={{"fontSize": "12px", "fontWeight": "700", "letterSpacing": "0.1em", "textTransform": "uppercase", "color": "#C9A98A", "marginBottom": "10px"}}>{"Open shifts & roles"}</p>
-<h1 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "38px", "lineHeight": "1.1", "color": "#fff", "letterSpacing": "-0.01em", "maxWidth": "620px"}}>{"Find work in every one of our four practices"}</h1>
+<h1 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "38px", "lineHeight": "1.1", "color": "#fff", "letterSpacing": "-0.01em", "maxWidth": "620px"}}>{"Find work across our specialisms"}</h1>
 <p style={{"color": "rgba(255,255,255,0.68)", "fontSize": "15.5px", "marginTop": "12px", "maxWidth": "560px"}}>{"One application covers all of them. Weekly pay, every Friday. Apply online or walk into any of our 48 branches."}</p>
 <div style={{"display": "flex", "gap": "8px", "background": "#fff", "borderRadius": "14px", "padding": "9px", "marginTop": "24px", "boxShadow": "0 20px 60px -20px rgba(23,26,32,0.30)", "flexWrap": "wrap", "maxWidth": "820px"}}>
 <label style={{"flex": "1 1 240px", "display": "flex", "alignItems": "center", "gap": "10px", "padding": "11px 13px", "borderRadius": "9px", "background": "#F5F4F2"}}>
