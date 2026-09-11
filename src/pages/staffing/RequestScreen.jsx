@@ -19,7 +19,7 @@ export default function RequestScreen(values) {
 </div>
 </div>
 <div style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "32px", "display": "flex", "gap": "32px", "alignItems": "flex-start", "flexWrap": "wrap"}}>
-<form aria-label="Staffing request" style={{"flex": "1 1 440px", "minWidth": "300px", "display": "flex", "flexDirection": "column", "gap": "26px"}}>
+<form onSubmit={(event) => { event.preventDefault(); submitRequest(); }} aria-label="Staffing request" style={{"flex": "1 1 440px", "minWidth": "300px", "display": "flex", "flexDirection": "column", "gap": "26px"}}>
 <section style={{"border": "1px solid #E5E2DC", "borderRadius": "18px", "background": "#fff", "padding": "26px"}}>
 <h2 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "21px", "color": "#171A20", "marginBottom": "18px"}}>{"1. What you need"}</h2>
 <p style={{"fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "8px"}}>{"Practice"}</p>

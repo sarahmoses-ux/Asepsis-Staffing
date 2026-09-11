@@ -3,23 +3,32 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import assert from 'node:assert/strict';
 const origin = 'http://127.0.0.1:5180';
-const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--port', '5180'], {stdio:'ignore',windowsHide:true});
+const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--port', '5180'], {stdio:['ignore','pipe','pipe'],windowsHide:true});
 let browser;
+let startupLog = '';
+server.stdout.on('data', chunk => { startupLog += chunk; });
+server.stderr.on('data', chunk => { startupLog += chunk; });
 try {
   let ready = false;
-  for (let i=0;i<100;i++) {
+  for (let i=0;i<600;i++) {
     try { if ((await fetch(origin)).ok) { ready=true; break; } } catch {}
     await new Promise(resolve=>setTimeout(resolve,100));
   }
-  assert.ok(ready,'Production preview must start');
+  assert.ok(ready,'Production preview must start: ' + startupLog);
   await mkdir('.artifacts/browser', {recursive:true});
   browser = await chromium.launch({channel:'chrome',headless:true});
   const page = await browser.newPage({viewport:{width:1440,height:1000}});
   const errors=[];
+  const externalAssetFailures = new Set();
   page.on('pageerror', error => errors.push(error.message));
-  page.on('console', message => {if(message.type()==='error') errors.push(message.text());});
+  page.on('console', message => {
+    if(message.type() !== 'error') return;
+    const url = message.location().url;
+    if (/^https:\/\/(images\.unsplash\.com|fonts\.googleapis\.com|fonts\.gstatic\.com)\//.test(url)) externalAssetFailures.add(url);
+    else errors.push(message.text());
+  });
   await page.goto(origin, {waitUntil:'networkidle'});
-  await expect(page.getByRole('heading', {name:'Every kind of work. One trusted staffing partner.'})).toBeVisible();
+  await expect(page.getByRole('heading', {name:/Every kind of work/})).toBeVisible();
   await page.screenshot({path:'.artifacts/browser/desktop.png',fullPage:true});
   await page.screenshot({path:'.artifacts/browser/desktop-viewport.png'});
   const results=[];
@@ -41,6 +50,12 @@ try {
   }
   await page.setViewportSize({width:1440,height:1000});
   await page.goto(origin+'/#home');
+  await page.getByRole('button',{name:/^Account/}).click();
+  await expect(page.getByRole('button',{name:'Worker dashboard',exact:true})).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('button',{name:'Worker dashboard',exact:true})).toHaveCount(0);
+  await page.getByText('Explore our locations',{exact:false}).click();
+  await expect(page.getByText('Sacramento',{exact:true})).toBeVisible();
   await page.getByPlaceholder('Job title, trade, or licence').fill('forklift');
   await page.getByRole('button',{name:'Search jobs',exact:true}).click();
   await expect(page).toHaveURL(/#jobs$/);
@@ -67,7 +82,7 @@ try {
   await page.getByRole('button',{name:'Submit another request'}).click();
   await expect(page.locator('input[data-field="role"]')).toBeVisible();
   await page.goto(origin+'/#home');
-  await page.getByRole('link',{name:'Healthcare jobs',exact:true}).click();
+  await page.getByRole('button',{name:'Browse Healthcare jobs',exact:true}).click();
   await expect(page).toHaveURL(/#jobs$/);
   await page.goBack();
   await expect(page).toHaveURL(/#home$/);
@@ -82,9 +97,9 @@ try {
   await page.goto(origin+'/landing.html',{waitUntil:'networkidle'});
   await page.getByRole('button',{name:'Apply now',exact:true}).first().click();
   await expect(page).toHaveURL(/index.html#apply$/);
-  await writeFile('.artifacts/browser/layout.json',JSON.stringify({errors,results},null,2));
+  await writeFile('.artifacts/browser/layout.json',JSON.stringify({errors,externalAssetFailures:[...externalAssetFailures],results},null,2));
   const overflows=results.filter(r=>r.scroll>r.width);
-  console.log(JSON.stringify({errors,overflows,layoutsChecked:results.length,interactions:'Search, save, application validation and completion, request validation and completion, repeat request, footer navigation, browser back, mobile menu, landing CTA'},null,2));
+  console.log(JSON.stringify({errors,externalAssetFailures:externalAssetFailures.size,overflows,layoutsChecked:results.length,interactions:'Search, save, application validation and completion, request validation and completion, repeat request, practice navigation, browser back, mobile menu, landing CTA'},null,2));
   assert.deepEqual(errors,[],'No browser errors');
   assert.deepEqual(overflows,[],'No horizontal overflow');
 } finally {

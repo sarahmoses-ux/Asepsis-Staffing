@@ -12,7 +12,7 @@ const screens = {
 const Page = screens[location.pathname.split('/').pop()] || App;
 createRoot(document.getElementById('root')).render(
   <Suspense fallback={<p role="status">Loading Asepsis Staffing…</p>}>
-    <Page />
+    {Page === App ? <App /> : <div className="reference-page"><Page /></div>}
   </Suspense>
 );
 if (location.pathname.endsWith('platform.html')) import('./pages/reference/enhancements.js');

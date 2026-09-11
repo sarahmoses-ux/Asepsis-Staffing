@@ -1,41 +1,56 @@
-﻿# Asepsis Staffing
+# Asepsis Staffing
 
-React 18 + Vite implementation of the supplied Asepsis design handoff.
+React + Vite staffing website, using the supplied Asepsis logo, colors, typography, and photography.
 
-## Run
+## Run locally
 
 ```sh
 npm install
 npm run dev
 ```
 
-Open http://127.0.0.1:5173. For a production build, run `npm run build`; deploy the contents of `dist/`. `npm run preview` serves the production build.
+Open http://127.0.0.1:5173.
 
-## Pages
+- `npm run build` creates the production site in `dist/`.
+- `npm run preview` serves that production build.
+- `npm test` checks the production build in Google Chrome. Build first; the test starts its own server on port 5180.
 
-- `/`: current Site v3, with hash routes for home, jobs, job details, applications, worker dashboard, staffing requests, employer dashboard, and traction.
-- `/platform.html`: supplied Platform v2 design.
-- `/landing.html`: supplied campaign landing page; its CTAs open the application flow.
-- `/brand.html`: supplied brand identity reference.
+## Folder guide
 
-The original archive and extracted `Asepsis-Staffing-Design-Handoff/` files are preserved. The current Site v3 is the primary visual source; inline measurements, colors, typography, photography URLs, and SVG marks were transferred directly into React JSX.
+```text
+src/
+  app/                  Application state and screen routing
+  components/
+    layout/             Shared header and footer
+    ui/                 Reusable brand mark
+  data/                 Supplied sample jobs and dashboard data
+  pages/
+    home/               Five focused homepage sections
+    staffing/           Search, applications, requests, and dashboards
+    reference/          Additional handoff previews
+  styles/               Shared styles and responsive layouts
+  main.jsx              React entry point
+public/                 Static assets
+tests/                 Browser checks
+design/                Original handoff and ZIP archive
+```
 
-## Structure
+The four root HTML files are Vite entry points. `index.html` is the public website; `platform.html`, `landing.html`, and `brand.html` retain the additional handoff previews without adding them to the public navigation. Generated builds, dependency caches, and browser reports are ignored by Git. Reports and screenshots are in `.artifacts/browser/`.
 
-- `src/Site.jsx`: site state, sample data, filters, navigation, and form validation.
-- `src/SiteView.jsx`: shared header, navigation, footer, and screen composition.
-- `src/screens/`: individual site screen components.
-- `src/Platform.jsx`, `src/Landing.jsx`, `src/Brand.jsx`: other handoff pages with separate view components.
-- `src/responsive.css`: tablet/mobile layout and reduced-motion adjustments.
-- `src/enhancements.js`: mobile navigation, accessible field labels, and footer destinations.
-- `vite.config.js`: multipage production build.
+## Website walkthrough
 
-## Verification
+1. **Find work:** a short introduction, job search, and one link for employers.
+2. **Our practices:** four clear cards for healthcare, skilled trades, technical trades, and professional roles.
+3. **How it works:** apply, get verified, and start working.
+4. **For employers:** a concise overview of temporary staffing, temp-to-hire, and direct placement, with one request button.
+5. **Locations:** opening hours and a phone link; branch names expand when needed.
 
-Build first, then run `npm test`. The browser checks start their own preview server on port 5180 and use installed Google Chrome. They check desktop/tablet/mobile overflow, console errors, search, saved jobs, application and request validation, browser history, and CTAs. Screenshots and results are written to `test-results/`.
+The header has three public navigation options. Worker/employer dashboards and saved jobs are grouped under Account. The footer keeps only useful navigation and a short company line.
 
-## Integration boundaries
+The homepage omits repeated statistics, duplicate CTAs, inactive legal links, investor material, and long specialist-service pitches. Detailed job filters and existing application/request flows remain available.
 
-The handoff contains sample jobs, profiles, shifts, and employers, with no API, database, authentication, or submission service. These interactions run in memory and reset on reload. Submission confirmations identify the demo; no application or request is sent to a recruiter. Worker/employer navigation opens the supplied sample dashboards.
+## Integration status
 
-Fonts and photography use the exact Google Fonts and Unsplash URLs supplied in the handoff and require internet access. Legal documents were not supplied, so their footer labels are disabled rather than linked to invented policies. The dispatch number and business claims are preserved from the supplied design.
+The handoff supplied sample content but no backend, authentication, or submission API. Forms validate and complete locally; confirmations identify the demo, and no request is sent to a recruiter. Data resets on reload.
+
+Google Fonts and Unsplash URLs are reused from the handoff and require an internet connection. Browser checks report external asset failures separately from application errors. The original design remains in `design/handoff/`.

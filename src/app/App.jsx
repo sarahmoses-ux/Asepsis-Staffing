@@ -22,7 +22,7 @@ export default class App extends React.Component {
   handleCand = (name, approve) => () => {
     this.setState({ handledCands: this.state.handledCands.concat([name]), approvedCount: this.state.approvedCount + (approve ? 1 : 0) });
   };
-  runSearch = () => { this.setState({ screen: 'jobs' }); window.scrollTo(0, 0); };
+  runSearch = () => { this.setState({ screen: 'jobs', vertical: 'All practices', types: [], shifts: [], settings: [], noExpOnly: false, driversOnly: false, sponsoredOnly: false }); window.scrollTo(0, 0); };
 
   componentDidMount() {
     this.readRoute();
@@ -168,15 +168,6 @@ export default class App extends React.Component {
     const job = JOBS.filter(function (j) { return j.id === s.selectedId; })[0] || JOBS[0];
     const jv = V[job.vertical];
 
-    const navDefs = [
-      { label: 'Home', screen: 'home' },
-      { label: 'Find work', screen: 'jobs' },
-      { label: 'My dashboard', screen: 'worker' },
-      { label: 'Request workers', screen: 'request' },
-      { label: 'Employer portal', screen: 'employer' },
-      { label: 'Company', screen: 'traction' }
-    ];
-    const active = { home: 'home', jobs: 'jobs', detail: 'jobs', apply: 'jobs', worker: 'worker', request: 'request', employer: 'employer', traction: 'traction' }[s.screen];
 
     const counts = {};
     Object.keys(V).forEach(function (k) { counts[k] = JOBS.filter(function (j) { return j.vertical === k; }).length; });
@@ -205,7 +196,7 @@ export default class App extends React.Component {
       ].map((p) => ({
         name: p.name, desc: p.desc, tags: p.tags, img: V[p.name].img, alt: V[p.name].alt,
         count: JOBS.filter(function (j) { return j.vertical === p.name; }).length + ' open now',
-        go: () => { this.setState({ screen: 'jobs', vertical: p.name }); window.scrollTo(0, 0); },
+        go: () => { this.setState({ screen: 'jobs', vertical: p.name, search: '', zip: '', types: [], shifts: [], settings: [], noExpOnly: false, driversOnly: false, sponsoredOnly: false }); window.scrollTo(0, 0); },
         pillStyle: { display: 'inline-block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: V[p.name].color, background: V[p.name].bg, padding: '5px 10px', borderRadius: '100px', whiteSpace: 'nowrap' },
         isHealthcare: p.name === 'Healthcare', isSkilled: p.name === 'Skilled Trades', isTechnical: p.name === 'Technical Trades', isProfessional: p.name === 'Professional'
       })),
@@ -222,10 +213,6 @@ export default class App extends React.Component {
       retentionStats: RETENTION,
       goJobs: this.go('jobs'),
       goApply: this.go('apply'),
-      navItems: navDefs.map((n) => ({
-        label: n.label, go: this.go(n.screen),
-        style: { padding: '9px 13px', borderRadius: '8px', fontSize: '14px', fontWeight: active === n.screen ? 600 : 500, color: active === n.screen ? '#171A20' : '#5D6472', background: active === n.screen ? '#F5F4F2' : 'transparent', whiteSpace: 'nowrap' }
-      })),
       search: s.search, zip: s.zip, sort: s.sort,
       onSearch: (e) => this.set({ search: e.target.value }),
       onZip: (e) => this.set({ zip: e.target.value }),
