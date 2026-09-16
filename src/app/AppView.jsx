@@ -1,4 +1,5 @@
 import React from 'react';
+import AccountScreen, { AuthScreen } from '../pages/staffing/AccountScreen.jsx';
 import Header from '../components/layout/Header.jsx';
 import Footer from '../components/layout/Footer.jsx';
 import HomePage from '../pages/home/HomePage.jsx';
@@ -23,13 +24,20 @@ const screens = {
 
 export default function AppView(values) {
   const Screen = screens[values.screen];
+  const protectedScreen = ['worker','employer','account','apply','request'].includes(values.screen);
+  let content;
+  if (protectedScreen && (!values.authReady || !values.user)) content = <p className="account-loading" role="status">Opening your account...</p>;
+  else if (['login','signup'].includes(values.screen)) content = <AuthScreen key={values.screen} {...values} />;
+  else if (['worker','employer','account'].includes(values.screen)) content = <AccountScreen {...values} />;
+  else content = Screen ? <div className="legacy-page"><Screen {...values} /></div> : <HomePage {...values} />;
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Header {...values} />
       <main id="main-content" className="site-main" tabIndex="-1">
         {values.formError && <p className="form-error container" role="alert">{values.formError}</p>}
-        {Screen ? <div className="legacy-page"><Screen {...values} /></div> : <HomePage {...values} />}
+        {values.submitting && <p className="container" role="status">Saving your submission...</p>}
+        {content}
       </main>
       <Footer {...values} />
     </div>

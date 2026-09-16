@@ -99,7 +99,7 @@ export default function RequestScreen(values) {
 <div style={{"border": "1px solid #E5E2DC", "borderRadius": "18px", "padding": "22px", "background": "#fff", "boxShadow": "0 1px 2px rgba(23,26,32,0.05),0 8px 24px -12px rgba(23,26,32,0.14)"}}>
 <p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.07em", "textTransform": "uppercase", "color": "#5B6270", "marginBottom": "10px"}}>{"Your request"}</p>
 <p style={{"fontSize": "15px", "fontWeight": "600", "color": "#171A20", "lineHeight": "1.45", "marginBottom": "16px"}}>{reqSummaryLine}</p>
-<button className="site-hover-57" type="button" onClick={submitRequest} style={{"width": "100%", "background": "#C9A98A", "color": "#171A20", "padding": "14px", "borderRadius": "10px", "fontSize": "15px", "fontWeight": "600", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"Send request to a recruiter"}</button>
+<button className="site-hover-57" type="button" onClick={submitRequest} style={{"width": "100%", "background": "#C9A98A", "color": "#171A20", "padding": "14px", "borderRadius": "10px", "fontSize": "15px", "fontWeight": "600", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"Submit staffing request"}</button>
 <p style={{"fontSize": "12.5px", "color": "#5B6270", "marginTop": "12px", "lineHeight": "1.5"}}>{"No commitment. You approve every candidate before they show up."}</p>
 </div>
 <div style={{"borderRadius": "18px", "padding": "22px", "background": "#F5F4F2"}}>
@@ -119,8 +119,8 @@ export default function RequestScreen(values) {
 <div style={{"width": "62px", "height": "62px", "borderRadius": "50%", "background": "#F6EFE7", "display": "flex", "alignItems": "center", "justifyContent": "center", "margin": "0 auto 22px"}}>
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A8825F" strokeWidth="2.6"><path d="M20 6L9 17l-5-5"></path></svg>
 </div>
-<h1 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "34px", "color": "#171A20", "lineHeight": "1.15"}}>{"Demo staffing request complete."}</h1>
-<p style={{"fontSize": "16px", "color": "#5D6472", "marginTop": "12px", "lineHeight": "1.6"}}>{reqSummaryLine}{". This preview has not sent your request to a recruiter."}</p>
+<h1 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "34px", "color": "#171A20", "lineHeight": "1.15"}}>{"Staffing request saved."}</h1>
+<p style={{"fontSize": "16px", "color": "#5D6472", "marginTop": "12px", "lineHeight": "1.6"}}>{reqSummaryLine}{". Your request is stored in your account. Recruiter notifications are not yet connected."}</p>
 <div style={{"display": "flex", "gap": "10px", "justifyContent": "center", "marginTop": "28px", "flexWrap": "wrap"}}>
 <button className="site-hover-59" type="button" onClick={goEmployer} style={{"background": "#22262E", "color": "#fff", "padding": "14px 24px", "borderRadius": "10px", "fontSize": "15px", "fontWeight": "600", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"Open employer portal"}</button>
 <button className="site-hover-60" type="button" onClick={goRequest} style={{"border": "1.5px solid #E5E2DC", "color": "#22262E", "padding": "13px 22px", "borderRadius": "10px", "fontSize": "14.5px", "fontWeight": "600", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"Submit another request"}</button>

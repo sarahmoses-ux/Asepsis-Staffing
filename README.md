@@ -9,11 +9,13 @@ npm install
 npm run dev
 ```
 
-Open http://127.0.0.1:5173.
+Requires Node.js 24 or newer (the backend uses built-in SQLite). Open http://127.0.0.1:5173. One command starts both the backend and frontend.
 
 - `npm run build` creates the production site in `dist/`.
-- `npm run preview` serves that production build.
-- `npm test` checks the production build in Google Chrome. Build first; the test starts its own server on port 5180.
+- `npm run preview` serves the static frontend only; use `npm run dev` for working accounts.
+- `npm test` runs backend security/persistence checks and browser account-flow checks in installed Google Chrome. Tests start isolated servers and databases on ports 5191 and 5192.
+- `npm run test:backend` and `npm run test:auth` run these checks separately.
+- `tests/browser.mjs` preserves the earlier demo-only walkthrough and is not part of the current test command.
 
 ## Folder guide
 
@@ -45,13 +47,31 @@ The four root HTML files are Vite entry points. `index.html` is the public websi
 4. **For employers:** a concise overview of temporary staffing, temp-to-hire, and direct placement, with one request button.
 5. **Locations:** opening hours and a phone link; branch names expand when needed.
 
-The header has three public navigation options. Worker/employer dashboards and saved jobs are grouped under Account. The footer keeps only useful navigation and a short company line.
+The header has three public navigation options plus clear Log in and Sign up buttons. Signed-in users have My dashboard and an Account menu with logout. Worker and employer accounts each see their own activity. The footer keeps only useful navigation and a short company line.
 
 The homepage omits repeated statistics, duplicate CTAs, inactive legal links, investor material, and long specialist-service pitches. Detailed job filters and existing application/request flows remain available.
 
 ## Integration status
 
-The handoff supplied sample content but no backend, authentication, or submission API. Forms validate and complete locally; confirmations identify the demo, and no request is sent to a recruiter. Data resets on reload.
+The Node backend provides sign-up, login, logout, session restoration, saved jobs, applications, and staffing requests. SQLite persists data in `server/data/asepsis.sqlite` (ignored by Git). Account dashboards show only the signed-in user's records; worker accounts submit applications and employer accounts submit staffing requests. Public job browsing remains available without login.
+
+Passwords use salted scrypt hashes. Random session tokens are stored as hashes, expire after seven days, and travel in HttpOnly, SameSite cookies. Mutations validate JSON, request size, origin, account ownership, and account type. Authentication is rate-limited per IP in a single server process. All SQL uses bound parameters.
+
+### Production
+
+Run `npm run build`, then start `node server/index.js` with these environment variables:
+
+- `NODE_ENV=production`
+- `APP_ORIGIN=https://your-domain.example` (exact public origin)
+- `PORT=5173` (or your hosting port)
+- `HOST=0.0.0.0` when needed by your host
+- `DATA_DIR=/persistent/path` for a persistent, backed-up database volume
+
+The production server serves `dist/` and the API together. Place it behind HTTPS; production session cookies require HTTPS. Keep database storage private. This SQLite setup is intended for one application server. Use shared storage/database and rate limiting before running multiple instances.
+
+### Remaining integrations
+
+Jobs still come from the supplied sample catalog. Submissions are genuinely saved, but recruiter email notifications, staff review tools, password recovery, and email verification are not connected. Existing shift/payroll handoff previews remain sample content; the main account routes now use the real personal dashboard. The backend does not send emails or perform hiring, payments, or credential checks.
 
 Google Fonts and Unsplash URLs are reused from the handoff and require an internet connection. Browser checks report external asset failures separately from application errors. The original design remains in `design/handoff/`.
 

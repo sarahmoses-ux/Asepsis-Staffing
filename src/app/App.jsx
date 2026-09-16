@@ -1,13 +1,15 @@
 import { SPECIALISMS, matchesSpecialism } from '../data/specialisms.js';
 import React from 'react';
+import { api } from './api.js';
 import AppView from './AppView.jsx';
 import { V, MARKET, MODEL, RETENTION, JOBS, HANDLED, APPLY_STEPS, CRED_OPTIONS, PRACTICE_LIST, AVAIL, MY_SHIFTS, MY_CREDS, MY_PAY, REQUESTS, CANDIDATES, ON_ASSIGN, EMP_REQS, TIERS, TYPES, SHIFTS } from '../data/demo.js';
 
 export default class App extends React.Component {
   render() { return <AppView {...this.renderVals()} />; }
   state = {
+    user: null, authReady: false, records: [], accountLoading: false, pendingScreen: null, submitting: false,
     screen: 'home', vertical: 'All practices', types: [], shifts: [], noExpOnly: false,
-    search: '', zip: '', sort: 'Newest', selectedId: 1, saved: [2, 8],
+    search: '', zip: '', sort: 'Newest', selectedId: 1, saved: [],
     step: 0, submitted: false, formError: '',
     form: { first: '', last: '', phone: '', email: '', zip: '', heard: 'Referred by a friend', eligible: 'Yes', over18: true, consent: false, creds: ['BLS'], practices: ['Healthcare'], avail: ['Nights'], start: 'Within a week', transport: 'Own vehicle', payMethod: 'Direct deposit', resume: '' },
     req: { practice: 'Skilled Trades', role: '', headcount: '6', tier: 'Temp-to-Hire', start: '', duration: '90 days', shift: '1st shift', site: '', cityState: '', reqs: ['Background check', 'E-Verify / I-9'], contact: '', company: 'Cardinal Logistics', email: '', phone: '', notes: '', urgent: false },
@@ -28,6 +30,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.readRoute();
+    this.restoreSession();
     window.addEventListener('hashchange', this.readRoute);
     window.addEventListener('asepsis:navigate', this.onNavigate);
     const v = this.props.openPractice;
@@ -37,7 +40,7 @@ export default class App extends React.Component {
   readRoute = () => {
     const [screen, id] = location.hash.slice(1).split('/');
     if (screen === 'international') { this.goInternational(); return; }
-    if (['home','jobs','detail','apply','worker','request','employer','traction'].includes(screen)) {
+    if (['home','jobs','detail','apply','worker','request','employer','traction','login','signup','account'].includes(screen)) {
       this.setState({ screen, ...(screen === 'detail' && JOBS.some(j => j.id === Number(id)) ? { selectedId: Number(id) } : {}) });
       window.scrollTo(0, 0);
     }
@@ -48,6 +51,12 @@ export default class App extends React.Component {
     if (section) setTimeout(() => document.getElementById(section)?.scrollIntoView(), 100);
   };
   componentDidUpdate() {
+    if (this.state.authReady && !this.state.user && ['worker','employer','account','apply','request'].includes(this.state.screen)) {
+      this.setState({ pendingScreen: this.state.screen, screen: 'login' }); return;
+    }
+    if (this.state.user && ((this.state.screen === 'apply' && this.state.user.role !== 'worker') || (this.state.screen === 'request' && this.state.user.role !== 'employer'))) {
+      this.setState({ screen: 'account', formError: 'This action requires a ' + (this.state.screen === 'apply' ? 'worker' : 'employer') + ' account.' }); return;
+    }
     const route = '#' + this.state.screen + (this.state.screen === 'detail' ? '/' + this.state.selectedId : '');
     if (location.hash !== route) history.pushState(null, '', route);
   }
@@ -74,10 +83,45 @@ export default class App extends React.Component {
 
   openJob = (id) => () => { this.setState({ screen: 'detail', selectedId: id }); window.scrollTo(0, 0); };
 
-  toggleSave = (id) => (e) => {
-    if (e && e.stopPropagation) e.stopPropagation();
-    const saved = this.state.saved;
-    this.setState({ saved: saved.indexOf(id) > -1 ? saved.filter(function (s) { return s !== id; }) : saved.concat([id]) });
+  restoreSession = async () => {
+    try { const { user } = await api('session'); this.setState({ user, authReady: true, ...(user ? { form: { ...this.state.form, first: user.name.split(' ')[0], last: user.name.split(' ').slice(1).join(' '), email: user.email }, req: { ...this.state.req, contact: user.name, email: user.email, company: '' } } : {}) }); if (user) await this.reloadAccount(); }
+    catch (error) { this.setState({ authReady: true, formError: error.message }); }
+  };
+  reloadAccount = async () => {
+    this.setState({ accountLoading: true });
+    try { const data = await api('account'); this.setState({ saved: data.saved, records: data.records }); }
+    catch (error) { this.setState({ formError: error.message }); }
+    finally { this.setState({ accountLoading: false }); }
+  };
+  onAuthenticated = async (user) => {
+    this.setState({ user, screen: this.state.pendingScreen || 'account', pendingScreen: null, formError: '', form: { ...this.state.form, first: user.name.split(' ')[0], last: user.name.split(' ').slice(1).join(' '), email: user.email }, req: { ...this.state.req, contact: user.name, email: user.email, company: '' } });
+    await this.reloadAccount();
+  };
+  logout = async () => {
+    try { await api('logout', {}); window.location.replace('/#home'); window.location.reload(); }
+    catch (error) { this.setState({ formError: error.message }); }
+  };
+  submitRecord = async (kind) => {
+    if (this.submissionInFlight || !(kind === 'application' ? this.validateApplication(true) : this.validateRequest())) return;
+    this.submissionInFlight = true;
+    this.setState({ formError: '', submitting: true });
+    try {
+      const job = JOBS.find(j => j.id === this.state.selectedId);
+      await api('records', { kind, data: kind === 'application' ? { ...this.state.form, jobId: job.id, jobTitle: job.title } : this.state.req });
+      this.setState(kind === 'application' ? { submitted: true } : { reqSubmitted: true });
+      await this.reloadAccount(); window.scrollTo(0, 0);
+    } catch (error) { this.setState({ formError: error.message }); }
+    finally { this.submissionInFlight = false; this.setState({ submitting: false }); }
+  };
+  toggleSave = (id) => async (e) => {
+    e?.stopPropagation();
+    if (!this.state.user) { this.setState({ pendingScreen: this.state.screen, screen: 'login' }); return; }
+    if (this.savingJob) return;
+    this.savingJob = true;
+    const saved = !this.state.saved.includes(id);
+    try { await api('saved', { jobId: id, saved }); this.setState(s => ({ saved: saved ? [...s.saved, id] : s.saved.filter(x => x !== id) })); }
+    catch (error) { this.setState({ formError: error.message }); }
+    finally { this.savingJob = false; }
   };
 
   toggleIn = (key, val) => () => {
@@ -180,6 +224,10 @@ export default class App extends React.Component {
 
     return {
       screen: s.screen,
+      submitting: s.submitting,
+      user: s.user, authReady: s.authReady, records: s.records, accountLoading: s.accountLoading,
+      go: this.go, onAuthenticated: this.onAuthenticated, logout: this.logout, reloadAccount: this.reloadAccount,
+      goLogin: this.go('login'), goSignup: this.go('signup'), goAccount: this.go('account'),
       goSection: (section) => this.onNavigate({ detail: { screen: 'home', section } }),
       dispatch: this.props.dispatchPhone ?? '(888) 555-0142',
       showRail: this.props.showOnboardingRail ?? true,
@@ -270,7 +318,7 @@ export default class App extends React.Component {
       formError: s.formError,
       back: this.stepTo(Math.max(0, s.step - 1)),
       showBack: s.step > 0,
-      submitApply: () => { if (!this.validateApplication(true)) return; this.setState({ submitted: true }); window.scrollTo(0, 0); },
+      submitApply: () => this.submitRecord('application'),
       goWorker: this.go('worker'),
       goEmployer: this.go('employer'),
       goRequest: this.go('request'),
@@ -330,7 +378,7 @@ export default class App extends React.Component {
       onReqField: this.onReqField,
       reqSubmitted: s.reqSubmitted,
       reqNotSubmitted: !s.reqSubmitted,
-      submitRequest: () => { if (!this.validateRequest()) return; this.setState({ reqSubmitted: true }); window.scrollTo(0, 0); },
+      submitRequest: () => this.submitRecord('request'),
       reqPracticeOptions: PRACTICE_LIST.map((p) => ({ name: p, go: this.setReq('practice', p), style: chip(s.req.practice === p) })),
       tierOptions: TIERS.map((t) => {
         const on = s.req.tier === t.name;
