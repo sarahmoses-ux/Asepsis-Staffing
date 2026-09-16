@@ -82,7 +82,7 @@ The shared specialism list in `src/data/specialisms.js` includes International a
 
 Leave Root Directory blank. Use `npm install && npm run build` as the Build Command and `npm run start` as the Start Command. Vite is a regular dependency so it remains available when `NODE_ENV=production` causes npm to omit development dependencies. The lockfile preserves the dependency classification for clean installs.
 
-Import the local `.env` into Render's environment settings; it is intentionally excluded from Git. For the separate Vercel frontend, `APP_ORIGIN` is `https://asepsis-staffing.vercel.app`. The Vercel API forwarding configuration still requires the deployed Render URL before the two hosts are connected.
+Import the local `.env` into Render's environment settings; it is intentionally excluded from Git. For the separate Vercel frontend, `APP_ORIGIN` is `https://asepsis-staffing.vercel.app`. The root `vercel.json` forwards `/api/*` to `https://asepsis-staffing.onrender.com/api/*`, with caching disabled for account responses.
 
 
 ### MongoDB Atlas setup
@@ -96,4 +96,4 @@ Import the local `.env` into Render's environment settings; it is intentionally 
 
 The server connects to MongoDB and creates indexes before accepting requests. It exits with a configuration message if the URI is missing or the cluster cannot be reached. Existing SQLite files are not automatically migrated; preserve them if they contain accounts or submissions you need.
 
-For this split hosting setup, keep `APP_ORIGIN=https://asepsis-staffing.vercel.app`. The Vercel-to-Render API forwarding still needs your deployed backend URL. This repository does not provision Atlas or configure your hosting accounts automatically.
+For this split hosting setup, keep `APP_ORIGIN=https://asepsis-staffing.vercel.app`. Vercel forwards API requests to `https://asepsis-staffing.onrender.com` through `vercel.json`; deploy the latest commit on Vercel to activate it. This repository does not provision Atlas or configure your hosting accounts automatically.
