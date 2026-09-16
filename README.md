@@ -76,3 +76,9 @@ Jobs still come from the supplied sample catalog. Submissions are genuinely save
 Google Fonts and Unsplash URLs are reused from the handoff and require an internet connection. Browser checks report external asset failures separately from application errors. The original design remains in `design/handoff/`.
 
 The shared specialism list in `src/data/specialisms.js` includes International across homepages, job filters, application preferences, and employer requests. International matches remote and sponsored jobs without changing their underlying industry or location requirements.
+
+### Render build settings
+
+Leave Root Directory blank. Use `npm install && npm run build` as the Build Command and `npm run start` as the Start Command. Vite is a regular dependency so it remains available when `NODE_ENV=production` causes npm to omit development dependencies. The lockfile preserves the dependency classification for clean installs.
+
+Import the local `.env` into Render's environment settings; it is intentionally excluded from Git. For the separate Vercel frontend, `APP_ORIGIN` is `https://asepsis-staffing.vercel.app`. The Vercel API forwarding configuration still requires the deployed Render URL before the two hosts are connected.
