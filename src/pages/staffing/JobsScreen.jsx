@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../styles/jobs.css';
 
 export default function JobsScreen(values) {
   const { activeFilters, clearFilters, d, driversOnly, filterSummary, goJobs, hasFilters, noExpOnly, noResults, onSearch, onSort, onZip, p, r, resultCount, search, settingOptions, shiftOptions, sort, sponsoredOnly, toggleDrivers, toggleNoExp, toggleSponsored, typeOptions, verticalOptions, visibleJobs, zip } = values;
@@ -92,12 +93,12 @@ export default function JobsScreen(values) {
 </div>
 <div style={{"display": "flex", "flexDirection": "column", "gap": "12px"}}>
 {(visibleJobs ?? []).map((j, index23) => <React.Fragment key={index23}>
-<article className="site-hover-24" style={{"border": "1px solid #E5E2DC", "borderRadius": "14px", "background": "#fff", "padding": "20px 22px", "display": "flex", "gap": "18px", "alignItems": "flex-start", "position": "relative", "overflow": "hidden", "transition": "border-color .18s ease,box-shadow .18s ease,transform .18s ease"}}>
+<article className="job-card site-hover-24">
 <span style={j.bar}></span>
 <div style={j.logo}>
 <span style={{"fontFamily": "'Fraunces',serif", "fontSize": "15px", "fontWeight": "600"}}>{j.initials}</span>
 </div>
-<div style={{"flex": "1 1 240px", "minWidth": "200px"}}>
+<div className="job-card__details">
 <div style={{"display": "flex", "alignItems": "center", "gap": "8px", "flexWrap": "wrap", "marginBottom": "4px"}}>
 <span style={j.pillStyle}>{j.vertical}</span>
 {(j.urgent) ? <> 
@@ -115,12 +116,12 @@ export default function JobsScreen(values) {
 <span style={{"fontSize": "11.5px", "fontWeight": "600", "padding": "5px 10px", "borderRadius": "100px", "background": "#F5F4F2", "color": "#5D6472"}}>{j.credLine}</span>
 </div>
 </div>
-<div style={{"flex": "0 0 auto", "display": "flex", "flexDirection": "column", "alignItems": "flex-end", "gap": "10px", "minWidth": "150px"}}>
-<div style={{"textAlign": "right"}}>
+<div className="job-card__summary">
+<div className="job-card__pay">
 <p style={{"fontSize": "15.5px", "fontWeight": "600", "color": "#171A20"}}>{j.pay}</p>
 <p style={{"fontSize": "12px", "color": "#5B6270", "marginTop": "2px"}}>{"Weekly pay · "}{j.posted}</p>
 </div>
-<div style={{"display": "flex", "gap": "8px"}}>
+<div className="job-card__actions">
 <button type="button" onClick={j.save} style={j.saveStyle}>{j.saveLabel}</button>
 <button className="site-hover-25" type="button" onClick={j.open} style={{"background": "#22262E", "color": "#fff", "padding": "9px 15px", "borderRadius": "8px", "fontSize": "13px", "fontWeight": "600", "whiteSpace": "nowrap", "transition": "background .16s ease,color .16s ease,border-color .16s ease"}}>{"View shift"}</button>
 </div>
