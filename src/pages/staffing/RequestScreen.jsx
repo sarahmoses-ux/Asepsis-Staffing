@@ -9,13 +9,9 @@ export default function RequestScreen(values) {
 <div>
 <p style={{"fontSize": "12px", "fontWeight": "700", "letterSpacing": "0.1em", "textTransform": "uppercase", "color": "#C9A98A", "marginBottom": "10px"}}>{"For employers"}</p>
 <h1 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "34px", "color": "#fff", "lineHeight": "1.12", "maxWidth": "560px"}}>{"Tell us what you need. We staff it."}</h1>
-<p style={{"color": "rgba(255,255,255,0.68)", "fontSize": "15.5px", "marginTop": "12px", "maxWidth": "520px"}}>{"A recruiter from the nearest branch responds within two hours on business days. Same-day coverage runs through the dispatch line."}</p>
+<p style={{"color": "rgba(255,255,255,0.68)", "fontSize": "15.5px", "marginTop": "12px", "maxWidth": "520px"}}>{"Submit your staffing requirements and view the saved request in your account."}</p>
 </div>
-<div style={{"background": "rgba(255,255,255,0.07)", "border": "1px solid rgba(255,255,255,0.18)", "borderRadius": "14px", "padding": "20px", "minWidth": "240px"}}>
-<p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.07em", "textTransform": "uppercase", "color": "#C9A98A", "marginBottom": "8px"}}>{"Need workers today?"}</p>
-<p style={{"fontSize": "20px", "fontWeight": "600", "color": "#fff"}}>{dispatch}</p>
-<p style={{"fontSize": "12.5px", "color": "rgba(255,255,255,0.6)", "marginTop": "6px"}}>{"24/7 dispatch · answered by a person"}</p>
-</div>
+
 </div>
 </div>
 <div style={{"maxWidth": "1240px", "margin": "0 auto", "padding": "32px", "display": "flex", "gap": "32px", "alignItems": "flex-start", "flexWrap": "wrap"}}>
@@ -48,11 +44,11 @@ export default function RequestScreen(values) {
 <h2 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "21px", "color": "#171A20", "marginBottom": "18px"}}>{"2. When and where"}</h2>
 <div style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit,minmax(200px,1fr))", "gap": "16px"}}>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"Start date"}</span>
-<input data-field="start" value={r.start} onChange={onReqField} placeholder="Mon, Sep 14" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
+<input type="date" data-field="start" value={r.start} onChange={onReqField} placeholder="Start date" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"Work site address"}</span>
-<input data-field="site" value={r.site} onChange={onReqField} placeholder="4400 Etna Pkwy, Dock 12" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
+<input data-field="site" value={r.site} onChange={onReqField} placeholder="Worksite address" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"City & state"}</span>
-<input data-field="cityState" value={r.cityState} onChange={onReqField} placeholder="Columbus, OH" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
+<input data-field="cityState" value={r.cityState} onChange={onReqField} placeholder="City, state" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 </div>
 <p style={{"fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "margin": "22px 0 8px"}}>{"Shift"}</p>
 <div style={{"display": "flex", "gap": "7px", "flexWrap": "wrap", "marginBottom": "20px"}}>
@@ -83,16 +79,16 @@ export default function RequestScreen(values) {
 <h2 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "21px", "color": "#171A20", "marginBottom": "18px"}}>{"4. Who we contact"}</h2>
 <div style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit,minmax(200px,1fr))", "gap": "16px"}}>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"Your name"}</span>
-<input data-field="contact" value={r.contact} onChange={onReqField} placeholder="Jordan Blake" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
+<input data-field="contact" value={r.contact} onChange={onReqField} placeholder="Contact name" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"Company"}</span>
 <input data-field="company" value={r.company} onChange={onReqField} style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"Work email"}</span>
-<input type="email" data-field="email" value={r.email} onChange={onReqField} placeholder="jordan@company.com" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
+<input type="email" data-field="email" value={r.email} onChange={onReqField} placeholder="Work email" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"Phone"}</span>
-<input type="tel" data-field="phone" value={r.phone} onChange={onReqField} placeholder="(614) 555-0170" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
+<input type="tel" data-field="phone" value={r.phone} onChange={onReqField} placeholder="Phone number" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 </div>
 <label style={{"display": "flex", "gap": "11px", "alignItems": "flex-start", "fontSize": "14px", "color": "#262A33", "lineHeight": "1.5", "marginTop": "20px", "paddingTop": "18px", "borderTop": "1px solid #E5E2DC", "cursor": "pointer"}}>
-<input type="checkbox" data-field="urgent" checked={r.urgent} onChange={onReqField} style={{"width": "16px", "height": "16px", "marginTop": "2px", "accentColor": "#22262E"}} />{"\n          This is urgent — route it to the 24/7 dispatch team for same-day coverage.\n        "}</label>
+<input type="checkbox" data-field="urgent" checked={r.urgent} onChange={onReqField} style={{"width": "16px", "height": "16px", "marginTop": "2px", "accentColor": "#22262E"}} />{"\n          This staffing request is urgent.\n        "}</label>
 </section>
 </form>
 <aside style={{"flex": "0 1 280px", "minWidth": "260px", "position": "sticky", "top": "98px", "display": "flex", "flexDirection": "column", "gap": "16px"}}>

@@ -25,7 +25,7 @@ src/
   components/
     layout/             Shared header and footer
     ui/                 Reusable brand mark
-  data/                 Shared specialisms, sample jobs, and dashboard data
+  data/                 Shared specialisms, form options, and empty operational collections
   pages/
     home/               Five focused homepage sections
     staffing/           Search, applications, requests, and dashboards
@@ -72,7 +72,7 @@ The production server serves `dist/` and the API together. Place it behind HTTPS
 
 ### Remaining integrations
 
-Jobs still come from the supplied sample catalog. Submissions are genuinely saved, but recruiter email notifications, staff review tools, password recovery, and email verification are not connected. Existing shift/payroll handoff previews remain sample content; the main account routes now use the real personal dashboard. The backend does not send emails or perform hiring, payments, or credential checks.
+The job catalog is empty until verified listings are connected. No sample jobs, dashboard records, branch contacts, or business metrics are displayed. Submissions are saved to MongoDB; recruiter notifications, staff review tools, password recovery, and email verification are not connected. The backend does not send emails or perform hiring, payments, or credential checks. Historical design handoffs are retained under `design/` as reference material; landing and platform URLs now open the live application.
 
 Google Fonts and Unsplash URLs are reused from the handoff and require an internet connection. Browser checks report external asset failures separately from application errors. The original design remains in `design/handoff/`.
 

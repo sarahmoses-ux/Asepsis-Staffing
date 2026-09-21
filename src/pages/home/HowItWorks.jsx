@@ -6,13 +6,13 @@ const steps = [
   { title: 'Start working', text: 'Get matched with an assignment and get paid weekly.' },
 ];
 
-export default function HowItWorks({ goApply }) {
+export default function HowItWorks({ goJobs }) {
   return (
     <section id="how-it-works" className="home-section how-section" aria-labelledby="how-title">
       <div className="container">
         <div className="section-heading heading-with-action">
           <div><p className="eyebrow">For job seekers</p><h2 id="how-title">Your next shift starts here.</h2></div>
-          <button className="text-link" onClick={goApply}>Start your application <span aria-hidden="true">↗</span></button>
+          <button className="text-link" onClick={goJobs}>Browse openings <span aria-hidden="true">↗</span></button>
         </div>
         <ol className="steps-grid">
           {steps.map((step, index) => (

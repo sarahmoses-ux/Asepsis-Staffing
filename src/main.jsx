@@ -15,4 +15,3 @@ createRoot(document.getElementById('root')).render(
     {Page === App ? <App /> : <div className="reference-page"><Page /></div>}
   </Suspense>
 );
-if (location.pathname.endsWith('platform.html')) import('./pages/reference/enhancements.js');

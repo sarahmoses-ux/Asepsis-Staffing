@@ -145,7 +145,7 @@ export default function BrandView(values) {
 <div style={{"border": "1px solid #E5E2DC", "borderRadius": "18px", "background": "#fff", "padding": "32px"}}>
 <p style={{"fontSize": "11.5px", "fontWeight": "700", "letterSpacing": "0.08em", "textTransform": "uppercase", "color": "#5B6270", "marginBottom": "20px"}}>{"Fraunces · display · 500 & 600"}</p>
 <p style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "40px", "lineHeight": "1.05", "letterSpacing": "-0.022em", "color": "#171A20"}}>{"Every kind of work"}</p>
-<p style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "600", "fontSize": "25px", "color": "#3A1D22", "marginTop": "18px", "fontVariantNumeric": "tabular-nums"}}>{"48 branches · 125,000+"}</p>
+<p style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "600", "fontSize": "25px", "color": "#3A1D22", "marginTop": "18px", "fontVariantNumeric": "tabular-nums"}}>{"Every kind of work."}</p>
 <p style={{"fontSize": "13.5px", "color": "#5B6270", "lineHeight": "1.6", "marginTop": "18px"}}>{"Headlines, section heads, stat figures, wordmark. Never under 18px, never for body copy or labels."}</p>
 </div>
 <div style={{"border": "1px solid #E5E2DC", "borderRadius": "18px", "background": "#fff", "padding": "32px"}}>

@@ -23,7 +23,7 @@ export default function ApplyScreen(values) {
 </button>
 </React.Fragment>)}
 <div style={{"padding": "14px", "marginTop": "6px", "borderTop": "1px solid #E5E2DC"}}>
-<p style={{"fontSize": "12.5px", "color": "#5D6472", "lineHeight": "1.55"}}>{"No resume needed for most roles. Prefer in person? Bring your ID to any of our 48 branches and we finish this with you."}</p>
+<p style={{"fontSize": "12.5px", "color": "#5D6472", "lineHeight": "1.55"}}>{"Complete your details to apply for this role."}</p>
 </div>
 </aside>
 <section style={{"flex": "1 1 440px", "minWidth": "300px", "border": "1px solid #E5E2DC", "borderRadius": "18px", "background": "#fff", "padding": "28px", "boxShadow": "0 1px 2px rgba(23,26,32,0.05),0 8px 24px -12px rgba(23,26,32,0.14)"}}>
@@ -32,15 +32,15 @@ export default function ApplyScreen(values) {
 <h2 style={{"fontFamily": "'Fraunces',serif", "fontVariationSettings": "'opsz' 144,'SOFT' 0,'WONK' 0", "fontWeight": "500", "fontSize": "24px", "color": "#171A20", "marginBottom": "20px"}}>{"About you"}</h2>
 <div style={{"display": "grid", "gridTemplateColumns": "repeat(auto-fit,minmax(200px,1fr))", "gap": "16px"}}>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"First name"}</span>
-<input data-field="first" value={f.first} onChange={onForm} placeholder="DeShawn" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
+<input data-field="first" value={f.first} onChange={onForm} placeholder="First name" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"Last name"}</span>
-<input data-field="last" value={f.last} onChange={onForm} placeholder="Carter" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
+<input data-field="last" value={f.last} onChange={onForm} placeholder="Last name" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"Mobile phone"}</span>
-<input type="tel" data-field="phone" value={f.phone} onChange={onForm} placeholder="(614) 555-0118" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
+<input type="tel" data-field="phone" value={f.phone} onChange={onForm} placeholder="Phone number" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"Email"}</span>
 <input type="email" data-field="email" value={f.email} onChange={onForm} placeholder="you@email.com" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"ZIP code"}</span>
-<input data-field="zip" value={f.zip} onChange={onForm} placeholder="43215" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
+<input data-field="zip" value={f.zip} onChange={onForm} placeholder="ZIP code" style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33"}} /></label>
 <label><span style={{"display": "block", "fontSize": "12.5px", "fontWeight": "600", "color": "#5D6472", "marginBottom": "6px"}}>{"How did you hear about us?"}</span>
 <select data-field="heard" value={f.heard} onChange={onForm} style={{"width": "100%", "border": "1.5px solid #E5E2DC", "borderRadius": "10px", "padding": "12px 13px", "fontSize": "14.5px", "color": "#262A33", "background": "#fff"}}>
 <option>{"Referred by a friend"}</option><option>{"Walked into a branch"}</option><option>{"Job board or search"}</option><option>{"Worked with Asepsis before"}</option>

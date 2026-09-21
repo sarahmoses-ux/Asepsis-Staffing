@@ -29,6 +29,7 @@ export default function AppView(values) {
   if (protectedScreen && (!values.authReady || !values.user)) content = <p className="account-loading" role="status">Opening your account...</p>;
   else if (['login','signup'].includes(values.screen)) content = <AuthScreen key={values.screen} {...values} />;
   else if (['worker','employer','account'].includes(values.screen)) content = <AccountScreen {...values} />;
+  else if (['detail','apply'].includes(values.screen) && !values.hasJob) content = <section className="container home-section"><h1>Job unavailable</h1><p>This opening is no longer available. Browse current openings to find a role.</p><button className="button button--primary" onClick={values.goJobs}>Browse jobs</button></section>;
   else content = Screen ? <div className="legacy-page"><Screen {...values} /></div> : <HomePage {...values} />;
   return (
     <div className="site-shell">

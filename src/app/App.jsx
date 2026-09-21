@@ -2,17 +2,17 @@ import { SPECIALISMS, matchesSpecialism } from '../data/specialisms.js';
 import React from 'react';
 import { api } from './api.js';
 import AppView from './AppView.jsx';
-import { V, MARKET, MODEL, RETENTION, JOBS, HANDLED, APPLY_STEPS, CRED_OPTIONS, PRACTICE_LIST, AVAIL, MY_SHIFTS, MY_CREDS, MY_PAY, REQUESTS, CANDIDATES, ON_ASSIGN, EMP_REQS, TIERS, TYPES, SHIFTS } from '../data/demo.js';
+import { V, MARKET, MODEL, RETENTION, JOBS, HANDLED, APPLY_STEPS, CRED_OPTIONS, PRACTICE_LIST, AVAIL, MY_SHIFTS, MY_CREDS, MY_PAY, REQUESTS, CANDIDATES, ON_ASSIGN, EMP_REQS, TIERS, TYPES, SHIFTS } from '../data/staffing.js';
 
 export default class App extends React.Component {
   render() { return <AppView {...this.renderVals()} />; }
   state = {
     user: null, authReady: false, records: [], accountLoading: false, pendingScreen: null, submitting: false,
     screen: 'home', vertical: 'All practices', types: [], shifts: [], noExpOnly: false,
-    search: '', zip: '', sort: 'Newest', selectedId: 1, saved: [],
+    search: '', zip: '', sort: 'Newest', selectedId: null, saved: [],
     step: 0, submitted: false, formError: '',
-    form: { first: '', last: '', phone: '', email: '', zip: '', heard: 'Referred by a friend', eligible: 'Yes', over18: true, consent: false, creds: ['BLS'], practices: ['Healthcare'], avail: ['Nights'], start: 'Within a week', transport: 'Own vehicle', payMethod: 'Direct deposit', resume: '' },
-    req: { practice: 'Skilled Trades', role: '', headcount: '6', tier: 'Temp-to-Hire', start: '', duration: '90 days', shift: '1st shift', site: '', cityState: '', reqs: ['Background check', 'E-Verify / I-9'], contact: '', company: 'Cardinal Logistics', email: '', phone: '', notes: '', urgent: false },
+    form: { first: '', last: '', phone: '', email: '', zip: '', heard: 'Referred by a friend', eligible: 'Yes', over18: false, consent: false, creds: [], practices: [], avail: [], start: 'Within a week', transport: 'Own vehicle', payMethod: 'Direct deposit', resume: '' },
+    req: { practice: 'Skilled Trades', role: '', headcount: '', tier: 'Temp-to-Hire', start: '', duration: '90 days', shift: '1st shift', site: '', cityState: '', reqs: ['Background check', 'E-Verify / I-9'], contact: '', company: '', email: '', phone: '', notes: '', urgent: false },
     reqSubmitted: false,
     claimed: [], handledCands: [], approvedCount: 0, settings: [], sponsoredOnly: false, internationalOnly: false, driversOnly: false
   };
@@ -107,6 +107,7 @@ export default class App extends React.Component {
     this.setState({ formError: '', submitting: true });
     try {
       const job = JOBS.find(j => j.id === this.state.selectedId);
+      if (kind === 'application' && !job) throw new Error('This job is no longer available. Please browse current openings.');
       await api('records', { kind, data: kind === 'application' ? { ...this.state.form, jobId: job.id, jobTitle: job.title } : this.state.req });
       this.setState(kind === 'application' ? { submitted: true } : { reqSubmitted: true });
       await this.reloadAccount(); window.scrollTo(0, 0);
@@ -213,8 +214,8 @@ export default class App extends React.Component {
   renderVals() {
     const s = this.state;
     const list = this.filtered();
-    const job = JOBS.filter(function (j) { return j.id === s.selectedId; })[0] || JOBS[0];
-    const jv = V[job.vertical];
+    const job = JOBS.filter(function (j) { return j.id === s.selectedId; })[0] || {};
+    const jv = V[job.vertical] || {};
 
 
     const counts = {};
@@ -224,12 +225,14 @@ export default class App extends React.Component {
 
     return {
       screen: s.screen,
+      hasJob: Boolean(job.id),
+      hasJobs: JOBS.length > 0,
       submitting: s.submitting,
       user: s.user, authReady: s.authReady, records: s.records, accountLoading: s.accountLoading,
       go: this.go, onAuthenticated: this.onAuthenticated, logout: this.logout, reloadAccount: this.reloadAccount,
       goLogin: this.go('login'), goSignup: this.go('signup'), goAccount: this.go('account'),
       goSection: (section) => this.onNavigate({ detail: { screen: 'home', section } }),
-      dispatch: this.props.dispatchPhone ?? '(888) 555-0142',
+      dispatch: this.props.dispatchPhone ?? '',
       showRail: this.props.showOnboardingRail ?? true,
       isJobs: s.screen === 'jobs',
       isDetail: s.screen === 'detail',
@@ -248,10 +251,7 @@ export default class App extends React.Component {
         isHealthcare: p.name === 'Healthcare', isSkilled: p.name === 'Skilled Trades', isTechnical: p.name === 'Technical Trades', isProfessional: p.name === 'Professional', isInternational: p.name === 'International'
       })),
       tiers: TIERS,
-      locations: [
-        { city: 'Dallas', st: 'TX' }, { city: 'Columbus', st: 'OH' }, { city: 'Charlotte', st: 'NC' }, { city: 'Phoenix', st: 'AZ' },
-        { city: 'Atlanta', st: 'GA' }, { city: 'Sacramento', st: 'CA' }, { city: 'Indianapolis', st: 'IN' }, { city: 'Tampa', st: 'FL' }
-      ],
+      locations: [],
       goTraction: this.go('traction'),
       marketStats: MARKET,
       modelRows: [...MODEL, { name: 'International', share: 'Remote and sponsored', margin: 'Cross-practice opportunities', note: 'Connects remote roles and internationally sponsored assignments across our specialisms.', w: '0%' }].map((m) => ({ name: m.name, share: m.share, margin: m.margin, note: m.note,
@@ -287,7 +287,7 @@ export default class App extends React.Component {
         title: job.title, company: job.company, location: job.location, vertical: job.vertical, type: job.type,
         shift: job.shift, pay: job.pay, start: job.start, desc: job.desc, duties: job.duties, reqs: job.reqs,
         onboarding: job.onboarding, openings: job.openings, branch: job.branch, recruiter: job.recruiter,
-        recruiterInitials: job.recruiter.split(' ').map(function (w) { return w[0]; }).join(''),
+        recruiterInitials: (job.recruiter || '').split(' ').map(function (w) { return w[0]; }).join(''),
         isHealthcare: job.vertical === 'Healthcare',
         isSkilled: job.vertical === 'Skilled Trades',
         isTechnical: job.vertical === 'Technical Trades',
@@ -335,7 +335,7 @@ export default class App extends React.Component {
       reviewPay: s.form.payMethod + ' · paid every Friday',
       consentOn: s.form.consent,
 
-      workerName: (s.form.first || 'DeShawn'),
+      workerName: s.form.first,
       myShifts: MY_SHIFTS.map((sh) => {
         const claimed = s.claimed.indexOf(sh.date) > -1;
         return { day: sh.day, date: sh.date, role: sh.role, site: sh.site, time: sh.time,
